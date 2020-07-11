@@ -1,0 +1,298 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    $.ajax({
+      url: "http://worldtimeapi.org/api/ip/192.30.252.153.json",
+      type: 'GET',
+      dataType: 'JSON',
+      success: function(res) {
+        var date = new Date(res.datetime);
+        var exp = date.getFullYear() - 2014;
+        $('#exp').html(exp);
+      }
+    });
+  });
+  $(document).ready(function() {
+    var data = [
+      {
+        "category": "Programming",
+        "entries": [
+          {
+            "name": "Java",
+            "rating": 6
+          },
+          {
+            "name": "php",
+            "rating": 6
+          },
+          {
+            "name": "Python",
+            "rating": 6
+          },
+          {
+            "name": "JavaScript",
+            "rating": 6
+          },
+          {
+            "name": "C#",
+            "rating": 5
+          },
+          {
+            "name": "Scripting",
+            "rating": 6
+          },
+          {
+            "name": "C",
+            "rating": 5
+          },
+          {
+            "name": "PL/SQL",
+            "rating": 5
+          }
+        ]
+      },
+      {
+        "category": "Databases",
+        "entries": [
+          {
+            "name": "Oracle",
+            "rating": 6
+          },
+          {
+            "name": "MySQL",
+            "rating": 6
+          },
+          {
+            "name": "SQL Server",
+            "rating": 6
+          },
+          {
+            "name": "PostgreSQL",
+            "rating": 5
+          },
+          {
+            "name": "MongoDB",
+            "rating": 5
+          }
+        ]
+      },
+      {
+        "category": "Frameworks",
+        "entries": [
+          {
+            "name": "Spring",
+            "rating": 5
+          },
+          {
+            "name": "Spring Boot",
+            "rating": 5
+          },
+          {
+            "name": "Hibernate",
+            "rating": 5
+          },
+          {
+            "name": "Laravel",
+            "rating": 5
+          },
+          {
+            "name": "CodeIgniter",
+            "rating": 5
+          },
+          {
+            "name": "ASP.NET MVC",
+            "rating": 5
+          }
+        ]
+      },
+      {
+        "category": "Platform",
+        "entries": [
+          {
+            "name": "Linux",
+            "rating": 6
+          },
+          {
+            "name": "Windows",
+            "rating": 6
+          },
+          {
+            "name": "Docker",
+            "rating": 5
+          },
+          {
+            "name": "AWS",
+            "rating": 4
+          }
+        ]
+      },
+      {
+        "category": "Build & Execution",
+        "entries": [
+          {
+            "name": "Maven",
+            "rating": 6
+          },
+          {
+            "name": "Gradle",
+            "rating": 5
+          }
+        ]
+      },
+      {
+        "category": "VCS and PM",
+        "entries": [
+          {
+            "name": "git",
+            "rating": 6
+          },
+          {
+            "name": "JIRA",
+            "rating": 5
+          },
+          {
+            "name": "YouTrack",
+            "rating": 4
+          }
+        ]
+      }
+    ];
+    var profContent = '';
+    for(var cat of data) {
+      profContent = profContent.concat('<li class="prof prof-cat-name">', cat.category, '</li><ul class="prof-cat">');
+      for(var item of cat.entries) {
+        var rate = item.rating;
+        var i = Math.floor(rate / 2);
+        var ic = Math.floor((10 - rate) / 2);
+        var half = '';
+        if(rate % 2 == 1) {
+          half = '<i class="fa fa-star-half-o"></i>';
+        }
+        var filled = ('<i class="fa fa-star"></i>').repeat(i);
+        var blank = ('<i class="fa fa-star-o"></i>').repeat(ic);
+        profContent = profContent.concat('<li><span class="prof prof-item"><span class="prof-item-name">', item.name, '</span><span class="prof-rating">-');
+        profContent = profContent.concat(filled, half, blank);
+        profContent = profContent.concat('</span></span></li>');
+      }
+      profContent = profContent.concat('</ul>');
+    }
+    $('#tech-prof').html(profContent);
+  });
+  $(document).ready(function(){
+    var hobbies = [
+      {
+        name: "FLYING",
+        description: "Aviation and piloting has always been the favourite pick of a hobby."
+      },
+      {
+        name: "DRIVING",
+        description: "Love the thrill of speed and the bond with the machine."
+      },
+      {
+        name: "RIDING",
+        description: "Love the thrill of speed and the bond with the machine."
+      },
+      {
+        name: "MUSIC",
+        description: "Listening to music and playing music."
+      },
+      {
+        name: "GUITAR",
+        description: "An awesome companion that let's speak the heart out."
+      },
+      {
+        name: "READING",
+        description: "Love reading because it enhances knowledge, imagination and thereby wisdom."
+      },
+      {
+        name: "WRITING",
+        description: "Express the thoughts on different things."
+      },
+      {
+        name: "DIY",
+        description: "Gives an immense amount of pleasure when looking at a succssful output."
+      },
+      {
+        name: "MECHANICS",
+        description: "The other half of bonding with a machine."
+      },
+      {
+        name: "TRAVELLING",
+        description: "See places and collect memories for that day when..."
+      },
+      {
+        name: "TEACHING",
+        description: "To give back to my motherland, and thereby the world and the human race."
+      },
+      {
+        name: "CODING",
+        description: "Keeping the brain busy for a hobby, while making it useful."
+      },
+      {
+        name: "SUDOKU",
+        description: "Just keeping the brain busy."
+      }
+    ];
+    var markup = "";
+    for(var i in hobbies) {
+      markup += "<div class='tooltip'><span class='tag'>" + hobbies[i].name + "</span>";
+      markup += "<span class='tooltiptext'>" + hobbies[i].description + "</span>";
+      markup += "</div>";
+    }
+    $("#hobbies-tags").html(markup);
+  });
+  $(document).ready(function(){
+    var traits = [
+      {
+        name: "BUDDHIST",
+        description: "Not a religious one, just trying to fit that gigantic knowledge system into life."
+      },
+      {
+        name: "MINIMALIST",
+        description: "Travel any journey very light."
+      },
+      {
+        name: "AMBITIOUS",
+        description: "Look forward to do the things deemed impossible."
+      },
+      {
+        name: "FOCUSED",
+        description: "Able to work towards goals and achieve them systematically."
+      },
+      {
+        name: "RESOURCEFUL",
+        description: "Know how to get the thing done with what is in hand."
+      },
+      {
+        name: "PUBLIC SPEAKER",
+        description: "Very comfortable with talks."
+      },
+      {
+        name: "PUNCTUAL",
+        description: "Never keeps someone waiting."
+      },
+      {
+        name: "DETAIL-ORIENTED",
+        description: "Thorough attention to details."
+      },
+      {
+        name: "RESULT-ORIENTED",
+        description: "Focuses on getting the thing done."
+      },
+      {
+        name: "MENTOR",
+        description: "Immensly enjoy coaching/mentoring."
+      },
+      {
+        name: "TACTFUL",
+        description: "Know how to handle situations."
+      }
+    ];
+    var markup = "";
+    for(var i in traits) {
+      markup += "<div class='tooltip'><span class='tag'>" + traits[i].name + "</span>";
+      markup += "<span class='tooltiptext'>" + traits[i].description + "</span>";
+      markup += "</div>";
+    }
+    $("#traits-tags").html(markup);
+  });
+</script>

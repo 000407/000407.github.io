@@ -30,8 +30,13 @@ github_username:  "000407"
 
 # Build settings
 theme: minima
+minima:
+  skin: dark
 plugins:
   - jekyll-feed
+
+gems:
+  - jekyll-font-awesome-sass
 
 # Exclude from processing.
 # The following items will not be processed, by default.
