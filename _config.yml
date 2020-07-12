@@ -28,6 +28,8 @@ url: "http://kanchana.senadheera.net" # the base hostname & protocol for your si
 linkedin_username: kanchana-senadheera
 github_username:  "000407"
 
+show_excerpts: true
+
 # Build settings
 theme: minima
 minima:
