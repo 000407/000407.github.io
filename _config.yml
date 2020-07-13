@@ -24,7 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   This is the personal web space I keep for myself. 
   You can find things like technical bits, my thoughts on different topics and issues, and knowledge I find from here and there.
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://kanchana.senadheera.net" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://kanchana.senadheera.net" # the base hostname & protocol for your site, e.g. http://example.com
 linkedin_username: kanchana-senadheera
 github_username:  "000407"
 
