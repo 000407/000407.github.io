@@ -1,0 +1,27 @@
+---
+layout: post
+title:  "Software Development - Linux? Windows? Or MacOS?"
+date:   2016-09-17 15:42:18 +0530
+categories: techbits
+excerpt: A quick glance at different operating system platforms available to get some insights on what platform suits the most for software development.
+---
+
+Ola muchachos y muchachas! To begin with, this is a question I thought, worth posting my opinion on. If someone asks this question from me there are primarily two sources that my answer would be generated from. One is my gut feeling and the other is my intellect. However, I'd go on with something which is a hybrid. Let's see if we can put some useful insights together. Remember, you are all free to comment on whatever I have written here and correct the incorrect.
+
+These three operating systems are like three completely different people, having their own unique characteristics. One big primary difference in Windows and MacOS in contrast with Linux is that Linux is F-R-E-E and open-source whereas the other two are not. If you need to tweak the OS and make things custom to suit your needs, linux lets you do it as much as you wish and you can. Tweak windows? Yeah you can, but for that either you should go on with a third-party tool (obviously might incur some cost and limited in what it can do) or you should be so damn thorough with windows registry. You don't know what you are doing? Well, then it's more probable that you'd screw everything up! In the case of MacOS, again it's pretty much like windows, that doesn't really let you tweak the OS up to an extent which is as great as linux.
+
+Also, we have to take into the account the fact that the MacOS has it's roots close to Linux. MacOS is based on [NeXTSTEP](https://en.wikipedia.org/wiki/NeXTSTEP), which is based on [Mach Kernel](https://en.wikipedia.org/wiki/Mach_kernel) and BSD, which is derived from Unix. Unix has paternity to Linux as well. Therefore tweaking MacOS to get a platform for development might sound/feel a bit difficult initially, but when you get used to, it will be a cake walk.
+
+Built-in utilities wise, again it appears that linux is ahead of both windows and MacOS. We have to face the fact that linux is actually the kernel and the utilities are bundled by different parties and being distributed (called distros). "What are the features I have in my Linux?" should actually be answered with the question "What is your distro?". Windows has only what Satya Nadella and his team give you and MacOS has only what Tim Cook and the team gives you. Yes you may develop the utilities that you want, but would you? Rather can you develop all that you need?
+
+Again in terms of utilities, we know for a fact that linux is open-source while other two are not. Since the source is open, you are free to make unlimited changes to the source itself. One could argue that this ability would make utilities less required, which is again true. Somehow, it is fair to conclude that, if you are creative enough, and if you know what you are doing, linux would be the best choice for you because it enables endless possibilities.
+
+But the problem with linux is that it is open-source. Since it is open-source people say that it is being managed by a huge community which is true. But when take the focus of effort into account, we have to admit that both Windows and MacOS have a very focused effort put on to them. It's a highly focused effort of a group of capable people who are actively engaged in developing their products since years. It's almost the same group of people who have been working on it for so long. We have to admit that when we fine-tune something for years, we get to know in and out about it and that alone makes the product the most optimum out of all. That is why Windows still has the most of the market share. And we cannot forget the fact that Windows provides the Subsystem for Linux. Install this and the other supporting tools, you have the Linux system built in. Imagine installing your favorite Linux packages using apt-get in a Windows command line. It is so fair to conclude that Windows is effectively working on unifying the OS platforms and they are becoming successful at it.
+
+![Desktop OS Market Share]({{ site.url }}/assets/img/posts/platforms-for-dev/StatCounter-os_combined-ww-monthly-201906-202006.png)
+
+Source: <a href="https://gs.statcounter.com/os-market-share/desktop/worldwide">StatCounter Global Stats - OS Market Share</a>
+
+When this topic is being discussed, one common card that is being played is Malware, saying Windows has the most threat. That is a very much subjective matter. Linux has a limited threat because nobody is bothered to make such for Linux. Not that it is impossible to make malware that could break Linux. And so applies for MacOS as well. Basically, the bottom line of the story is that nobody could ever predict that there won't be any threat to Linux from malware because all it takes is a set of willing people to do that.
+
+So the conclusion of the topic is "we simply cannot rely on a single platform forever. Each platform has its own pros and cons, making them highly compatible with some cases and not compatible or feasible at all on other cases." This applies for software development as well. If one could unify all the features on one fine day? Ah yeah! Then that's the OS you'd have to go for.
