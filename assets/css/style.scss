@@ -141,3 +141,7 @@ div.tooltip:not(:first-child) {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+#typearea {
+	resize: vertical;
+}
