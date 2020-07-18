@@ -1,0 +1,30 @@
+{% if site.data.navigation.nav[0] %}
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    {% for item in site.data.navigation.nav %}
+      <li>
+        {% if item.url %}
+          <span class="main-item"><a href="{{ item.url }}">{{ item.title }}</a></span>
+        {% else %}
+          <span class="main-item">{{ item.title }}</span>
+        {% endif %}
+        {% if item.level1[0] %}
+          <ul>
+          {% for entry in item.level1 %}
+            <li>{% include nav_item.html url=entry.url content=entry.content %}
+              {% if entry.level2[0] %}
+                <ul>
+                {% for subentry in entry.level2 %}
+                  <li>{% include nav_item.html url=subentry.url content=subentry.content %}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+{% endif %}

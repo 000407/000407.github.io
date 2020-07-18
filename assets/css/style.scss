@@ -3,7 +3,8 @@
 ---
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+  "minima/initialize",
+  "nav";
 
 @mixin float-right($width) {
 	margin-top: auto;

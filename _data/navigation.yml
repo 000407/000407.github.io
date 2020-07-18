@@ -1,0 +1,11 @@
+nav:
+  - title: Home
+    url: /
+  - title: About
+    url: /about
+  - title: Blog
+    url: /blog
+  - title: Tools
+    level1:
+      - content: Singlish Writer
+        url: /tools/singlishw

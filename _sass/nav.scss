@@ -1,0 +1,133 @@
+.nav-bar {
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  text-align: left;  /* May want to align center */
+}
+
+.nav-menu, .nav-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu {
+  span.main-item {
+    display: inline-block;
+    width: 4em;
+    text-align: center;
+  }
+  a, span {
+    color: #93a1a1;  /* White font for link color. */
+    padding: 0 0.5em;
+    display: block;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 1.0;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.8);  /* Solid black rollover for all items. */
+    }
+  }
+}
+
+/* Selected Menu Item */
+
+.selected {
+  opacity: 1.0;
+  background: rgba(255, 255, 255, 0.5);  /* Transparent white selected item. */
+  color: #000 !important;                /* Black font. */
+  border-radius: .2em;
+}
+
+.site-nav div.trigger {
+  @media screen and (max-width: 600px) {
+    width: 10em;
+  }
+}
+
+/* Navigation Bar - Level 1 Drop Down Menu */
+
+.nav-menu > li {
+  @media screen and (min-width: 600px) {
+    display: inline-block;
+  }
+  &:hover {
+    span.main-item {
+      color: #fff;
+      border-bottom: 0.2em solid #CC2936 /* Madder Lake */
+    }
+  }
+}
+
+.nav-menu > li:first-child {
+  margin-left: 0;
+}
+
+.nav-menu > li > a {}
+
+.nav-menu > li > a:hover {}
+
+/* Navigation Bar - Level 2 */
+
+.nav-menu > li > ul {
+  text-align: left;
+  width: auto;  /* Change auto value with 200px if you want a bigger menu */
+  display: none;
+  background: #08415C;  /* Indigo Dye */
+  
+  @media screen and (min-width:600px) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+
+  min-width: 150px;
+  z-index: 9999999;
+}
+.nav-menu > li:hover > ul {
+  display: block;
+}
+.nav-menu ul li a {}
+.nav-menu ul li a:hover {}
+
+/* Navigation Bar - Level 3 */
+
+.nav-menu > li > ul > li > ul {
+  text-align: left;
+  display: none;
+  background: #388697;  /* Metallic Seaweed */
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 150px;
+  z-index: 9999999;
+}
+.nav-menu > li > ul > li:hover > ul {
+  display: block;
+}
+.nav-menu ul ul li {}
+.nav-menu ul ul li a {}
+.nav-menu ul ul li a:hover {}
+
+/* Navigation Bar - Level 4 */
+
+.nav-menu > li > ul > li > ul > li > ul {
+  text-align: left;
+  display: none;
+  background: #CC2936;  /* Baby Pink. */
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 250px;
+  z-index: 9999999;
+}
+.nav-menu > li > ul > li > ul > li:hover > ul {
+  display: block;
+}
+.nav-menu ul ul ul li {}
+.nav-menu ul ul ul li a {}
+.nav-menu ul ul ul li a:hover {}
