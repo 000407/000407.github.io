@@ -35,3 +35,9 @@
   </div>
 
 </footer>
+
+{% if page.scripts %}
+  {% for file in page.scripts %}
+    <script type="text/javascript" src="/assets/js/{{ file }}.js"></script>
+  {% endfor %}
+{% endif %}
