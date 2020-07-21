@@ -142,8 +142,13 @@ div.tooltip:not(:first-child) {
   visibility: visible;
 }
 
-#typearea {
-	resize: vertical;
+a.social-icon {
+	font-size: 2.5em;
+	color: #93a1a1;
+
+	&:hover {
+		color: #fff;
+	}
 }
 
 .mermaid {

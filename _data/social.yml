@@ -1,0 +1,17 @@
+email:
+  id: 'kanchana@senadheera.net'
+  href: 'mailto:'
+  title: 'Email'
+  fa-icon: 'fa-envelope-square'
+
+linkedin:
+  id: 'kanchana-senadheera'
+  href: 'https://www.linkedin.com/in/'
+  title: 'LinkedIn'
+  fa-icon: 'fa-linkedin-square'
+
+github:
+  id: '000407'
+  href: 'https://github.com/'
+  title: 'GitHub'
+  fa-icon: 'fa-github-square'
