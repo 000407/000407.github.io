@@ -145,3 +145,15 @@ div.tooltip:not(:first-child) {
 #typearea {
 	resize: vertical;
 }
+
+.mermaid {
+	background-color: #fff;
+	width: 100%;
+	margin: 1em 0;
+	
+	svg {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
