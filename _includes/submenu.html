@@ -2,9 +2,9 @@
 {% for entry in submenu %}
   <li>
     {% if entry.url %}
-      <span class="sub-item"><a href="{{ include.url }}">{{ entry.content }}</a></span>
+      <span class="sub-item"><a href="{{ entry.url }}">{{ entry.content }}</a></span>
     {% else %}
-      <span>{{ include.content }}</span>
+      <span class="sub-item">{{ entry.content }}</span>
     {% endif %}
     {% if entry.submenu %}
       {% assign submenu = entry.submenu %}
