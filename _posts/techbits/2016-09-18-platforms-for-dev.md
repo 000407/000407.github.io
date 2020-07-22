@@ -18,7 +18,7 @@ Again in terms of utilities, we know for a fact that linux is open-source while 
 
 But the problem with linux is that it is open-source. Since it is open-source people say that it is being managed by a huge community which is true. But when take the focus of effort into account, we have to admit that both Windows and MacOS have a very focused effort put on to them. It's a highly focused effort of a group of capable people who are actively engaged in developing their products since years. It's almost the same group of people who have been working on it for so long. We have to admit that when we fine-tune something for years, we get to know in and out about it and that alone makes the product the most optimum out of all. That is why Windows still has the most of the market share. And we cannot forget the fact that Windows provides the Subsystem for Linux. Install this and the other supporting tools, you have the Linux system built in. Imagine installing your favorite Linux packages using apt-get in a Windows command line. It is so fair to conclude that Windows is effectively working on unifying the OS platforms and they are becoming successful at it.
 
-![Desktop OS Market Share]({{ site.url }}/assets/img/posts/platforms-for-dev/StatCounter-os_combined-ww-monthly-201906-202006.png)
+![Desktop OS Market Share](/assets/img/posts/platforms-for-dev/stats.png)
 
 Source: <a href="https://gs.statcounter.com/os-market-share/desktop/worldwide">StatCounter Global Stats - OS Market Share</a>
 
