@@ -1,0 +1,15 @@
+<ul>
+{% for entry in submenu %}
+  <li>
+    {% if entry.url %}
+      <span class="sub-item"><a href="{{ include.url }}">{{ entry.content }}</a></span>
+    {% else %}
+      <span>{{ include.content }}</span>
+    {% endif %}
+    {% if entry.submenu %}
+      {% assign submenu = entry.submenu %}
+      {% include submenu.html %}
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>

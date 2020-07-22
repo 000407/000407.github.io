@@ -12,6 +12,10 @@
 
 .nav-menu li {
   position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 4em;
 }
 
 .nav-menu {
@@ -20,18 +24,23 @@
     width: 4em;
     text-align: center;
   }
-  a, span {
-    color: #93a1a1;  /* White font for link color. */
-    padding: 0 0.5em;
-    display: block;
-    text-decoration: none;
-
-    &:hover {
-      opacity: 1.0;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.8);  /* Solid black rollover for all items. */
+  li > {
+    span, span * {
+      color: #93a1a1;  /* White font for link color. */
+      padding: 0 0.5em;
+      display: block;
+      text-decoration: none;
     }
   }
+  li:hover {
+    span.sub-item, span.sub-item * {
+      color: #fff;
+    }
+  }
+}
+
+li:hover > span.main-item , li:hover > span.main-item * {
+  color: #000;
 }
 
 /* Selected Menu Item */
@@ -57,10 +66,13 @@
   }
   &:hover {
     span.main-item {
-      color: #fff;
-      border-bottom: 0.2em solid #CC2936 /* Madder Lake */
+      border-bottom: 0.2em solid #59171B /* Caput Mortuum */
     }
   }
+}
+
+.nav-menu > li li:hover {
+  background-color: #543133; /* Old Burgundy */
 }
 
 .nav-menu > li:first-child {
@@ -77,7 +89,7 @@
   text-align: left;
   width: auto;  /* Change auto value with 200px if you want a bigger menu */
   display: none;
-  background: #08415C;  /* Indigo Dye */
+  background: #59171B;  /* Caput Mortuum */
   
   @media screen and (min-width:600px) {
     position: absolute;
@@ -99,7 +111,6 @@
 .nav-menu > li > ul > li > ul {
   text-align: left;
   display: none;
-  background: #388697;  /* Metallic Seaweed */
   position: absolute;
   left: 100%;
   top: 0;
@@ -118,7 +129,6 @@
 .nav-menu > li > ul > li > ul > li > ul {
   text-align: left;
   display: none;
-  background: #CC2936;  /* Baby Pink. */
   position: absolute;
   left: 100%;
   top: 0;

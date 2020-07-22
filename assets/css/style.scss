@@ -19,6 +19,11 @@
 	width: max-content;
 }
 
+.site-header {
+	border-bottom: none;
+	border-top-color: #59171B; /* Caput Mortuum */
+}
+
 b.employment-duration, b.project-client, b.education-duration {
 	@include float-right(15em);
 	font-size: 70%;
@@ -147,7 +152,7 @@ a.social-icon {
 	color: #93a1a1;
 
 	&:hover {
-		color: #fff;
+		color: #4F090C;
 	}
 }
 
@@ -161,4 +166,9 @@ a.social-icon {
 		margin-left: auto;
 		margin-right: auto;
 	}
+}
+
+img[src*="#center"] {
+	display: block;
+    margin: auto;
 }

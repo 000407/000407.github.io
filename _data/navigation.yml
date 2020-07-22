@@ -6,6 +6,6 @@ nav:
   - title: Blog
     url: /blog
   - title: Tools
-    level1:
+    submenu:
       - content: Singlish Writer
         url: /tools/singlishw
