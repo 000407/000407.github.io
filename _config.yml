@@ -28,10 +28,16 @@ url: "https://kanchana.senadheera.net" # the base hostname & protocol for your s
 
 show_excerpts: true
 
+# Disqus Comments
+disqus:
+    # Leave shortname blank to disable comments site-wide.
+    # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
+    shortname: "000407"
+
 # Build settings
 theme: minima
 minima:
-  skin: solarized-dark
+  skin: classic
 plugins:
   - jekyll-feed
 
