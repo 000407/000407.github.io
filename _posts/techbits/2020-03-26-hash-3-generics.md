@@ -3,7 +3,7 @@ layout: post
 title:  "#::3-Generics"
 date:   2020-03-27 15:42:18 +0530
 categories: techbits
-excerpt: A quick glance at different operating system platforms available to get some insights on what platform suits the most for software development.
+excerpt: A deep dive into the concept of Generics, and a glance at under the hood of C# and Java, to slightly improve the understanding on how these two implements the concept of Generics.
 ---
 
 Some time back, I wrote about stacks and how to implement them. There, I have promised at the end that I will improve our current implementation using generics. This, I write to keep that promise. The initial part of this, I am going to discuss some technical aspects related to generics in C# and Java. For those who are less interested in that part, you can jump into the implementation straight away. Let’s get started. First of all, I am going to take a look at a simple method `void Swap()` that is used to swap two references.
