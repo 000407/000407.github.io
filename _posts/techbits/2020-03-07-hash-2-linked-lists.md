@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "#::2-Linked Lists"
-date:   2016-09-17 15:42:18 +0530
+date:   2020-03-07 15:42:18 +0530
 categories: techbits
 scripts: ["mermaid.min"]
-excerpt: A quick glance at different operating system platforms available to get some insights on what platform suits the most for software development.
+excerpt: A linked list is a data structure that is nothing but a list of elements which are linearly interlinked with the use of references. This post intends to explain the concepts behind linked lists, along with how to implement one, using C#.
 ---
 
 Let us start this discussion with a simple analogy, that is a story about one of my friends, Alice.
