@@ -172,3 +172,15 @@ img[src*="#center"] {
 	display: block;
     margin: auto;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.mermaid::-webkit-scrollbar {
+ 	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.mermaid {
+	overflow: scroll;
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+}
