@@ -10,7 +10,18 @@ A Software Engineer in profession with a proven track record with <span id="exp"
 
 ## <i class='fa fa-flag-checkered'></i> Portfolio
 
-  - <span class="project-record"><span class="project-title">[JobsDB.lk](https://jobsdb.lk/)</span> <b class="project-client"> - hSenid Software Lanka (2020)</b></span>
+  - <span class="project-record"><span class="project-title">Backend Development - PayPay Payment Platform</span> <b class="project-client"> - PayPay Corporation (2020)</b></span>
+    <ul class="project-brief">
+      <li>A fully fledged payment platform.</li>
+      <li>A distributed application uses microservices architecture. Uses Spring Boot 2.2.6 + MySQL 5.7 + TiDB</li>
+      <li>Uses Kafka for messaging and services interconnection.</li>
+      <li>Worked closely with CI/CD concepts.</li>
+      <li>Outsourced by hSenid Software Lanka to Paypay Corporation (via Fujisoft Incorporated) and assigned in the role of Engineer. Stationed in Yokohama, Japan.</li>
+      <li>Server-side development</li>
+      <li>Complex data requirements with high-throughput and high availability requirements.</li>
+    </ul>
+
+  - <span class="project-record"><span class="project-title">[JobsDB.lk](https://jobsdb.lk/)</span> <b class="project-client"> - hSenid Software Lanka (2019-2020)</b></span>
     <ul class="project-brief">
       <li>A vacancy advertising, CV generation and vacancy application management platform to integrate univerisities and companies.</li>
       <li>Web Application on Angular 8, with Spring Boot 2.2.1 + Spring 5.2.1 + MongoDB 4.0</li>
