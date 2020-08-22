@@ -4,8 +4,7 @@ title: "vLayman.1::Branch and Bound Algorithm"
 date: 2020-07-23 20:00:00 +0530
 categories: techbits
 excerpt: "Branch and Bound Algorithm, invented by P.M. Narendra and K. Fukunaga, is a long standing, widely used algorithm in machine learning and pattern recognition. This post intends to explain the mathematical background and the function of the BnB algorithm in details along with an example."
-styles: ["katex.min"]
-scripts: ["katex.min", "katex.init", "mermaid.min"]
+scripts: ["mathjax/tex-chtml", "mermaid.min"]
 ---
 
 ## Prologue

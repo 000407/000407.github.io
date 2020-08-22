@@ -34,10 +34,6 @@ disqus:
   # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
   shortname: "000407"
 
-markdown: kramdown
-kramdown:
-   math_engine: mathjax
-
 # Build settings
 theme: minima
 minima:
