@@ -139,7 +139,7 @@ Sample<Integer> intSample = new Sample<Integer>(); // Valid
 Sample<int> intSample = new Sample<int>(); // Invalid
 ```
 
- - Unmanaged Type Constraints – Similar to previous one this time, type arguments only which are of non-nullable (unmanaged types are)[https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types] are allowed now.
+ - Unmanaged Type Constraints – Similar to previous one this time, type arguments only which are of non-nullable [unmanaged types](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types) are allowed now.
 
 ```c#
 class Sample<T> where T : class {}
