@@ -13,18 +13,16 @@ A Software Engineer in profession with a proven track record with <span id="exp"
   - <span class="project-record"><span class="project-title">Backend Development - PayPay Payment Platform</span> <b class="project-client"> - PayPay Corporation (2020)</b></span>
     <ul class="project-brief">
       <li>A fully fledged payment platform.</li>
-      <li>A distributed application uses microservices architecture. Uses Spring Boot 2.2.6 + MySQL 5.7 + TiDB</li>
-      <li>Uses Kafka for messaging and services interconnection.</li>
-      <li>Worked closely with CI/CD concepts.</li>
+      <li>Microservices, Spring Boot, Messaging Queues, CI/CD</li>
       <li>Outsourced by hSenid Software Lanka to Paypay Corporation (via Fujisoft Incorporated) and assigned in the role of Engineer. Stationed in Yokohama, Japan.</li>
       <li>Server-side development</li>
       <li>Complex data requirements with high-throughput and high availability requirements.</li>
     </ul>
 
-  - <span class="project-record"><span class="project-title">[JobsDB.lk](https://jobsdb.lk/)</span> <b class="project-client"> - hSenid Software Lanka (2019-2020)</b></span>
+  - <span class="project-record"><span class="project-title">[JobsDB.lk](https://jobsdb.lk/)</span> <b class="project-client"> - hSenid Software Lanka (2019)</b></span>
     <ul class="project-brief">
       <li>A vacancy advertising, CV generation and vacancy application management platform to integrate univerisities and companies.</li>
-      <li>Web Application on Angular 8, with Spring Boot 2.2.1 + Spring 5.2.1 + MongoDB 4.0</li>
+      <li>Web Application on Angular, with Spring Boot and NoSQL database</li>
       <li>Assigned in the role of Lead Engineer</li>
       <li>Architectural design, server-side & client-side development</li>
       <li>Developed a pluggable authentication module on top of Spring security, with support for OAuth2, JWT and Credential based authentication modes. This module further reduces the boiler-plate code required for Spring security configuration.</li>
@@ -43,7 +41,7 @@ A Software Engineer in profession with a proven track record with <span id="exp"
   - <span class="project-record"><span class="project-title">Hospital Group Management System</span> <b class="project-client"> - Singaporean Client (2019)<b></b>
     <ul class="project-brief">
       <li>An end-to-end Hospital Management System that includes patient management, appointments management, medical documents management, services and billing management to a group of Hospitals in Singapore</li>
-      <li>Web application on Angular 8, with Spring Boot 2.2.1 + Spring 5.2.1 + MongoDB 4.0</li>
+      <li>Web application on Angular, with Spring Boot and Relational + NoSQL</li>
       <li>Outsourced by hSenid Software Lanka and assigned in the role of Engineer. Offshore work collaborating with 3 other teams from Kandy LK, Singapore and Hong Kong.</li>
       <li>Assigned in developing a core report generator module, that collects and summarises data from multiple different documents.</li>
     </ul>
@@ -51,7 +49,7 @@ A Software Engineer in profession with a proven track record with <span id="exp"
   - <span class="project-record"><span class="project-title">[Job Portal](https://hsenidjobportal.peopleshr.com) for eHRM & PeoplesHR</span> <b class="project-client"> - hSenidBiz (2018)<b/></b>
     <ul class="project-brief">
       <li>A job advertising, application management and vacancy management system to be integrated with eHRM and PeoplesHR HRM solutions by hSenidBiz</li>
-      <li>Web application on KO.js + jQuery 3.3.1 + ASP.NET + SQL Server 2014</li>
+      <li>Web application on KO.js + jQuery 3.3.1 + ASP.NET + SQL Server</li>
       <li>Outsourced by hSenid Software Lanka to hSenidBiz and assigned in the role of Engineer.</li>
       <li>Assigned in the development of the following areas of the Application.</li>
       <ul>
@@ -139,7 +137,7 @@ A Software Engineer in profession with a proven track record with <span id="exp"
       <li>G.C.E Ordinary Level - 8 A Passes, 1 B Pass and 1 C Pass</li>
       <li>Sports - Karate, Volley Ball, Foot Ball, Table Tennis</li>
       <li>Member of the Senior Debating Team</li>
-      <li>Member of the Senior Music Ochestra (Organ/Serpina)</li>
+      <li>Member of the Senior Music Ochestra (Keyboards)</li>
       <li>Member of the Media Unit</li>
     </ul>
     <li><span class="education-record"><span class="education-title">Sri Amarawansha Dhamma School, Getambe LK</span><b class="education-duration"> - 1996-2008</b></span></li>
@@ -147,7 +145,7 @@ A Software Engineer in profession with a proven track record with <span id="exp"
       <li>Sunday School Education</li>
       <li>Dhamma School Final Examination - 2 D Passes and 2 C Passes</li>
       <li>Head Prefect of the Prefects' Court</li>
-      <li>Member of the Senior Music Ochestra (Organ/Serpina)</li>
+      <li>Member of the Senior Music Ochestra (Keyboards)</li>
       <li>Captain of the Senior Debating Team</li>
       <li>Buddhism Teaching</li>
     </ul>
