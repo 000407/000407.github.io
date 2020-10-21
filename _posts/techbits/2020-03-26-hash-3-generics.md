@@ -6,7 +6,7 @@ categories: techbits
 excerpt: A deep dive into the concept of Generics, and a glance at under the hood of C# and Java, to slightly improve the understanding on how these two implements the concept of Generics.
 ---
 
-Some time back, I wrote about stacks and how to implement them. There, I have promised at the end that I will improve our current implementation using generics. This, I write to keep that promise. The initial part of this, I am going to discuss some technical aspects related to generics in C# and Java. For those who are less interested in that part, you can jump into the implementation straight away. Let’s get started. First of all, I am going to take a look at a simple method `void Swap()` that is used to swap two references.
+Some time back, I wrote about stacks and how to implement them. There, I have promised at the end that I will improve our current implementation using generics. This, I write to keep that promise. The initial part of this, I am going to discuss some technical aspects related to generics in C# and Java. For those who are less interested in that part, you can [jump into the implementation](#impl) straight away. Let’s get started. First of all, I am going to take a look at a simple method `void Swap()` that is used to swap two references.
 
 ```c#
 void Swap(Integer lhs, Integer rhs) {
@@ -317,7 +317,7 @@ List<Car> cars1 = objectMapper.readValue(jsonArray, new TypeReference<List<Car>>
 
 Even though you might think, “since the end result should be a `List<Car>` type argument for `TypeReference<>` should be obvious”, it seems like there is no inference channel that the compiler can understand so. Hence, the first method above will fail during the runtime. So the bottom line is, there should be some inference channels that the compiler/runtime is aware of, in order to successfully infer the types for generics.
 
-## Modified Stack
+## <a name='impl'></a>Modified Stack
 
 Previously, our stack supported only int data and now we are trying to make it work with different types. The first thing is to rewrite the IStack interface with generics.
 
