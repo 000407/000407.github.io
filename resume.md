@@ -128,6 +128,7 @@ A Software Engineer in profession with a proven track record with <span id="exp"
     <ul>
       <li>University of Colombo</li>
       <li>Overall GPA - 3.43</li>
+      <li>Best e-Learner - Academic Year 2013-2014</li>
       <li>Worked in a study group. Helped the batchmates by tutoring on certain subject areas including Information Security, Mathematics for Computing, Database Systems etc.</li>
     </ul>
     <li><span class="education-record"><span class="education-title">Ranabima Royal College, Peradeniya LK</span><b class="education-duration"> - 2000-2008</b></span></li>
