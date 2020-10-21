@@ -6,7 +6,7 @@ categories: techbits
 excerpt: A deep dive into the concept of Generics, and a glance at under the hood of C# and Java, to slightly improve the understanding on how these two implements the concept of Generics.
 ---
 
-Some time back, I wrote about stacks and how to implement them. There, I have promised at the end that I will improve our current implementation using generics. This, I write to keep that promise. The initial part of this, I am going to discuss some technical aspects related to generics in C# and Java. For those who are less interested in that part, you can jump into the implementation straight away. Let’s get started. First of all, I am going to take a look at a simple method `void Swap()` that is used to swap two references.
+Some time back, I wrote about stacks and how to implement them. There, I have promised at the end that I will improve our current implementation using generics. This, I write to keep that promise. The initial part of this, I am going to discuss some technical aspects related to generics in C# and Java. For those who are less interested in that part, you can [jump into the implementation](#impl) straight away. Let’s get started. First of all, I am going to take a look at a simple method `void Swap()` that is used to swap two references.
 
 ```c#
 void Swap(Integer lhs, Integer rhs) {
@@ -16,7 +16,7 @@ void Swap(Integer lhs, Integer rhs) {
 }
 ```
 
-All about this method looks fine except that it can Swap only integer object references. That simply tells us that if we have other types of objects (for instance say `Float`), you will need other methods to be implemented with almost similar body, and blatantly violate one of the key principles of coding practices DRY (AKA Don’t Repeat Yourself) and end up having to do Shotgun Surgery. DUH! Can we really improve this to have only one implementation that is reusable across different types? Just look at the three implementations of `Swap()` method given below for Integer, Personand Car.
+All about this method looks fine except that it can Swap only integer object references. That simply tells us that if we have other types of objects (for instance say `Float`), you will need other methods to be implemented with almost similar body, and blatantly violate one of the key principles of coding practices DRY (AKA Don’t Repeat Yourself) and end up having to do Shotgun Surgery. DUH! Can we really improve this to have only one implementation that is reusable across different types? Just look at the three implementations of `Swap()` method given below for `Integer`, `Person` and `Car`.
 
 ```c#
 class Utility {
@@ -109,7 +109,7 @@ class Utility {
 }
 ```
 
-Unlike the .NET CLR, Java Runtime Environment (JRE) takes a different avenue in handling generics. It does something called type erasure. Even though the type parameters are specified in the code, all of them will be erased during the compile time. Generally, type erasure will replace the references to the type parameter T with Object for T is not bound. T will be replaced with the upper bound type. Further details and edge cases are discussed below.
+Unlike the .NET CLR, Java Runtime Environment (JRE) takes a different avenue in handling generics. It does something called type erasure. Even though the type parameters are specified in the code, all of them will be erased during the compile time. Generally, type erasure will replace the references to the type parameter `T` with Object for `T` is not bound. `T` will be replaced with the upper bound type. Further details and edge cases are discussed below.
 
 ## Generic Classes
 
@@ -139,13 +139,13 @@ Sample<Integer> intSample = new Sample<Integer>(); // Valid
 Sample<int> intSample = new Sample<int>(); // Invalid
 ```
 
- - Value Type Constraints – Similar to previous one this time, type arguments only which are of value types are allowed now.
+ - Unmanaged Type Constraints – Similar to previous one this time, type arguments only which are of non-nullable [unmanaged types](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types) are allowed now.
 
 ```c#
 class Sample<T> where T : class {}
 
-Sample<Integer> intSample = new Sample<Integer>(); // Valid
-Sample<int> intSample = new Sample<int>(); // Invalid
+Sample<Integer> intSample = new Sample<Integer>(); // Invalid
+Sample<int> intSample = new Sample<int>(); // Valid
 ```
 
  - Constructor Type Constraints – This will check if the given type parameter `T` has a parameter-less default constructor, for each `T` is any non-static, non-abstract class without any explicitly declared constructors and for any non-abstract class with an explicit public parameter-less constructor. This should be the  last constraint defined for a generic type. Below, line number 7 will cause in `'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter `T` in the generic type or method 'Program.CreateInstance<T>()'` during compile time.
@@ -317,7 +317,7 @@ List<Car> cars1 = objectMapper.readValue(jsonArray, new TypeReference<List<Car>>
 
 Even though you might think, “since the end result should be a `List<Car>` type argument for `TypeReference<>` should be obvious”, it seems like there is no inference channel that the compiler can understand so. Hence, the first method above will fail during the runtime. So the bottom line is, there should be some inference channels that the compiler/runtime is aware of, in order to successfully infer the types for generics.
 
-## Modified Stack
+## <a name='impl'></a>Modified Stack
 
 Previously, our stack supported only int data and now we are trying to make it work with different types. The first thing is to rewrite the IStack interface with generics.
 
