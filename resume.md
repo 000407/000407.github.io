@@ -152,6 +152,13 @@ A Software Engineer in profession with a proven track record with <span id="exp"
     </ul>
   </ul>
 
+## <i class='fa fa-certificate'></i> Certifications
+  <ul>
+    <li><span class="education-record"><span class="education-title">Certified Ethical Hacker (C|EH)</span><b class="education-duration"> - 09/2020 - 09/2023</b></span></li>
+    <li><span class="education-record"><span class="education-title">Certified Information Systems Security Practitioner (CISSP)</span><b class="education-duration"> - Reading</b></span></li>
+    <li><span class="education-record"><span class="education-title">Cisco Certified Network Associate (CCNA) Security</span><b class="education-duration"> - Reading</b></span></li>
+  </ul>
+
 ## <i class='fa fa-angellist'></i> Personal
   <ul class="personal">
     <li class="bio">Bio</li>
