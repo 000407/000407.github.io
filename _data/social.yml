@@ -2,16 +2,21 @@ email:
   id: 'kanchana@senadheera.net'
   href: 'mailto:'
   title: 'Email'
-  fa-icon: 'fa-envelope-square'
+  fa-icon: 'fa-envelope'
 
 linkedin:
   id: 'kanchana-senadheera'
   href: 'https://www.linkedin.com/in/'
   title: 'LinkedIn'
-  fa-icon: 'fa-linkedin-square'
+  fa-icon: 'fa-linkedin'
 
 github:
   id: '000407'
   href: 'https://github.com/'
   title: 'GitHub'
-  fa-icon: 'fa-github-square'
+  fa-icon: 'fa-github'
+
+so:
+  id: '3126973'
+  href: 'https://stackoverflow.com/users/'
+  fa-icon: 'fa-stack-overflow'

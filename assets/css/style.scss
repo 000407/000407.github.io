@@ -147,12 +147,19 @@ div.tooltip:not(:first-child) {
   visibility: visible;
 }
 
-a.social-icon {
-	font-size: 2.5em;
-	color: #93a1a1;
+i.fac-square {
+	position: relative;
+    top: -.2em;
+    padding: .2em;
+    font-size: 1.7em;
+    color: #eee;
+    background-color: #93a1a1;
+    border-radius: 0.25em;
+    width: 1em;
+    text-align: center;
 
-	&:hover {
-		color: #4F090C;
+    &:hover {
+		background-color: #4F090C;
 	}
 }
 
