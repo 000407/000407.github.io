@@ -3,10 +3,12 @@ layout: post
 title: "Software Version Controlling"
 date: 2017-09-13 17:36:00 +0530
 categories: techbits
-excerpt: Excerpt goes here
-scripts: ["mermaid.min"]
+excerpt: Version control systems (VCS) (also known as revision control, source control, or source code management) is a class of systems responsible for managing changes to a collections of information such as computer programs, multimedia, databases, documents and so on. In computer programming and software engineering, VCSs are extensively used for controlling the versioning of the source code and plays a vital role in any software development effort as a software project is essentially a team effort which most of the cases are geographically dispersed across many regions. This article explains the fundamental concepts of VCS and their use and practice in modern software development context.
+styles: ["software-vcs"]
 git_docs_src: https://git-scm.com/docs
 ---
+
+![Some Popular VCSs](/assets/img/posts/software-vcs/title_image.png#center#title){: .title}
 
 ## Fundamentals
 
