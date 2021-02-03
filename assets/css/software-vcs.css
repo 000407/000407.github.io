@@ -1,0 +1,7 @@
+img.title {
+  width: 612px;
+  height: 246px;
+
+  object-fit: cover;
+  object-position: 100% 0;
+}
