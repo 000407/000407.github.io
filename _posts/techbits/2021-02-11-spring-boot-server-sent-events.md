@@ -129,7 +129,7 @@ However, these could be achieved only within the following constraints/limitatio
  - SSE is limited to UTF-8; no support binary data
  - SSE is having an imposed limitation on maximum number of concurrent connections. This can be particularly hindering when opening multiple tabs as the limit is per browser and set to a very low number ([about 6](https://stackoverflow.com/a/16853226/3126973), 100 by default with HTTP/2 and HTTP/3)
 
-That's it for this one lads. Happy coding! :sunglasses:
+That's it for this one lads. Feel free to drop a comment below. Happy coding! :sunglasses:
 
 ### References
 
