@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Server-Sent Events in Action"
-date:   2021-02-06 00:00:00
+date:   2021-02-11 00:00:00
 categories: techbits
-excerpt: 
+excerpt: In client-server architecture, the modes of interaction between the client and the server are primarily two-fold. They are namely Push and Pull. Generally, the server is understood to be passive, where the interaction is initiated from the side of the client, making the client the active party. But this is not the case, when the server wants to notify the client when there is a specific event occurred on the side of the server. These events are sent, or pushed to the client as they occur. This article is about Server-Side Events and how to use them.
 scripts: ["mermaid.min"]
 src_raw_host: https://raw.githubusercontent.com/000407/sse_demo/master/src
 src_host: https://github.com/000407/sse_demo/blob/master/src
