@@ -20,6 +20,7 @@ group :jekyll_plugins do
   gem 'jekyll-spaceship'
   gem 'kramdown-parser-gfm'
   gem 'httparty'
+  gem 'jekyll-paginate-v2'
 end
 
 # Security flaw fix

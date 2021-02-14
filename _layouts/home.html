@@ -1,61 +1,37 @@
 ---
 layout: default
 ---
+<article class="post">
 
-<div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+  <header class="post-header">
+    <h1 class="post-title mt-center">{{ page.title | escape }}</h1>
+  </header>
 
-  {{ content }}
+  <div class="post-content mt-center">
+    {{ content }}
+  </div>
+  <div id="quote" class="fade-in">
+    <div id="quote-text">Your attitude, not your aptitude will determine your altitude.</div>
+    <div id="quote-author">Hilary Hinton &quot;Zig&quot; Ziglar</div>
+  </div>
+</article>
 
+<script type="text/javascript">
+  $(document).ready(() => {
+    $.getJSON('assets/data/quotes.json', (json) => {
+      const interval = setInterval(() => {
+        $("#quote").toggleClass('fade-in fade-out');
 
-  {% if site.paginate %}
-    {% assign posts = paginator.posts %}
-  {% else %}
-    {% assign posts = site.posts %}
-  {% endif %}
+        var to = setTimeout(() => {
+          var i = Math.floor(Math.random() * json.quotes.length) + 0;
 
+          $("#quote-text").html(json.quotes[i].text);
+          $("#quote-author").html(json.quotes[i].author);
+          $("#quote").toggleClass('fade-in fade-out');
+        }, 1000);
 
-  {%- if posts.size > 0 -%}
-    {%- if page.list_title -%}
-      <h2 class="post-list-heading">{{ page.list_title }}</h2>
-    {%- endif -%}
-    <ul class="post-list">
-      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-      {%- for post in posts -%}
-      <li>
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-
-    {% if site.paginate %}
-      <div class="pager">
-        <ul class="pagination">
-        {%- if paginator.previous_page %}
-          <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>
-        {%- else %}
-          <li><div class="pager-edge">•</div></li>
-        {%- endif %}
-          <li><div class="current-page">{{ paginator.page }}</div></li>
-        {%- if paginator.next_page %}
-          <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">{{ paginator.next_page }}</a></li>
-        {%- else %}
-          <li><div class="pager-edge">•</div></li>
-        {%- endif %}
-        </ul>
-      </div>
-    {%- endif %}
-
-  {%- endif -%}
-
-</div>
+        
+      }, 10000);
+    });
+  });
+</script>

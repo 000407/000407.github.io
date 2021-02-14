@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: ~MY_TERRITORY~
+title: ~my territory~
 email: kanchana@senadheera.net
 description: >- # this means to ignore newlines until "baseurl:"
   This is the personal web space I keep for myself. 
@@ -34,6 +34,17 @@ disqus:
   # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
   shortname: "000407"
 
+# Paginate-V2 settings
+pagination:
+  enabled: true
+  per_page: 3
+  offset: 0
+  permalink: '/page/:num/'
+  title: ':title - page :num of :max'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+
 # Build settings
 theme: minima
 minima:
@@ -42,9 +53,9 @@ minima:
 plugins:
   - jekyll-feed
   - jekyll-spaceship
-
-gems:
   - jekyll-font-awesome-sass
+  - jekyll-paginate-v2
+  
 
 # Exclude from processing.
 # The following items will not be processed, by default.
