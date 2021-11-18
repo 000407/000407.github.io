@@ -9,7 +9,13 @@ permalink: /resume/
 A Software Engineer in profession with a proven track record with <span id="exp"></span>+ years of experience in engineering applications that makes life easy. A versatile individual that always strives to go above and beyond expectations. Exposed to a wide and deep array of technologies and tools. Capable of tackling pretty much anything with an <strong><em>elegant solution</em></strong>. Capable and eager to <strong><em>research, learn</em></strong> as well as <strong><em>teach</em></strong>, <strong><em>train</em></strong> and <strong><em>mentor</em></strong>. A tech evangelist that truly believes “<strong><em>developing software is and always should be an engineering discipline</em></strong>”
 
 ## <i class='fa fa-flag-checkered'></i> Portfolio
-
+  - <span class="project-record"><span class="project-title">Associate Lead Fullstack Engineer - CloudKitchen</span> <b class="project-client"> - Grubtech (Pvt) Ltd. (2021)</b></span>
+    <ul class="project-brief">
+      <li>An end-to-end restaurant management platform that automates and expedites the entire lifecycle of food order processing</li>
+      <li>Microservices, SQL/NoSQL, Spring Boot, Messaging Queues, CI/CD, AWS Cloud</li>
+      <li>Server-side development</li>
+      <li>Complex data requirements with high-throughput and high availability requirements.</li>
+    </ul>
   - <span class="project-record"><span class="project-title">Backend Development - PayPay Payment Platform</span> <b class="project-client"> - PayPay Corporation (2020)</b></span>
     <ul class="project-brief">
       <li>A fully fledged payment platform.</li>
@@ -101,10 +107,12 @@ A Software Engineer in profession with a proven track record with <span id="exp"
 
 ## <i class='fa fa-handshake-o'></i> Experience
   <ul>
-    <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2016 – To Date</b></span></li>
+    <li><span class="employment-record"><span class="employment-title">Associate Tech Lead</span><b class="employment-duration"> - 08/2021 – To-date</b></span></li>
+    <p class="employment-employer">Grubtech (Pvt) Ltd, Dubai, UAE.</p>
+    <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2016 – 07/2021</b></span></li>
     <p class="employment-employer">hSenid Software Lanka (Pvt) Ltd, Colombo, LK.</p>
     <ul>
-      <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2019 – To Date</b></span></li>
+      <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2019 – 04/2021</b></span></li>
       <li><span class="employment-record"><span class="employment-title">Software Engineer</span><b class="employment-duration"> - 09/2017 – 09/2019</b></span></li>
       <li><span class="employment-record"><span class="employment-title">Associate Software Engineer</span><b class="employment-duration"> - 09/2016 – 09/2017</b></span></li>
     </ul>
@@ -118,6 +126,10 @@ A Software Engineer in profession with a proven track record with <span id="exp"
 
 ## <i class='fa fa-graduation-cap'></i> Education
   <ul>
+    <li><span class="education-record"><span class="education-title">Master of Science - Network & Information Security</span><b class="education-duration"> - Reading</b></span></li>
+    <ul>
+      <li>Kingston University - London</li>
+    </ul>
     <li><span class="education-record"><span class="education-title">Master of Information Security</span><b class="education-duration"> - 2017-2019</b></span></li>
     <ul>
       <li>University of Colombo</li>
