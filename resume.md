@@ -131,8 +131,10 @@ A Software Engineer in profession with a proven track record with <span id="exp"
       <li><span class="employment-record"><span class="employment-title">Software Engineer</span><b class="employment-duration"> - 09/2017 – 09/2019</b></span></li>
       <li><span class="employment-record"><span class="employment-title">Associate Software Engineer</span><b class="employment-duration"> - 09/2016 – 09/2017</b></span></li>
     </ul>
-    <li><span class="employment-record"><span class="employment-title">Visiting Faculty Member</span><b class="employment-duration"> - 02/2019 – 12/2019</b></span></li>
-    <p class="employment-employer">ANC Education, Kandy, LK.</p>
+    <li><span class="employment-record"><span class="employment-title">Visiting Faculty Member</span><b class="employment-duration"> - 06/2021 – Todate</b></span></li>
+    <p class="employment-employer">Asia Pacific Institute for Information Technology (APIIT), Kandy, LK.</p>
+    <li><span class="employment-record"><span class="employment-title">Visiting Faculty Member</span><b class="employment-duration"> - 02/2019 – 09/2021</b></span></li>
+    <p class="employment-employer">American National College (ANC) Education, Kandy, LK.</p>
     <li><span class="employment-record"><span class="employment-title">Visiting Lecturer</span><b class="employment-duration"> - 09/2016 – 01/2020</b></span></li>
     <p class="employment-employer">ESOFT Metro Campus, Kandy, LK.</p>
     <li><span class="employment-record"><span class="employment-title">Senior Lecturer</span><b class="employment-duration"> - 02/2014 – 07/2016</b></span></li>
