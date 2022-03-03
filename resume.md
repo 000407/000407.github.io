@@ -10,10 +10,20 @@ A Software Engineer in profession with a proven track record with <span id="exp"
 
 ## <i class='fa fa-flag-checkered'></i> Portfolio
 
+  - <span class="project-record"><span class="project-title">Associate Lead Engineer (Backend) - Cloud Kitchen</span> <b class="project-client"> - GrubTech (Pvt) Ltd. (2022)</b></span>
+    <ul class="project-brief">
+      <li>A fully fledged restaurant and kitchen Operating System.</li>
+      <li>Microservices, Spring Boot, Mongo DB, Kafka, Terraform, CircleCI, AWS Cloud</li>
+      <li>The system automates end-to-end kitchen/restaurant functions starting from menu/catalog to order delivery management.</li>
+      <li>Intergates with a number of food aggregators across globe. Operates in sites of a clientele across 16 countries.</li>
+      <li>Client & Server side development</li>
+      <li>Complex data requirements with high-throughput and high availability requirements.</li>
+    </ul>
+
   - <span class="project-record"><span class="project-title">Backend Development - PayPay Payment Platform</span> <b class="project-client"> - PayPay Corporation (2020)</b></span>
     <ul class="project-brief">
       <li>A fully fledged payment platform.</li>
-      <li>Microservices, Spring Boot, Messaging Queues, CI/CD</li>
+      <li>Microservices, Spring Boot, MySQL, Mongo DB, Kafka, Terraform, GitHub Actions, AWS Cloud</li>
       <li>Outsourced by hSenid Software Lanka to Paypay Corporation (via Fujisoft Incorporated) and assigned in the role of Engineer. Stationed in Yokohama, Japan.</li>
       <li>Server-side development</li>
       <li>Complex data requirements with high-throughput and high availability requirements.</li>
@@ -75,12 +85,20 @@ A Software Engineer in profession with a proven track record with <span id="exp"
       <li>MOMO is a portable Payment Card Reader that interfaces with other devices using bluetooth. Requirement was to read the payment card using the device into the Android app and perform a payment from the customer to the merchant. Successfully integrated the card reader and transaction processing.</li>
     </ul>
 
-  - <span class="project-record"><span class="project-title">ClassMate – Classroom/Lecturer Allocation Management System</span> <b class="project-client"> - ESOFT Metro Campus (2016)</b></span>
+  - <span class="project-record"><span class="project-title">ClassMate – Classroom/Lecturer Allocation Management</span> <b class="project-client"> - ESOFT Metro Campus (2016)</b></span>
     <ul class="project-brief">
       <li>A fully fledged classrooms and lecturers allocation management system</li>
       <li>Web Application on HTML + CSS + jQuery 3.1.1 + php 5.6 + Oracle 11g</li>
       <li>Architect + Developer + Tester (flew solo)</li>
       <li>Part time, self-motivated venture for ESOFT Metro Campus Kandy. As a full time lecturer, developed this application as a solution to existing issues in classrooms and lecturers allocation management.</li>
+    </ul>
+
+  - <span class="project-record"><span class="project-title">QuWiz - Online Testing System</span> <b class="project-client"> - Personal Project (2020)</b></span>
+    <ul class="project-brief">
+      <li>An online quiz management application.</li>
+      <li>A web application on Angular, AWS Lambda, AWS Cognito and MongoDB Atlas</li>
+      <li>Architect + Developer + Tester (flew solo)</li>
+      <li>This system provides features to manage quiz applications (quiz structure templates, questions management, scoring etc). Ideal solution of conducting of quiz competitions etc. Used by multiple Educational Institutes.</li>
     </ul>
 
   - <span class="project-record"><span class="project-title">Online Testing System</span> <b class="project-client"> - ESOFT Metro Campus (2016)</b></span>
@@ -101,10 +119,15 @@ A Software Engineer in profession with a proven track record with <span id="exp"
 
 ## <i class='fa fa-handshake-o'></i> Experience
   <ul>
-    <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2016 – To Date</b></span></li>
+    <li><span class="employment-record"><span class="employment-title">Associate Tech Lead</span><b class="employment-duration"> - 07/2021 – To Date</b></span></li>
+    <p class="employment-employer">GrubTech (Pvt) Ltd, Colombo, LK.</p>
+    <ul>
+      <li><span class="employment-record"><span class="employment-title">Associate Tech Lead</span><b class="employment-duration"> - 07/2021 – To Date</b></span></li>
+    </ul>
+    <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2016 – 06/2021</b></span></li>
     <p class="employment-employer">hSenid Software Lanka (Pvt) Ltd, Colombo, LK.</p>
     <ul>
-      <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2019 – To Date</b></span></li>
+      <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2019 – 06/2021</b></span></li>
       <li><span class="employment-record"><span class="employment-title">Software Engineer</span><b class="employment-duration"> - 09/2017 – 09/2019</b></span></li>
       <li><span class="employment-record"><span class="employment-title">Associate Software Engineer</span><b class="employment-duration"> - 09/2016 – 09/2017</b></span></li>
     </ul>
@@ -118,6 +141,11 @@ A Software Engineer in profession with a proven track record with <span id="exp"
 
 ## <i class='fa fa-graduation-cap'></i> Education
   <ul>
+    <li><span class="education-record"><span class="education-title">Master of Science - Network & Information Security</span><b class="education-duration"> - 2021-2022</b></span></li>
+    <ul>
+      <li>Kingston University - UK</li>
+      <li>Reading</li>
+    </ul>
     <li><span class="education-record"><span class="education-title">Master of Information Security</span><b class="education-duration"> - 2017-2019</b></span></li>
     <ul>
       <li>University of Colombo</li>
