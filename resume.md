@@ -77,7 +77,7 @@ A Software Engineer in profession with a proven track record with <span id="exp"
       <li>The module is capable of reading the report format given in JSON and generating the query required for data selection and projection.</li>
     </ul>
   
-  - <span class="project-record"><span class="project-title">Single Sign-On Application<b class="project-client"> - DST Brunei (2018)</b></span>
+  - <span class="project-record"><span class="project-title">Single Sign-On Application</span> <b class="project-client"> - DST Brunei (2018)</b></span>
     <ul class="project-brief">
       <li>Single Sign-On Application for DST's mobile services platform</li>
       <li>A web application with the backend on JSP (Java 8) + CAS 4.2.4 + Tomcat 6.0 and HTML + jQuery</li>
