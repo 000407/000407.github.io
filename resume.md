@@ -76,7 +76,15 @@ A Software Engineer in profession with a proven track record with <span id="exp"
       <li>Outsourced by hSenid Software Lanka to hSenid Mobile Solutions and assigned in the role of Engineer.</li>
       <li>The module is capable of reading the report format given in JSON and generating the query required for data selection and projection.</li>
     </ul>
-
+  
+  - <span class="project-record"><span class="project-title">Single Sign-On Application<b class="project-client"> - DST Brunei (2018)</b></span>
+    <ul class="project-brief">
+      <li>Single Sign-On Application for DST's mobile services platform</li>
+      <li>A web application with the backend on JSP (Java 8) + CAS 4.2.4 + Tomcat 6.0 and HTML + jQuery</li>
+      <li>Outsourced by hSenid Software Lanka to hSenid Mobile Solutions and assigned in the role of Engineer.</li>
+      <li>DST's Mobile Service Platform had multiple applications, which required a single sign-on solution. This was provided with Aperero's CAS, where the DST's platform was written in JSP running on Tomcat 6.0.</li>
+    </ul>
+  
   - <span class="project-record"><span class="project-title">MOMO Reader Integration for Applova</span> <b class="project-client"> - hSenid Mobile (2018)</b></span>
     <ul class="project-brief">
       <li>Intgeration of the MOMO payment card reader with the Android App</li>
