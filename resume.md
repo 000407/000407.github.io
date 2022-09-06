@@ -10,23 +10,48 @@ A Software Engineer in profession with a proven track record with <span id="exp"
 
 ## <i class='fa fa-flag-checkered'></i> Portfolio
 
-  - <span class="project-record"><span class="project-title">Associate Lead Engineer (Backend) - Cloud Kitchen</span> <b class="project-client"> - GrubTech (Pvt) Ltd. (2022)</b></span>
+  - <span class="project-record"><span class="project-title">grubPos - Point of Sale App</span> <b class="project-client"> - Grubtech (2022)</b></span>
     <ul class="project-brief">
-      <li>A fully fledged restaurant and kitchen Operating System.</li>
-      <li>Microservices, Spring Boot, Mongo DB, Kafka, Terraform, CircleCI, AWS Cloud</li>
-      <li>The system automates end-to-end kitchen/restaurant functions starting from menu/catalog to order delivery management.</li>
-      <li>Intergates with a number of food aggregators across globe. Operates in sites of a clientele across 16 countries.</li>
-      <li>Client & Server side development</li>
-      <li>Complex data requirements with high-throughput and high availability requirements.</li>
+      <li>PoS Product of Grubtech</li>
+      <li>Flutter application</li>
+      <li>Android & iOS Platforms</li>
+      <li>Integration with KDS network local kitchen via a local wireless network for offline functioning</li>
+      <li>Architectural design & engineering (in the capacity of team lead)</li>
+      <li>Flutter (Android & iOS, Method Channels) + Spring Boot + Nodejs + Mongo (DB, Realm, Triggers) + Kafka + Redis + AWS Elastic Container + CircleCI + Terraform</li>
+    </ul>
+
+  - <span class="project-record"><span class="project-title">grubOne - Kitchen Management App</span> <b class="project-client"> - Grubtech (2022)</b></span>
+    <ul class="project-brief">
+      <li>A fully-fledged food order workflow monitoring and management application</li>
+      <li>Flutter application</li>
+      <li>Android & iOS Platforms</li>
+      <li>Architectural design & engineering</li>
+      <li>Flutter (Android & iOS, Method Channels) + Spring Boot + Mongo DB + Kafka + Redis + AWS Elastic Container + CircleCI + Terraform</li>
+    </ul>
+
+  - <span class="project-record"><span class="project-title">Menu Items Management Engine for KDS</span> <b class="project-client"> - Grubtech (2021 - 2022)</b></span>
+    <ul class="project-brief">
+      <li>A CRUD engine for menu items management (86ing, enabling, retrieval by keyword search)</li>
+      <li>KDS - A front-end application that functions as an interactive display unit in kitchens.</li>
+      <li>Backend architectural design & engineering</li>
+      <li>Spring Boot + Mongo DB (Mongo Atlas Search, Materialized Views, Change Streams) + Kafka with ksql + Redis + AWS Elastic Container + CircleCI + Terraform</li>
+    </ul>
+
+  - <span class="project-record"><span class="project-title">[grub Cubbies](https://www.grubtech.com/blog/smart-food-lockers)</span> <b class="project-client"> - Grubtech (2021)</b></span>
+    <ul class="project-brief">
+      <li>IoT-based smart locker system for food pickup and delivery dispatch automation</li>
+      <li>Microcontrolled cubbies connecting with each other in a mesh topology</li>
+      <li>Backend architectural design</li>
+      <li>Spring Boot + Mongo DB + Redis + Kafka + AWS Elastic Container + JUnit 5 + CircleCI + Terraform</li>
     </ul>
 
   - <span class="project-record"><span class="project-title">Backend Development - PayPay Payment Platform</span> <b class="project-client"> - PayPay Corporation (2020)</b></span>
     <ul class="project-brief">
       <li>A fully fledged payment platform.</li>
-      <li>Microservices, Spring Boot, MySQL, Mongo DB, Kafka, Terraform, GitHub Actions, AWS Cloud</li>
       <li>Outsourced by hSenid Software Lanka to Paypay Corporation (via Fujisoft Incorporated) and assigned in the role of Engineer. Stationed in Yokohama, Japan.</li>
       <li>Server-side development</li>
       <li>Complex data requirements with high-throughput and high availability requirements.</li>
+      <li>Spring Boot + MySQL + Apache Hadoop + Apache Spark + Google BigQuery + Kafka + AWS Elastic Containers + GitHub Actions CI/CD + Terraform</li>
     </ul>
 
   - <span class="project-record"><span class="project-title">[JobsDB.lk](https://jobsdb.lk/)</span> <b class="project-client"> - hSenid Software Lanka (2019)</b></span>
@@ -101,7 +126,7 @@ A Software Engineer in profession with a proven track record with <span id="exp"
       <li>Part time, self-motivated venture for ESOFT Metro Campus Kandy. As a full time lecturer, developed this application as a solution to existing issues in classrooms and lecturers allocation management.</li>
     </ul>
 
-  - <span class="project-record"><span class="project-title">QuWiz - Online Testing System</span> <b class="project-client"> - Personal Project (2020)</b></span>
+  - <span class="project-record"><span class="project-title">[QuWiz](https://quwiz.github.io/home) - Online Testing System</span> <b class="project-client"> - Personal Project (2020)</b></span>
     <ul class="project-brief">
       <li>An online quiz management application.</li>
       <li>A web application on Angular, AWS Lambda, AWS Cognito and MongoDB Atlas</li>
@@ -129,12 +154,12 @@ A Software Engineer in profession with a proven track record with <span id="exp"
   <ul>
     <li><span class="employment-record"><span class="employment-title">Associate Tech Lead</span><b class="employment-duration"> - 07/2021 – To Date</b></span></li>
     <p class="employment-employer">GrubTech (Pvt) Ltd, Colombo, LK.</p>
-    <ul>
+    <ul class="career-ladder">
       <li><span class="employment-record"><span class="employment-title">Associate Tech Lead</span><b class="employment-duration"> - 07/2021 – To Date</b></span></li>
     </ul>
     <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2016 – 06/2021</b></span></li>
     <p class="employment-employer">hSenid Software Lanka (Pvt) Ltd, Colombo, LK.</p>
-    <ul>
+    <ul class="career-ladder">
       <li><span class="employment-record"><span class="employment-title">Senior Software Engineer</span><b class="employment-duration"> - 09/2019 – 06/2021</b></span></li>
       <li><span class="employment-record"><span class="employment-title">Software Engineer</span><b class="employment-duration"> - 09/2017 – 09/2019</b></span></li>
       <li><span class="employment-record"><span class="employment-title">Associate Software Engineer</span><b class="employment-duration"> - 09/2016 – 09/2017</b></span></li>
