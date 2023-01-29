@@ -14,6 +14,52 @@
   $(document).ready(function() {
     var data = [
       {
+        "category": "Domains",
+        "entries": [
+          {
+            "name": "Fin Tech",
+            "rating": 6
+          },
+          {
+            "name": "Food Tech",
+            "rating": 6
+          },
+          {
+            "name": "Cryptosystems",
+            "rating": 6
+          },
+          {
+            "name": "RnD",
+            "rating": 6
+          }
+        ]
+      },
+      {
+        "category": "ARCHITECTURAL",
+        "entries": [
+          {
+            "name": "Design Patterns",
+            "rating": 6
+          },
+          {
+            "name": "Secure Software",
+            "rating": 6
+          },
+          {
+            "name": "CI/CD",
+            "rating": 6
+          },
+          {
+            "name": "Programming Techniques",
+            "rating": 6
+          },
+          {
+            "name": "Data Modelling",
+            "rating": 6
+          }
+        ]
+      },
+      {
         "category": "Programming",
         "entries": [
           {
@@ -55,6 +101,10 @@
           {
             "name": "Dart",
             "rating": 4
+          },
+          {
+            "name": "Rust",
+            "rating": 3
           }
         ]
       },
@@ -140,8 +190,20 @@
             "rating": 5
           },
           {
+            "name": "Kafka",
+            "rating": 5
+          },
+          {
             "name": "AWS",
             "rating": 4
+          },
+          {
+            "name": "Spark",
+            "rating": 3
+          },
+          {
+            "name": "Hadoop",
+            "rating": 3
           }
         ]
       },
@@ -157,7 +219,7 @@
             "rating": 5
           },
           {
-            "name": "GitHub Workflows & Actions",
+            "name": "GitHub",
             "rating": 6
           },
           {
@@ -188,9 +250,9 @@
         ]
       }
     ];
-    var profContent = '';
+    var profContent = '<table class="tbl-tech-prof">';
     for(var cat of data) {
-      profContent = profContent.concat('<li class="prof prof-cat-name">', cat.category, '</li><ul class="prof-cat">');
+      profContent = profContent.concat('<tr class="prof prof-cat-name"><th colspan=2>', cat.category, '</th></tr>');
       for(var item of cat.entries) {
         var rate = item.rating;
         var i = Math.floor(rate / 2);
@@ -201,12 +263,12 @@
         }
         var filled = ('<i class="fa fa-star"></i>').repeat(i);
         var blank = ('<i class="fa fa-star-o"></i>').repeat(ic);
-        profContent = profContent.concat('<li><span class="prof prof-item"><span class="prof-item-name">', item.name, '</span><span class="prof-rating">-');
+        profContent = profContent.concat('<tr class="prof prof-item"><td class="prof-item-name">', item.name, '</td><td class="prof-rating">');
         profContent = profContent.concat(filled, half, blank);
-        profContent = profContent.concat('</span></span></li>');
+        profContent = profContent.concat('</td></tr>');
       }
-      profContent = profContent.concat('</ul>');
     }
+    profContent = profContent.concat('</table>');
     $('#tech-prof').html(profContent);
   });
   $(document).ready(function(){

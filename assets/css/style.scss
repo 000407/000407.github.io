@@ -118,6 +118,10 @@ a.site-title {
 	@include fadeOutStyle();
 }
 
+.resume {
+	font-size: 12px;
+}
+
 b.employment-duration, b.project-client, b.education-duration {
 	@include float-right(15em);
 	font-size: 70%;
@@ -129,17 +133,47 @@ span.prof-rating {
 }
 
 span.lang-prof-rating {
-	@include float-right(32em);
+	@include float-right(50em);
+}
+
+table.tbl-tech-prof {
+	border: none;
+	background-color: none;
+	td, th {
+		border: none;
+		padding: 0.5em 0;
+	}
+	th {
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		text-align: center;
+	}
+	td:first-child {
+		padding: 0.5em 1em;
+	}
+	td:last-child {
+		text-align: center;
+	}
+}
+
+td.prof-item-name {
+	width: 65%;	
 }
 
 span.employment-record,
 span.project-record,
-span.education-record,
-span.prof-item,
-span.lang-prof-item {
+span.education-record
+{
 	display: inline-flex;
 	justify-content: space-between;
 	width: 90%;
+}
+
+.section-heading {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
 }
 
 ul.career-ladder {
@@ -154,12 +188,12 @@ li {
 	}
 }
 
-h2 + ul, ul.bio-data {
+ul.custom-bullet, ul.bio-data {
 	padding-left: 0;
 	list-style-type: none;
 }
 
-h2 + ul > li:before {
+ul.custom-bullet > li:before {
 	margin:0 10px 0 -20px;
 	font-family: 'FontAwesome';
 	content: '\f138';
@@ -182,6 +216,11 @@ li.bio-data-location:before {
 
 li.bio-data-email:before {
 	content: '\f1fa';
+}
+
+
+li.bio-data-social:before {
+	content: '\f0f3';
 }
 
 ul.personal li:before {
@@ -316,4 +355,14 @@ img[src*="#center"] {
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+/* Grid */
+.grid {
+  display: flex;
+}
+
+.grid > .col {
+  padding: 1em 0;
+  flex: 0 0 auto;
 }
