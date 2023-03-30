@@ -8,6 +8,9 @@
         var date = new Date(res.datetime);
         var exp = date.getFullYear() - 2014;
         $('#exp').html(exp);
+      },
+      error: function(jqxhr) {
+        console.log(jqxhr);
       }
     });
   });
@@ -195,7 +198,7 @@
           },
           {
             "name": "AWS",
-            "rating": 4
+            "rating": 5
           },
           {
             "name": "Spark",
