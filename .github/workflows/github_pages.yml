@@ -11,11 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1' 
-          bundler-cache: true 
-
       # Use GitHub Actions' cache to cache dependencies on servers
       - uses: actions/cache@v2
         with:
@@ -25,7 +20,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       # Use GitHub Deploy Action to build and deploy to Github
-      - uses: jeffreytse/jekyll-deploy-action@v0.3.1
+      - uses: jeffreytse/jekyll-deploy-action@v0.6.0
         with:
           provider: 'github'
           token: ${{ secrets.JEKYLL_PAT }}
