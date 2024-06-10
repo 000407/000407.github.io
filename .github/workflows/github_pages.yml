@@ -23,5 +23,5 @@ jobs:
       - uses: jeffreytse/jekyll-deploy-action@v0.6.0
         with:
           provider: 'github'
-          token: ${{ secrets.JEKYLL_PAT }
-          ruby_ver: '3.1.3'}
+          token: ${{ secrets.JEKYLL_PAT }}
+          ruby_ver: '3.1.3'
