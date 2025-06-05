@@ -10,7 +10,7 @@ permalink: /cv/
       <h5 class="section-heading"><i class='fa fa-user'></i> Info</h5>
       <ul class="bio-data">
         <li class="bio-data bio-data-name">Kānchana Sēnādheera</li>
-        <li class="bio-data bio-data-location">Pilimathalawa, Kandy LK</li>
+        <li class="bio-data bio-data-location">Yokohama, Kanagawa JP</li>
         <li class="bio-data bio-data-email">kanchana at senadheera dot net</li>
         <li class="bio-data bio-data-social">Social Links: <a href="#social_links">See Bottom</a></li>
       </ul>
