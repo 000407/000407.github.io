@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Java - Concurrency in a Nutshell | ~my territory~</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Java - Concurrency in a Nutshell">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="This is the first of a series of discussions on concurrency in general and how those concepts areemployed in the Java ecosystem.">
+<meta property="og:description" content="This is the first of a series of discussions on concurrency in general and how those concepts areemployed in the Java ecosystem.">
+<link rel="canonical" href="https://kanchana.senadheera.net/techbits/2017/04/23/java-concurrency.html">
+<meta property="og:url" content="https://kanchana.senadheera.net/techbits/2017/04/23/java-concurrency.html">
+<meta property="og:site_name" content="~my territory~">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-04-23T10:12:18+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Java - Concurrency in a Nutshell">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2017-04-23T10:12:18+00:00","datePublished":"2017-04-23T10:12:18+00:00","description":"This is the first of a series of discussions on concurrency in general and how those concepts areemployed in the Java ecosystem.","headline":"Java - Concurrency in a Nutshell","mainEntityOfPage":{"@type":"WebPage","@id":"https://kanchana.senadheera.net/techbits/2017/04/23/java-concurrency.html"},"url":"https://kanchana.senadheera.net/techbits/2017/04/23/java-concurrency.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link type="application/atom+xml" rel="alternate" href="https://kanchana.senadheera.net/feed.xml" title="~my territory~">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+  <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+
+  <div class="wrapper">
+<h2><a class="site-title" rel="author" href="/">~my territory~</a></h2>
+<nav class="main-nav site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    
+      <li>
+        
+          <span class="main-item"><a href="/">Home</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/about">About</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/blog">Blog</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item">Tools</span>
+        
+        
+          
+          <ul>
+
+  <li>
+    
+      <span class="sub-item"><a href="/tools/singlishw">Singlish Writer</a></span>
+    
+    
+  </li>
+
+</ul>
+        
+      </li>
+    
+    </ul>
+  </div>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Java - Concurrency in a Nutshell</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2017-04-23T10:12:18+00:00" itemprop="datePublished">
+        Apr 23, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="introduction">Introduction</h2>
+
+<p>Concurrent processing is simply understood as executing multiple tasks simultaneously. The primary intention of implementing concurrent processing is to increase the throughput of a system. Thereby, the efficiency of the system could be elevated drastically, like introducing more lanes instead of a single lane, would increase the number of vehicles that could take that road at once.</p>
+
+<h2 id="core-concepts">Core Concepts</h2>
+
+<p>There are a few key concepts that need clarification prior to proceed in this discussion and narrow down the scope. Those concepts are discussed below.</p>
+
+<h3 id="processor-architecture">Processor Architecture</h3>
+
+<p>Within a processor assembly, there exists the execution core. Based on the architecture of the processor, the number of execution cores might vary from one to many. This could be understood as a tunnel for the sake of simplicity. A tunnel which is wide enough for only one person to walk along could be comprehended as a single execution core, while a parallel set of such singular tunnels could be comprehended as a processor having multiple execution cores. Irrespective of whether there is only one execution core or there are many, concurrent processing is possible.</p>
+
+<h3 id="processes--threads">Processes &amp; Threads</h3>
+
+<p>There are two basic units in common jargon of concurrency, namely Process and Thread. Within the Java environment, most concurrent implementation works with threads. Nevertheless, processes are also quite important when it comes to concurrent processing. These two could be differentiated as follows.</p>
+
+<h4 id="processes">Processes</h4>
+
+<p>A process has a self-contained execution environment, which generally includes a complete, private set of basic run-time resources. These resources are usually contained in a private memory space.</p>
+
+<p>Processes sometimes appear to be synonymous with the terms <em>program</em> and <em>application</em> in certain contexts. However, what a user might see as a whole program/application is actually a cooperating set of processes which run independently. For the program to function, these processes are communicating among each other using certain mechanisms such as pipes and sockets. This as a whole is identified as <em>Inter-Process Communication</em> (IPC) and this is one important concept to take into account within a multi-processing environment.</p>
+
+<p>Within the Java Virtual Machine (JVM) most of the implementations are done as single-process implementations. Creating separate processes is possible with the utilization of ProcessBuilder and so forth.</p>
+
+<h4 id="threads">Threads</h4>
+<p>Within a single process, there may be certain segments of instructions that could be executed in parallel. These segments of instructions are treated as a <em>Thread</em> in terms of multi-processing. Threads are precisely segments of a process. In fact, the original sequence of instructions of a process alone is treated as a thread. Then, this thread is broken down into many threads so that those could be executed in parallel. In that sense, a thread could also be comprehended as a <em>lightweight process</em>.</p>
+
+<p>All these threads which belong to a single process share the same memory space and the same set of resources which are owned by the process. This makes it very efficient as well as potentially problematic when multi-threading is implemented. Conceptual aspects of some of these problems are discussed under the topics race conditions, deadlocks and livelocks.</p>
+
+<p>Leaning towards Java, <em>Multithreaded execution is an essential feature of the Java platform. Every application has at least one thread — or several if you count system threads that do things like memory management and signal handling</em> according to the <a href="http://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html">Javadoc</a>. What is implemented in JVM using Java, is a main thread, which the other threads are eventually created from, if and whenever required. This is on the programmer.</p>
+
+<h2 id="concepts-related-to-possible-problems">Concepts related to Possible Problems</h2>
+
+<h3 id="race-condition">Race Condition</h3>
+
+<p>There are certain code segments in threads named critical segments. When multiple threads execute simultaneously, the order of execution of each threads critical segments would impact the final result of the code execution. To simplify this, let us assume that there are three Threads namely <code class="language-plaintext highlighter-rouge">T1</code>, <code class="language-plaintext highlighter-rouge">T2</code> and <code class="language-plaintext highlighter-rouge">T3</code>. Let us also assume that the critical segments of each of these threads are named <code class="language-plaintext highlighter-rouge">CT1</code>, <code class="language-plaintext highlighter-rouge">CT2</code> and <code class="language-plaintext highlighter-rouge">CT3</code> respectively. Then, when these threads execute in parallel, the critical sections being executed in the order <code class="language-plaintext highlighter-rouge">CT1 -&gt; CT2 -&gt; CT3</code> would yield a different result from <code class="language-plaintext highlighter-rouge">CT1 -&gt; CT3 -&gt; CT2</code>. Such a scenario is well known as a Race Condition in concurrency terminology. The <a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem"><em>Dining Philosophers’ Problem</em></a> is also a prominent example of a race condition.</p>
+
+<h3 id="deadlock">Deadlock</h3>
+
+<p>Deadlock is precisely a problem which arises due to incorrect application of mechanisms which are implemented to overcome Race Conditions. Assume that</p>
+
+<ul>
+  <li>two groups (namely A and B), each group comprising of two people are working on two different handcraft tasks.</li>
+  <li>there is only one pair of scissors and only one paperknife.</li>
+  <li>group A would need only the pair of scissors during the first half of their work and they would need both the pair of scissors and the paperknife during the latter half of their work.</li>
+  <li>group B would need only the paperknife during the initial half of their work and then both during the latter half.</li>
+  <li>group A starts to work and before they reach the point where they would need the paperknife, group B starts their work.</li>
+</ul>
+
+<p>Now it is obvious that when group A reaches to the point where they need the paperknife, the paperknife is not available leaving them waiting for paperknife. Similarly, when group B reaches the point where they need the pair of scissors, they also will have to pause and wait until the pair of scissors is available. Effectively, no group is working and yielding any result. Such a blocked situation arise in a program that is run in multiple threads/processors is known as a Deadlock. This could be overcome only either one of</p>
+
+<ul>
+  <li>Making sure that the two groups start their work in some way that they wouldn’t hold on to the apparatus that the other group would need.</li>
+  <li>When a deadlock occurs, either one of the parties giving up what they are already holding on to.</li>
+</ul>
+
+<h3 id="livelock">Livelock</h3>
+
+<p>Livelock is somewhat similar to a deadlock, except the fact that the threads which are interfering with each other are continuously working, unlike in a deadlock situation. This could be mapped to a real-world situation of two watchmen <code class="language-plaintext highlighter-rouge">WA</code> &amp; <code class="language-plaintext highlighter-rouge">WB</code>, who are watching a room which is having two doors <code class="language-plaintext highlighter-rouge">DA</code> &amp; <code class="language-plaintext highlighter-rouge">DB</code>, where each door can only be locked from inside and unlocked from outside.</p>
+
+<ul>
+  <li>Each watchman is responsible for only one door.</li>
+  <li>When both the doors are open, <code class="language-plaintext highlighter-rouge">WA</code> would go in, lock his responsible door <code class="language-plaintext highlighter-rouge">DA</code> and walk out of the room, leaving <code class="language-plaintext highlighter-rouge">DB</code> open.</li>
+  <li>For <code class="language-plaintext highlighter-rouge">WB</code> to lock <code class="language-plaintext highlighter-rouge">DB</code> and come out, <code class="language-plaintext highlighter-rouge">DA</code> should remain open. So <code class="language-plaintext highlighter-rouge">WB</code> would open up <code class="language-plaintext highlighter-rouge">DA</code>, walk in, lock <code class="language-plaintext highlighter-rouge">DB</code> and walk out from <code class="language-plaintext highlighter-rouge">DA</code>, leaving <code class="language-plaintext highlighter-rouge">DA</code> open again.</li>
+  <li>Now <code class="language-plaintext highlighter-rouge">WA</code>’s duty is in jeopardy, which would make him unlock <code class="language-plaintext highlighter-rouge">DB</code>, walk in, lock <code class="language-plaintext highlighter-rouge">DA</code> and come out from <code class="language-plaintext highlighter-rouge">DB</code>.</li>
+</ul>
+
+<p>This would continue to happen, leaving both watchmen to continuously attend the work. If the two watchmen are assumed to be two threads, they would continuously work to achieve their outputs. Livelock is precisely a result of poor utilization of threads during programming. A similar problem is discussed in Javadoc under the topic livelocks.</p>
+
+<h3 id="starvation">Starvation</h3>
+
+<p>Starvation occurs when certain threads in a multithreaded environment are unable to make progress due to unavailability of resources and this unavailability is occurred because of other threads which hold onto the resources. These threads, which holds on to resources on a long term basis are known as greedy threads.</p>
+
+<h2 id="synchronization">Synchronization</h2>
+
+<p>Primarily, two types of errors/problems are possible due to attempts of concurrency. Those are namely,</p>
+
+<ul>
+  <li>
+<strong><em>Thread Interference</em></strong>: Happens when two operations, running in different threads but acting on the same data, interleave. This means that the two operations consist of multiple steps, and the sequences of steps overlap. Interleaving refers to alternatively executing statements from both threads. It is important to note that even a single statement in a Java source might compile and interpret into multiple machine instructions during execution. This might lead to a race condition as discussed above.</li>
+  <li>
+<strong><em>Memory Inconsistency Errors</em></strong>: Occur when different threads have inconsistent views of what should be the same data. One possible result is a livelock.</li>
+</ul>
+
+<p>In the core of Java, it has an implementation to dodge this kind of scenarios. That is the utilization of the <code class="language-plaintext highlighter-rouge">synchronized</code> keyword. Synchronized methods enable a simple strategy for preventing thread interference and memory consistency errors. If an object is visible to more than one thread, <em>all reads or writes to that object’s variables could be done through synchronized methods</em>. When a method is modified with this, it ensures the execution of the method will be atomic, as the thread would acquire and hold on to the intrinsic lock of the respective object instance/class, until the end of the synchronized method/block. This strategy is effective but can present problems with liveness.</p>
+
+<h3 id="atomic-access">Atomic Access</h3>
+
+<p>Atomic access in Java refers to as a pre-demarcated block of codes execute without interleaving in the midway. In a simpler explanation, let us assume that when you write an essay your mother is asking you to help her with another chore. There, if you pause the writing the essay and attend to her work and then come back to your work, essay writing task is interleaved in the midway. That is considered as non-atomic because the task is not executed at once. Happening this in a multithreaded is the reason for most of the problems. Ensuring a block is which is meant to run at once, runs at once is known as atomic execution/access.</p>
+
+<h2 id="happens-before-guarantee">Happens-Before Guarantee</h2>
+
+<p>let us say that there are two threads <code class="language-plaintext highlighter-rouge">TA</code> &amp; <code class="language-plaintext highlighter-rouge">TB</code> and a variable named <code class="language-plaintext highlighter-rouge">VA</code> where <code class="language-plaintext highlighter-rouge">TA</code> writes a value to <code class="language-plaintext highlighter-rouge">VA</code> and subsequently <code class="language-plaintext highlighter-rouge">TB</code> reads <code class="language-plaintext highlighter-rouge">VA</code> (note <code class="language-plaintext highlighter-rouge">TA</code> writing on <code class="language-plaintext highlighter-rouge">VA</code> is followed by <code class="language-plaintext highlighter-rouge">TB</code> reading <code class="language-plaintext highlighter-rouge">VA</code> is the order that the programmer wants this to be). This would be something as follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TA WRITE(VA)
+
+TB READ(VA)
+</code></pre></div></div>
+
+<p>Typically, to ensure the efficient switching between threads, JVM may or may not reorder the instructions from two threads to get the best out of it. In such a scenario it is possible that the execution order of the two instructions would be flipped, as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TB READ(VA)
+
+TA WRITE(VA)
+</code></pre></div></div>
+
+<p>In the second case, it is obvious that what is read by <code class="language-plaintext highlighter-rouge">TB</code> is actually an incorrect value, which is later changed to the real value by <code class="language-plaintext highlighter-rouge">TA</code>. To void this from happening, it is important to ensure instruction 1 happens before instruction 2. There are few occasions that this guarantee is essential in a multithreaded environment.</p>
+
+<ol>
+  <li>Blocks of codes from two threads accessing the same object</li>
+  <li>Volatile reads and  writes</li>
+  <li>Thread starting</li>
+  <li>Thread joining</li>
+  <li>Intrinsic Locks</li>
+</ol>
+
+<p>The intrinsic lock is which Java’s concurrency controlling is built around. This is a singleton entity that is implemented by the JVM for each class and for each object instance. This lock is acquired by the thread that invokes methods/access variables of the particular class. Simplified, assume that there is an object instance <code class="language-plaintext highlighter-rouge">A</code>, which is accessed by a thread <code class="language-plaintext highlighter-rouge">TA</code>, to invoke a method in <code class="language-plaintext highlighter-rouge">A</code>. First the intrinsic lock of <code class="language-plaintext highlighter-rouge">A</code>, should be acquired by the thread. Then only the thread is able to execute the methods/blocks. If the lock is already acquired by a different thread, all threads who are expecting to access the synchronized methods/blocks have to wait until the lock is released.</p>
+
+<p>Implementation of this lock is done at both class level and instance level. For class members (static members), the thread that accesses should acquire the class’s intrinsic lock and for instance members, the thread that accesses them should acquire the object lock.</p>
+
+<h2 id="volatility">Volatility</h2>
+
+<p>Generally in computer science, volatility refers to data retention being dependent on the existence of electricity/voltage. Java uses volatility however, with a different face given to it. Members (i.e. attributes) modified with volatile ensures that all cached copies of the volatile members are synchronized with the main memory. This, in other words, means that the data is not read/written thread-locally (the thread’s private memory space), instead directly written and read from the main memory. This affects on all of the assignments/writes prior to writing the volatile variable as well. When a volatile variable is written, values of all the other variables are flushed to the main memory as well. Look at the below pieces of snippets.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Shared</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">b</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">c</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Here, the variable <code class="language-plaintext highlighter-rouge">c</code> is declared volatile. Hence, when <code class="language-plaintext highlighter-rouge">c</code> is written, <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> also are written to the main memory before <code class="language-plaintext highlighter-rouge">c</code>. Beyond Java 5, volatile gives you the happens-before guarantee as well.</p>
+
+<p>That’s all for the time being folks! Await for an in-depth, detailed discussion on how Java implements these concepts along with some examples…</p>
+
+  </div>
+  <div style="text-align: center;">~END~</div>
+<div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://kanchana.senadheera.net/techbits/2017/04/23/java-concurrency.html';
+      this.page.identifier = 'https://kanchana.senadheera.net/techbits/2017/04/23/java-concurrency.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://000407.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+<a class="u-url" href="/techbits/2017/04/23/java-concurrency.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col mt-center">
+        <div class="social-links">
+<a name="social_links"></a>
+<div id="social-media">
+    
+    
+        
+        
+            <a href="mailto:kanchana@senadheera.net" title="Email" class="social-icon"><i class="fa fac-square fa-envelope"></i></a>
+        
+    
+        
+        
+            <a href="https://www.linkedin.com/in/kanchana-senadheera" title="LinkedIn" class="social-icon"><i class="fa fac-square fa-linkedin"></i></a>
+        
+    
+        
+        
+            <a href="https://github.com/000407" title="GitHub" class="social-icon"><i class="fa fac-square fa-github"></i></a>
+        
+    
+        
+        
+            <a href="https://stackoverflow.com/users/3126973" title="" class="social-icon"><i class="fa fac-square fa-stack-overflow"></i></a>
+        
+    
+</div>
+</div>
+        <p>© 2017 Kanchana Senadheera @ KaZE<sub>2</sub>. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+</body>
+
+</html>

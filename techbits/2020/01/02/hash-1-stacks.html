@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>#::1-Stacks | ~my territory~</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="#::1-Stacks">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="This post intends to explain the concept of Stack, as a data structure. When learning about Abstract Data Types (ADTs), Stack is a good place to start at, as it will further clarify/clear off your misty picture on what ADTs really are.">
+<meta property="og:description" content="This post intends to explain the concept of Stack, as a data structure. When learning about Abstract Data Types (ADTs), Stack is a good place to start at, as it will further clarify/clear off your misty picture on what ADTs really are.">
+<link rel="canonical" href="https://kanchana.senadheera.net/techbits/2020/01/02/hash-1-stacks.html">
+<meta property="og:url" content="https://kanchana.senadheera.net/techbits/2020/01/02/hash-1-stacks.html">
+<meta property="og:site_name" content="~my territory~">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-01-02T07:50:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="#::1-Stacks">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-01-02T07:50:00+00:00","datePublished":"2020-01-02T07:50:00+00:00","description":"This post intends to explain the concept of Stack, as a data structure. When learning about Abstract Data Types (ADTs), Stack is a good place to start at, as it will further clarify/clear off your misty picture on what ADTs really are.","headline":"#::1-Stacks","mainEntityOfPage":{"@type":"WebPage","@id":"https://kanchana.senadheera.net/techbits/2020/01/02/hash-1-stacks.html"},"url":"https://kanchana.senadheera.net/techbits/2020/01/02/hash-1-stacks.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link type="application/atom+xml" rel="alternate" href="https://kanchana.senadheera.net/feed.xml" title="~my territory~">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+  <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+
+  <div class="wrapper">
+<h2><a class="site-title" rel="author" href="/">~my territory~</a></h2>
+<nav class="main-nav site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    
+      <li>
+        
+          <span class="main-item"><a href="/">Home</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/about">About</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/blog">Blog</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item">Tools</span>
+        
+        
+          
+          <ul>
+
+  <li>
+    
+      <span class="sub-item"><a href="/tools/singlishw">Singlish Writer</a></span>
+    
+    
+  </li>
+
+</ul>
+        
+      </li>
+    
+    </ul>
+  </div>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">#::1-Stacks</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2020-01-02T07:50:00+00:00" itemprop="datePublished">
+        Jan 2, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>When learning about Abstract Data Types (ADTs), Stack is a good place to start at, as it will further clarify/clear off your misty picture on what ADTs really are.</p>
+
+<p>All of us have seen the CD bulk at some point in our life.</p>
+
+<p><img src="/assets/img/posts/hash-1-stacks/featured.jpg#center" alt="CD Bulk"></p>
+
+<p>This is the easiest and the most prominent form of a Stack. You can observe the following properties here.</p>
+
+<ul>
+  <li>Only one opening at the top. That’s all where you can put in and get out things.</li>
+  <li>Whatever the last item that has put in (LAST-IN), comes out first (FIRST-OUT), hence LIFO.</li>
+  <li>Traversal Order will be the reverse order of insertion.</li>
+</ul>
+
+<p>This could be visualized in general as follows.</p>
+
+<p><img src="/assets/img/posts/hash-1-stacks/stack_representation.jpg#center" alt="CD Bulk"></p>
+
+<p>Illustration of a Stack (Image Courtesy <a href="https://www.tutorialspoint.com/data_structures_algorithms/images/stack_representation.jpg">Tutorials Point</a>)</p>
+
+<p>Stack type has the following signatures of operations over it.</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">void push(T item)</code>:- To put an item into the stack</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">T pop()</code>:- To get the top most item out of the stack (i.e. item is removed from the stack)</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">T peek()</code>:- To get the top most item of the stack (i.e. item is not removed from the stack)</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">boolean isFull()</code>:- To check if the stack is empty. This is required for popping a stack as trying to pop and empty stack won’t make sense.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">boolean isEmpty()</code>:- To check if the stack is full. This method is only required for the cases where we are using a core data structure (such as an array) which is strict in size (e.g. arrays in C# and Java).</li>
+</ul>
+
+<p>Now that we have figured the operations, let’s try to implement this. I have taken the liberty of using C# language for implementation. If you are interested, you may read this Medium blog, to see some other implementations of stack. Also, the following assumptions/preconditions are set for this implementation.</p>
+
+<ul>
+  <li>This stack can hold only to integer values (C#’s type int )</li>
+  <li>The underlying data structure used here in this implementation is C#’s array. Of course this could be implemented with LinkedList as well. That will be much more flexible than the array-based implementation.</li>
+</ul>
+
+<p>Implementing a stack based on an array is quite straight forward. All we need is a pointer named <code class="language-plaintext highlighter-rouge">top</code> , which will be an <em>integer holding onto the index of the array</em>, that has the item that is treated as the current top most item of the stack. We simply manipulate the value of top by the methods, <code class="language-plaintext highlighter-rouge">push()</code> , <code class="language-plaintext highlighter-rouge">pop()</code> and <code class="language-plaintext highlighter-rouge">peek()</code>.</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">top</code> is initially set to -1.</li>
+  <li>Whenever a new item needs to be pushed to the stack, increase <code class="language-plaintext highlighter-rouge">top</code> by 1, and set <code class="language-plaintext highlighter-rouge">array[top]</code> to the new value to be added. This is what we need to do in our <code class="language-plaintext highlighter-rouge">push()</code> operation implementation. This cannot be done beyond the point where the value of <code class="language-plaintext highlighter-rouge">top</code> is <code class="language-plaintext highlighter-rouge">array.Length - 1</code>.</li>
+  <li>Whenever the stack is popped, we will get the value at <code class="language-plaintext highlighter-rouge">array[top]</code> and then decrease <code class="language-plaintext highlighter-rouge">top</code> by 1. This cannot be done beyond the point where the value of <code class="language-plaintext highlighter-rouge">top</code> is -1.</li>
+  <li>Whenever we want to peek at the top of the stack, we just return the value in the array at <code class="language-plaintext highlighter-rouge">array[top]</code>.</li>
+  <li>Actual content of the stack is the items in the array that are in the range 0 and top .</li>
+</ul>
+
+<h3 id="the-interface-for-stack--istack">The Interface for Stack :: <code class="language-plaintext highlighter-rouge">IStack</code>
+</h3>
+
+<p>We can define an initial interface that sets the contract for a stack implementation. This will be as follows.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="nc">IStack</span> <span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Push</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="nf">Pop</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="nf">Peek</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="nf">IsFull</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="nf">IsEmpty</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then, let’s define a class that agrees to this contract.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Stack</span> <span class="p">:</span> <span class="n">IStack</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kt">int</span><span class="p">[]</span> <span class="n">array</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">top</span><span class="p">;</span> <span class="k">public</span> <span class="nf">Stack</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">array</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
+        <span class="n">top</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span> 
+    <span class="c1">// Method implementations</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>When initializing the stack,</p>
+
+<ul>
+  <li>Size of the stack should be specified in the constructor parameter size . This will be the initialization size of the core array .</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">top</code> should be initialized to -1. This is the floor value that <code class="language-plaintext highlighter-rouge">top</code> can have. The ceiling value of <code class="language-plaintext highlighter-rouge">top</code> will be <code class="language-plaintext highlighter-rouge">size - 1</code> .</li>
+</ul>
+
+<p>Each method implementation will take the shape as follows.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">void</span> <span class="nf">Push</span><span class="p">(</span><span class="kt">int</span> <span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">IsFull</span><span class="p">())</span> <span class="p">{</span> <span class="c1">//Check if the stack is full</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">SystemException</span><span class="p">(</span><span class="s">"Stack is already full!"</span><span class="p">);</span> <span class="c1">// Will not try to add new items</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">[++</span><span class="n">top</span><span class="p">]</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="kt">int</span> <span class="nf">Pop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// Check if the stack is empty</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">SystemException</span><span class="p">(</span><span class="s">"Stack is empty!"</span><span class="p">);</span> <span class="c1">// Will not try to remove the top most item from the stack</span>
+    <span class="p">}</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">[</span><span class="n">top</span><span class="p">--];</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="kt">int</span> <span class="nf">Peek</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// Check if the stack is empty</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">SystemException</span><span class="p">(</span><span class="s">"Stack is empty!"</span><span class="p">);</span> <span class="c1">// Will not try to get the top most item from the stack</span>
+    <span class="p">}</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">[</span><span class="n">top</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We need two additional methods to verify if the top value stays within the boundaries. These are as follows.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">bool</span> <span class="nf">IsFull</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span> <span class="p">==</span> <span class="k">this</span><span class="p">.</span><span class="n">top</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="kt">bool</span> <span class="nf">IsEmpty</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">top</span> <span class="p">==</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>That’s it! Now we have a usable stack. We can verify the execution by follows.</p>
+
+<pre><code class="language-cmd">Stack stack1 = new Stack(3);
+stack1.Push(10);
+stack1.ShowStack();
+stack1.Push(30);
+stack1.ShowStack();
+stack1.Push(20);
+stack1.ShowStack();
+stack1.Push(50);
+stack1.ShowStack(); //Throws the SystemException
+</code></pre>
+
+<p>I also have implemented a non-standard method <code class="language-plaintext highlighter-rouge">ShowStack()</code> to display the stack in the terminal. This will give us the following result in the terminal.</p>
+
+<pre><code class="language-cmd">|  |
+|  |
+|10|
+|__|
+|  |
+|30|
+|10|
+|__|
+|20|
+|30|
+|10|
+|__|
+Unhandled Exception:
+System.SystemException: Stack is already full!
+  at Stack.Push (System.Int32 value) [0x0000b] in &lt;6575c48c03074e1789a42989f3c57445&gt;:0 
+  at StackDemo.Main (System.String[] args) [0x00031] in &lt;6575c48c03074e1789a42989f3c57445&gt;:0 
+[ERROR] FATAL UNHANDLED EXCEPTION: System.SystemException: Stack is already full!
+  at Stack.Push (System.Int32 value) [0x0000b] in &lt;6575c48c03074e1789a42989f3c57445&gt;:0 
+  at StackDemo.Main (System.String[] args) [0x00031] in &lt;6575c48c03074e1789a42989f3c57445&gt;:0
+</code></pre>
+<p>You can see that when we try to push to a stack which is already full, we get the intended exception thrown with message Stack is already full! .</p>
+
+<p>That’s pretty much it. I will later on include the same implementation improved with the use of Generics. Happy coding!</p>
+
+  </div>
+  <div style="text-align: center;">~END~</div>
+<div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://kanchana.senadheera.net/techbits/2020/01/02/hash-1-stacks.html';
+      this.page.identifier = 'https://kanchana.senadheera.net/techbits/2020/01/02/hash-1-stacks.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://000407.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+<a class="u-url" href="/techbits/2020/01/02/hash-1-stacks.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col mt-center">
+        <div class="social-links">
+<a name="social_links"></a>
+<div id="social-media">
+    
+    
+        
+        
+            <a href="mailto:kanchana@senadheera.net" title="Email" class="social-icon"><i class="fa fac-square fa-envelope"></i></a>
+        
+    
+        
+        
+            <a href="https://www.linkedin.com/in/kanchana-senadheera" title="LinkedIn" class="social-icon"><i class="fa fac-square fa-linkedin"></i></a>
+        
+    
+        
+        
+            <a href="https://github.com/000407" title="GitHub" class="social-icon"><i class="fa fac-square fa-github"></i></a>
+        
+    
+        
+        
+            <a href="https://stackoverflow.com/users/3126973" title="" class="social-icon"><i class="fa fac-square fa-stack-overflow"></i></a>
+        
+    
+</div>
+</div>
+        <p>© 2017 Kanchana Senadheera @ KaZE<sub>2</sub>. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+</body>
+
+</html>
