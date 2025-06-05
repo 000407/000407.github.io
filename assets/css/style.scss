@@ -188,7 +188,7 @@ li {
 	}
 }
 
-ul.custom-bullet, ul.bio-data {
+ul.custom-bullet, ul.bio-data, ul.personal {
 	padding-left: 0;
 	list-style-type: none;
 }
@@ -197,6 +197,12 @@ ul.custom-bullet > li:before {
 	margin:0 10px 0 -20px;
 	font-family: 'FontAwesome';
 	content: '\f138';
+	font-size: 0.8em;
+}
+
+ul.personal > li:before {
+	margin:0 10px 0 -20px;
+	font-family: 'FontAwesome';
 	font-size: 0.8em;
 }
 
@@ -228,19 +234,19 @@ ul.personal li:before {
 }
 
 ul.personal li.bio:before {
-	content: '\f007'
+	content: '\f007';
 }
 
 ul.personal li.hobbies:before {
-	content: '\f118'
+	content: '\f118';
 }
 
 ul.personal li.traits:before {
-	content: '\f087'
+	content: '\f087';
 }
 
 ul.personal li.languages:before {
-	content: '\f1ab'
+	content: '\f1ab';
 }
 
 span.tag {
