@@ -21,6 +21,7 @@ group :jekyll_plugins do
   gem 'kramdown-parser-gfm'
   gem 'httparty'
   gem 'jekyll-paginate-v2'
+  gem 'jekyll-redirect-from'
 end
 
 # Security flaw fix

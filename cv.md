@@ -1,7 +1,9 @@
 ---
 layout: page
 title: Curriculum Vitae
-permalink: /cv/
+permalink: /resume/
+redirect_from:
+  - /cv/
 ---
 
 <div class="resume grid">
