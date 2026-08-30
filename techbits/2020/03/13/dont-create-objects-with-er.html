@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Don’t Create Objects That End With -ER? My Two Cents… | ~my territory~</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Don’t Create Objects That End With -ER? My Two Cents…">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Classes that ends with ‘ER’ has been the root for criticisms from many Object Paradigm Purists. One such was found at Don’t Create Objects That End With -ER. This is an attempt to pen down some thoughts on this idea of ER.">
+<meta property="og:description" content="Classes that ends with ‘ER’ has been the root for criticisms from many Object Paradigm Purists. One such was found at Don’t Create Objects That End With -ER. This is an attempt to pen down some thoughts on this idea of ER.">
+<link rel="canonical" href="https://kanchana.senadheera.net/techbits/2020/03/13/dont-create-objects-with-er.html">
+<meta property="og:url" content="https://kanchana.senadheera.net/techbits/2020/03/13/dont-create-objects-with-er.html">
+<meta property="og:site_name" content="~my territory~">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-03-13T10:12:18+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Don’t Create Objects That End With -ER? My Two Cents…">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-03-13T10:12:18+00:00","datePublished":"2020-03-13T10:12:18+00:00","description":"Classes that ends with ‘ER’ has been the root for criticisms from many Object Paradigm Purists. One such was found at Don’t Create Objects That End With -ER. This is an attempt to pen down some thoughts on this idea of ER.","headline":"Don’t Create Objects That End With -ER? My Two Cents…","mainEntityOfPage":{"@type":"WebPage","@id":"https://kanchana.senadheera.net/techbits/2020/03/13/dont-create-objects-with-er.html"},"url":"https://kanchana.senadheera.net/techbits/2020/03/13/dont-create-objects-with-er.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link type="application/atom+xml" rel="alternate" href="https://kanchana.senadheera.net/feed.xml" title="~my territory~">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+  <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+
+  <div class="wrapper">
+<h2><a class="site-title" rel="author" href="/">~my territory~</a></h2>
+<nav class="main-nav site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    
+      <li>
+        
+          <span class="main-item"><a href="/">Home</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/about">About</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/blog">Blog</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item">Tools</span>
+        
+        
+          
+          <ul>
+
+  <li>
+    
+      <span class="sub-item"><a href="/tools/singlishw">Singlish Writer</a></span>
+    
+    
+  </li>
+
+</ul>
+        
+      </li>
+    
+    </ul>
+  </div>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Don’t Create Objects That End With -ER? My Two Cents…</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2020-03-13T10:12:18+00:00" itemprop="datePublished">
+        Mar 13, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/assets/img/posts/dont-create-objects-with-er/featured.png#center" alt="Scenario 1"></p>
+
+<p>Well, the beginning of this story goes back to the beginning of August 2019 (not so far eh?). I came across this interesting article <a href="https://www.yegor256.com/2015/03/09/objects-end-with-er.html">Don’t Create Objects That End With -ER</a> , with the title Don’t Create Objects That End With -ER. Ever since I read that, I had a lot of thoughts rumbling in my head that ultimately said: “something in this post doesn’t add up!”. Here I am penning down those thoughts.</p>
+
+<p>At the very beginning, I should mention that this is not any sort of a challenge to the person who wrote that article. From his philosophy of the Object-Oriented Paradigm, he probably should be having many years of experience, which is pacific ocean compared to the jug of water I have with me. This is actually a question. I will end this article with a question mark, hopefully, to revisit and update this with the answers, if and whenever I find them.</p>
+
+<p>There is an interesting pick of an example. In the same words from the article</p>
+
+<p><img src="/assets/img/posts/dont-create-objects-with-er/1.png#center" alt="Scenario 1"></p>
+
+<p>And, the things that follow this, are what made me having a problem. Let’s take a look at that as well.</p>
+
+<p><img src="/assets/img/posts/dont-create-objects-with-er/2.png#center" alt="Scenario 2"></p>
+
+<p>Haven’t noticed anything yet? Okay, let’s try to jot down the facts.</p>
+
+<ul>
+  <li>Both scenarios are about trying to get the biggest apple.</li>
+  <li>In scenario 1, simply sort the apples in the descending order, and get the one at the beginning.</li>
+  <li>In scenario 2, it is doing things my(the Sorted’s own) way. In the scenario itself, it is clearly mentioned that instead of sorting all of them, it will go through each apple and find the biggest one and then return it.</li>
+</ul>
+
+<p>If we take a look at scenario 2 in an implementation perspective, something is missing there in that given implementation.</p>
+
+<ol>
+  <li>It creates an instance of the Sorted object. I don’t have a problem with that. But I have a problem with how the core of the Sorted object is written. To that also, there is a clue given which is “go through them all one by one and find the biggest”. This is nothing but finding maximum in O(n) time isn’t it? (Linear data structure, you can’t finalize the result until you examine the last element)</li>
+  <li>Then in the next line, it assigns sorted.get(0) to the biggest.</li>
+</ol>
+
+<p>From the way I see it, scenario 2 has at least the following grey areas.</p>
+
+<ol>
+  <li>Sorted should know the purpose/final expectation of calling itself. This is evident from the scenario even. (consider the question <strong>Consider them sorted, what do you want to do next?</strong>)</li>
+  <li>Based on the answer to that question, the Sorted object decides its next course of actions.</li>
+  <li>The business partner now calls itself <strong>Sorted</strong>, which actually does not have anything sorted at all. Simply put, <strong><em>how can you end up with something sorted, without actually sorting</em></strong>? I, being a fan of descriptive identifiers, find this to be a bit disturbing because the name that has been chosen is too close to a lie.</li>
+</ol>
+
+<p>In other words, we are talking about intelligent objects, aren’t we? I think yes, we are talking about an intelligent object in scenario 2. Can you think of an implementation of such an object? Wouldn’t that be a god class which is knowing a lot of things, including how to make decisions on what to do in certain cases?</p>
+
+<p>If someone says that this is not about intelligent objects, then someone should know the expectation of this, isn’t it? If the object doesn’t know that, then the obvious another party who should know what the expectation is the developer who writes the code.</p>
+
+<p>All of these I can boil down to the following.</p>
+
+<blockquote>
+  <p>Who will ask the question “Consider them sorted, what do you want to do next”?</p>
+</blockquote>
+
+<p>Is there anyone who knows the answer? Please feel free to comment. Until next time!</p>
+
+  </div>
+  <div style="text-align: center;">~END~</div>
+<div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://kanchana.senadheera.net/techbits/2020/03/13/dont-create-objects-with-er.html';
+      this.page.identifier = 'https://kanchana.senadheera.net/techbits/2020/03/13/dont-create-objects-with-er.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://000407.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+<a class="u-url" href="/techbits/2020/03/13/dont-create-objects-with-er.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col mt-center">
+        <div class="social-links">
+<a name="social_links"></a>
+<div id="social-media">
+    
+    
+        
+        
+            <a href="mailto:kanchana@senadheera.net" title="Email" class="social-icon"><i class="fa fac-square fa-envelope"></i></a>
+        
+    
+        
+        
+            <a href="https://www.linkedin.com/in/kanchana-senadheera" title="LinkedIn" class="social-icon"><i class="fa fac-square fa-linkedin"></i></a>
+        
+    
+        
+        
+            <a href="https://github.com/000407" title="GitHub" class="social-icon"><i class="fa fac-square fa-github"></i></a>
+        
+    
+        
+        
+            <a href="https://stackoverflow.com/users/3126973" title="" class="social-icon"><i class="fa fac-square fa-stack-overflow"></i></a>
+        
+    
+</div>
+</div>
+        <p>© 2017 Kanchana Senadheera @ KaZE<sub>2</sub>. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+</body>
+
+</html>

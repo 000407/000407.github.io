@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>vLayman.1::Branch and Bound Algorithm | ~my territory~</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="vLayman.1::Branch and Bound Algorithm">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Branch and Bound Algorithm, invented by P.M. Narendra and K. Fukunaga, is a long standing, widely used algorithm in machine learning and pattern recognition. This post intends to explain the mathematical background and the function of the BnB algorithm in details along with an example.">
+<meta property="og:description" content="Branch and Bound Algorithm, invented by P.M. Narendra and K. Fukunaga, is a long standing, widely used algorithm in machine learning and pattern recognition. This post intends to explain the mathematical background and the function of the BnB algorithm in details along with an example.">
+<link rel="canonical" href="https://kanchana.senadheera.net/techbits/2020/07/23/bnb-algorithm.html">
+<meta property="og:url" content="https://kanchana.senadheera.net/techbits/2020/07/23/bnb-algorithm.html">
+<meta property="og:site_name" content="~my territory~">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-07-23T14:30:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="vLayman.1::Branch and Bound Algorithm">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-07-23T14:30:00+00:00","datePublished":"2020-07-23T14:30:00+00:00","description":"Branch and Bound Algorithm, invented by P.M. Narendra and K. Fukunaga, is a long standing, widely used algorithm in machine learning and pattern recognition. This post intends to explain the mathematical background and the function of the BnB algorithm in details along with an example.","headline":"vLayman.1::Branch and Bound Algorithm","mainEntityOfPage":{"@type":"WebPage","@id":"https://kanchana.senadheera.net/techbits/2020/07/23/bnb-algorithm.html"},"url":"https://kanchana.senadheera.net/techbits/2020/07/23/bnb-algorithm.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link type="application/atom+xml" rel="alternate" href="https://kanchana.senadheera.net/feed.xml" title="~my territory~">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+  <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="site-header">
+
+  <div class="wrapper">
+<h2><a class="site-title" rel="author" href="/">~my territory~</a></h2>
+<nav class="main-nav site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    
+      <li>
+        
+          <span class="main-item"><a href="/">Home</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/about">About</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/blog">Blog</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item">Tools</span>
+        
+        
+          
+          <ul>
+
+  <li>
+    
+      <span class="sub-item"><a href="/tools/singlishw">Singlish Writer</a></span>
+    
+    
+  </li>
+
+</ul>
+        
+      </li>
+    
+    </ul>
+  </div>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">vLayman.1::Branch and Bound Algorithm</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2020-07-23T14:30:00+00:00" itemprop="datePublished">
+        Jul 23, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="prologue">Prologue</h2>
+
+<ul>
+  <li>Assume a set of features $ S = {x_1, x_2, \ldots, x_n} $</li>
+  <li>Goal is to select a set having $b$ number features from $S$ (i.e. $b \lt n$)</li>
+  <li>Power Set of $S$ is given by $ P(S) = {B \mid B \subseteq S} $</li>
+  <li>Set of all sets that has $b$ number of elements is given by $\mathcal{A}_b = {C \mid C \subseteq S, n(C)=b}$</li>
+</ul>
+
+<h2 id="criterionobjective-function">Criterion(Objective) Function</h2>
+
+<ul>
+  <li>This is a function $J$ where $J:P(S) \mapsto (-\infty, \infty)$
+    <ul>
+      <li>Purpose of $J$ is to attach a value to each element in $P(S)$, so that a decision about each subset of $S$ can be made.</li>
+      <li>Example of a $J$ (one of many ways of defining a $J$)
+        <ul>
+          <li>Consider a set of 5 features (i.e. $n(S) = 5$) and we are to select 2 features (i.e. $b = 5$). We can select ${5 \choose 2} = 10$ different sets having 2 elements.</li>
+          <li>For each of these 2 feature sets, infinite number of decision rules can be formulated, out of which we can choose a finite number of decision rules.</li>
+          <li>For each of such decision rules, there is a probability of misclassification, and the minimum of these probabilities can be obtained.</li>
+          <li>For an arbitrary feature pair $(l,m) \forall l,m \in S$, let’s say the minimum misclassification probability is $P_{min}(l,m)$. This $P_{min}$ can be calculated for each feature pairs.</li>
+          <li>Out of all those $P_{min}$ we can find the smallest. The feature pair, corresponding to this smallest value will <strong><em>minimise</em></strong> the probability of misclassification.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>$J$ is to be optimized, i.e
+    <ul>
+      <li>Find $C_0 \in \mathcal{A}_b$ such that
+        <ul>
+          <li>$J(C_0) \geq J(C) \forall C \in \mathcal{A}_b$ ~&gt; Maximisation Problem</li>
+          <li>$J(C_0) \leq J(C) \forall C \in \mathcal{A}_b$ ~&gt; Minimisation Problem</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="formulation-of-algorithm">Formulation of Algorithm</h2>
+
+<ul>
+  <li>Assume the criterion function $J$, and the target number of features $b$ are given.</li>
+  <li>We can perform an exhaustive search to find the optimal subset with the use of $J$.</li>
+  <li>But this will quickly become impractical (E.g. consider a feature set having 100 features out of which we are to choose 10. Number of possible choices are ${100 \choose 10} = 1.7310309\times 10^{13})$, which is 1+ trillions)</li>
+  <li>However, if $J$ satisfies the property given below, we can formulate an algorithm to find optimal feature subset, without exhaustive search.
+    <ul>
+      <li>Given $S = {x_1, x_2, \ldots, x_n}$</li>
+      <li>$J(A_1) \leq J(A_2)$ when $ A_1 \subseteq A_2 \subseteq S - (1)$</li>
+    </ul>
+  </li>
+  <li>This means <strong><em>more features implies that there is more information</em></strong>. This property is not always useful because, certain features which could act as noise might distort the quality of the feature subset, in terms of its importance.</li>
+</ul>
+
+<h3 id="branch-and-bound-algorithm">Branch and Bound Algorithm</h3>
+
+<ul>
+  <li>Formulated by P.M. Narendra and K.Fukunaga initially in 1975, this is an algorithm that can be used to derive the optimal feature subset, without exhaustively searching the given space.</li>
+  <li>This consists of a tree that is specifically developed under certain constraints.
+    <ul>
+      <li># of levels $L = n - b + 1$, where $n$ is the number of features in the initial set, and $b$ is the number of elements in the target feature set.</li>
+      <li># of branches of a node + # of features to be preserved $= b + 1$
+        <ul>
+          <li>
+<strong>Features to Preserve</strong>: At each node, the <strong><em>features eliminated by the right-side siblings of each parent</em></strong>, up the hierarchy should be preserved.</li>
+        </ul>
+      </li>
+      <li># of leaf nodes = ${n \choose b}$</li>
+      <li>Tree is constructed either <strong>left-to-right</strong>, or <strong>right-to-left</strong>. By the nature, <strong><em>the tree will be asymmetric</em></strong>.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="example">Example</h3>
+
+<ul>
+  <li>Assume a feature set $S = {a,b,c,d,e}$, and out of this 3 features to be chosen.</li>
+</ul>
+
+<p>Initial parameters $n=5, b=3$</p>
+
+<p>Number of choices ${5 \choose 3} = 10$</p>
+
+<h4 id="steps-of-constructing-the-tree">Steps of constructing the tree:</h4>
+
+<ul>
+  <li>Notes:
+    <ul>
+      <li>-a indicates that feature a is removed from the feature set</li>
+      <li>There is a selection criteria $\mathcal{C}$ that selects features to eliminate on each branch, at each node. (This function is discussed later)</li>
+    </ul>
+  </li>
+  <li>For the root node, number of nodes to preserve is 0. Therefore root node will have $b+1$ branches, which is 4.</li>
+  <li>If we assume that $\mathcal{C}$ chose $a,b,c$ and $d$ to be removed from the feature set in each branch, we will get a tree like follows.</li>
+</ul>
+
+<div class="mermaid">
+    graph TD;
+        R["*"] --- A["-a"] &amp; B["-b"] &amp; C["-c"] &amp; D["-d"];
+</div>
+
+<ul>
+  <li>Now, the right most branch should always preserve $a,b$ and $c$. From the formula for #branches, we can calculate it should have only 1 branch. Since $d$ is already taken out, next we have to remove $e$. And we have ${a,b,c}$ as a feature subset.</li>
+</ul>
+
+<div class="mermaid">
+    graph TD;
+        R["*"] --- A["-a"] &amp; B["-b"] &amp; C["-c"] &amp; D["-d"];
+        D --- E1["-e"];
+        E1 --- ss1["{a,b,c}"];
+</div>
+
+<ul>
+  <li>The second right-most branch should preserve $a$ and $b$. So, it should have 2 branches. For each of the two branches, let’s say $\mathcal{C}$ choose $d$ and $e$. So, we put each</li>
+</ul>
+
+<div class="mermaid">
+    graph TD;
+        R["*"] --- A1["-a"] &amp; B1["-b"] &amp; C1["-c"] &amp; D1["-d"];
+        D1 --- E1["-e"];
+        E1 -.- ss1["{a,b,c}"];
+        C1 --- E2["-e"] &amp; D2["-d"];
+        E2 -.- ss2["{a,b,d}"];
+        D2 -.- ss3["{a,b,e}"];
+</div>
+
+<ul>
+  <li>The third right-most (second left-most) branch from the root, should preserve only $a$, it needs to have 3 branches (from the formula). Assuming that $\mathcal{C}$ chose $c,d$ and $e$,</li>
+</ul>
+
+<div class="mermaid">
+    graph TD;
+        R["*"] --- A1["-a"] &amp; B1["-b"] &amp; C1["-c"] &amp; D1["-d"];
+        D1 --- E1["-e"];
+        E1 -.- ss1["{a,b,c}"];
+        C1 --- D2["-d"] &amp; E2["-e"];
+        D2 -.- ss3["{a,b,e}"];
+        E2 -.- ss2["{a,b,d}"];
+        B1 --- C2["-c"] &amp; D3["-d"] &amp; E3["-e"];
+        C2 -.- ss6["{a,d,e}"];;
+        D3 -.- ss5["{a,c,e}"];
+        E3 -.- ss4["{a,c,d}"]
+</div>
+
+<ul>
+  <li>Finally for the left most node, #features to preserve is 0. Hence, there should be 4 branches (from the formula). Assuming that $\mathcal{C}$ chose $b,c,d$ and $e$ for those 4 branches,</li>
+</ul>
+
+<div class="mermaid">
+    graph TD;
+        R["*"] --- A1["-a"] &amp; B1["-b"] &amp; C1["-c"] &amp; D1["-d"];
+        D1 --- E1["-e"];
+        E1 -.- ss1["{a,b,c}"];
+        C1 --- D2["-d"] &amp; E2["-e"];
+        D2 -.- ss2["{a,b,e}"];
+        E2 -.- ss3["{a,b,d}"];
+        B1 --- C2["-c"] &amp; D3["-d"] &amp; E3["-e"];
+        C2 -.- ss4["{a,d,e}"];;
+        D3 -.- ss5["{a,c,e}"];
+        E3 -.- ss6["{a,c,d}"];
+        A1 --- B2["-b"] &amp; C3["-c"] &amp; D4["-d"] &amp; E4["-e"];
+        B2 -.- ss7["{c,d,e}"];
+        C3 -.- ss8["{b,d,e}"];
+        D4 -.- ss9["{b,c,e}"];
+        E4 -.- ss10["{b,c,d}"];
+</div>
+
+<p>As it should be obvious by now, this algorithm provides us a way of systematically permuting a feature set, in a way which facilitates reducing the search space to improve search performance.</p>
+
+<h4 id="role-of-j">Role of $J$</h4>
+
+<ul>
+  <li>$J$ is the function that provides a bound for each of the nodes.</li>
+</ul>
+
+<div class="mermaid">
+    graph TD;
+        R["Root"] --- L["l"] &amp; M["m"];
+        M --- N["n"];
+</div>
+
+<ul>
+  <li>In the tree, it is evident that each node $n$ is a subset of its parent $m$, which makes it evident that $J(n) \leq J(m)$.</li>
+  <li>Given $n$ is a leaf node, if there is a sibling $l$ of node $m$, that which $J(l) \leq J(n)$, <strong><em>it is guaranteed that all of $l$’children will yield values for $J$, which are less than $J(n)$</em></strong>. Here $J(l)$ acts as a <strong><em>lower bound</em></strong> for $J(o)$ (hence the name <strong><em>bound</em></strong>).</li>
+  <li>So, we can conclude that the node $n$ is the node that has the optimal subset of features.</li>
+</ul>
+
+  </div>
+  <div style="text-align: center;">~END~</div>
+<div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://kanchana.senadheera.net/techbits/2020/07/23/bnb-algorithm.html';
+      this.page.identifier = 'https://kanchana.senadheera.net/techbits/2020/07/23/bnb-algorithm.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://000407.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+<a class="u-url" href="/techbits/2020/07/23/bnb-algorithm.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col mt-center">
+        <div class="social-links">
+<a name="social_links"></a>
+<div id="social-media">
+    
+    
+        
+        
+            <a href="mailto:kanchana@senadheera.net" title="Email" class="social-icon"><i class="fa fac-square fa-envelope"></i></a>
+        
+    
+        
+        
+            <a href="https://www.linkedin.com/in/kanchana-senadheera" title="LinkedIn" class="social-icon"><i class="fa fac-square fa-linkedin"></i></a>
+        
+    
+        
+        
+            <a href="https://github.com/000407" title="GitHub" class="social-icon"><i class="fa fac-square fa-github"></i></a>
+        
+    
+        
+        
+            <a href="https://stackoverflow.com/users/3126973" title="" class="social-icon"><i class="fa fac-square fa-stack-overflow"></i></a>
+        
+    
+</div>
+</div>
+        <p>© 2017 Kanchana Senadheera @ KaZE<sub>2</sub>. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+
+  
+    <script type="text/javascript" src="/assets/js/mermaid.min.js"></script>
+  
+</body>
+
+</html>
