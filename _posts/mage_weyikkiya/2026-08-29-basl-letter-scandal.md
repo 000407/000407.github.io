@@ -40,7 +40,7 @@ excerpt: 22 වන ව්‍යවස්ථා සංශෝධනය ගැන �
 >
 > Shortly afterwards, at 4.33 p.m., Dinamina reported that Rajeev Amarasuriya had telephoned the newspaper again and clarified that the wording was not "there at", but in fact "threat", meaning a threat.
 
-අනෙකුත් සියලු සාකච්ඡා, මතිමතාන්තර පසෙකින් තබා, මෙම ප්‍රශ්නගත වාක්‍යයේ අර්ථය කුමක්දැයි අපි මොහොතකට කල්පනා කර බලමු. මේ සඳහා මුලින්ම, භාෂා පරිවර්තනය පිළිබඳ ප්‍රකට අන්තර්ජාල යෙදුමක් වන [Google Translate](translate.google.com), සහ දෙවනුව උත්පාදක කෘත්‍රිම බුද්ධි (Generative Artifical Intelligence) පරිගණක වැඩසටහනක් වන [ChatGPT](chatgpt.com) යන යෙදුම් පාවිච්චි කිරීමට මම තීරණය කළෙමි. ඒ, එකිනෙකට කිසිදු සහසම්බන්ධයක් නැති මූලාශ්‍ර දෙකකින්, මෙම කාරණය ගැන දේශපාලන පක්ෂග්‍රාහීකම් වලින් කිලිටි නොවූ අදහසක් ගොඩනගා ගැනීම අරමුණු කරගෙනය.
+අනෙකුත් සියලු සාකච්ඡා, මතිමතාන්තර පසෙකින් තබා, මෙම ප්‍රශ්නගත වාක්‍යයේ අර්ථය කුමක්දැයි අපි මොහොතකට කල්පනා කර බලමු. මේ සඳහා මුලින්ම, භාෂා පරිවර්තනය පිළිබඳ ප්‍රකට අන්තර්ජාල යෙදුමක් වන [Google Translate](https://translate.google.com), සහ දෙවනුව උත්පාදක කෘත්‍රිම බුද්ධි (Generative Artifical Intelligence) පරිගණක වැඩසටහනක් වන [ChatGPT](https://chatgpt.com) යන යෙදුම් පාවිච්චි කිරීමට මම තීරණය කළෙමි. ඒ, එකිනෙකට කිසිදු සහසම්බන්ධයක් නැති මූලාශ්‍ර දෙකකින්, මෙම කාරණය ගැන දේශපාලන පක්ෂග්‍රාහීකම් වලින් කිලිටි නොවූ අදහසක් ගොඩනගා ගැනීම අරමුණු කරගෙනය.
 
 ![google_translate_threat.png](/assets/img/posts/basl-letter-scandal/google_translate_threat.png)
 
