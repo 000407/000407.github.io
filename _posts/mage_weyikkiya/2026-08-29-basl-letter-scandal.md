@@ -18,7 +18,7 @@ excerpt: 22 වන ව්‍යවස්ථා සංශෝධනය ගැන �
 
 > However, in light of the proceedings in Parliament today, i.e. 19.08.2026, and the position of the Government expressed **threat**, there appears to be no consensus on the same, nor interest presently by the Government to provide this opportunity to its Members of Parliament.
 
-මෙම මතභේදාත්මක තත්වය තව දුරටත් ව්‍යාකූල කරවන ලද්දේ එම වාක්‍යය පිළිබඳව ලංකාවේ ප්‍රකට පුවත්පතක්, සහ තවත් ප්‍රකට විද්‍යුත් මාධ්‍ය නාලිකාවක් විසින් අවස්ථා කිහිපයකදී කරන ලද කරුණු විමසීම් වලදී, නීතීඥ සංගමය පාර්ශවයෙන් ලැබුණු පරස්පර විරෝධී පැහැදිලි කිරීම්ය. එම කරුණු විමසීම් වල කාලානුක්‍රමික සංක්ෂිප්තය මෙම වෙබ් පිටුවෙන් උපුටා ගත් අන්දමට, පහත පරිදී වේ.
+මෙම මතභේදාත්මක තත්වය තව දුරටත් ව්‍යාකූල කරවන ලද්දේ එම වාක්‍යය පිළිබඳව ලංකාවේ ප්‍රකට පුවත්පතක්, සහ තවත් ප්‍රකට විද්‍යුත් මාධ්‍ය නාලිකාවක් විසින් අවස්ථා කිහිපයකදී කරන ලද කරුණු විමසීම් වලදී, නීතීඥ සංගමය පාර්ශවයෙන් ලැබුණු පරස්පර විරෝධී පැහැදිලි කිරීම්ය. එම කරුණු විමසීම් වල කාලානුක්‍රමික සංක්ෂිප්තය [මෙම වෙබ් පිටුවෙන්](https://www.newsfirst.lk/2026/08/20/threat-thereat-or-what-how-many-explanations-can-one-official-letter-have) උපුටා ගත් අන්දමට, පහත පරිදී වේ.
 
 > However, over the course of a single afternoon, a number of differing explanations were provided about the wording used in the letter.
 >
