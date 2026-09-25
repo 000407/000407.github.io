@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Software Version Controlling | ~my territory~</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Software Version Controlling">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Version control systems (VCS) (also known as revision control, source control, or source code management) is a class of systems responsible for managing changes to a collections of information such as computer programs, multimedia, databases, documents and so on. In computer programming and software engineering, VCSs are extensively used for controlling the versioning of the source code and plays a vital role in any software development effort as a software project is essentially a team effort which most of the cases are geographically dispersed across many regions. This article explains the fundamental concepts of VCS and their use and practice in modern software development context.">
+<meta property="og:description" content="Version control systems (VCS) (also known as revision control, source control, or source code management) is a class of systems responsible for managing changes to a collections of information such as computer programs, multimedia, databases, documents and so on. In computer programming and software engineering, VCSs are extensively used for controlling the versioning of the source code and plays a vital role in any software development effort as a software project is essentially a team effort which most of the cases are geographically dispersed across many regions. This article explains the fundamental concepts of VCS and their use and practice in modern software development context.">
+<link rel="canonical" href="https://kanchana.senadheera.net/techbits/2017/09/13/software-version-controlling.html">
+<meta property="og:url" content="https://kanchana.senadheera.net/techbits/2017/09/13/software-version-controlling.html">
+<meta property="og:site_name" content="~my territory~">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-09-13T12:06:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Software Version Controlling">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2017-09-13T12:06:00+00:00","datePublished":"2017-09-13T12:06:00+00:00","description":"Version control systems (VCS) (also known as revision control, source control, or source code management) is a class of systems responsible for managing changes to a collections of information such as computer programs, multimedia, databases, documents and so on. In computer programming and software engineering, VCSs are extensively used for controlling the versioning of the source code and plays a vital role in any software development effort as a software project is essentially a team effort which most of the cases are geographically dispersed across many regions. This article explains the fundamental concepts of VCS and their use and practice in modern software development context.","headline":"Software Version Controlling","mainEntityOfPage":{"@type":"WebPage","@id":"https://kanchana.senadheera.net/techbits/2017/09/13/software-version-controlling.html"},"url":"https://kanchana.senadheera.net/techbits/2017/09/13/software-version-controlling.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link type="application/atom+xml" rel="alternate" href="https://kanchana.senadheera.net/feed.xml" title="~my territory~">
+	
+		<link rel="stylesheet" type="text/css" href="/assets/css/software_vcs.css">
+	
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+  <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+
+  <div class="wrapper">
+<h2><a class="site-title" rel="author" href="/">~my territory~</a></h2>
+<nav class="main-nav site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    
+      <li>
+        
+          <span class="main-item"><a href="/">Home</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/about">About</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/blog">Blog</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item">Tools</span>
+        
+        
+          
+          <ul>
+
+  <li>
+    
+      <span class="sub-item"><a href="/tools/singlishw">Singlish Writer</a></span>
+    
+    
+  </li>
+
+</ul>
+        
+      </li>
+    
+    </ul>
+  </div>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Software Version Controlling</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2017-09-13T12:06:00+00:00" itemprop="datePublished">
+        Sep 13, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/assets/img/posts/software_vcs/title_image.png#center#title" alt="Some Popular VCSs" class="title"></p>
+
+<h2 id="fundamentals">Fundamentals</h2>
+
+<p>A <strong>Version Control System</strong> is a special piece of software, that helps a group of developers working on a project to keep track of their work. Primarily, a VCS</p>
+
+<ul>
+  <li>allows developers to work simultaneously.</li>
+  <li>restricts unintentional overwrites.</li>
+  <li>maintains version history.</li>
+</ul>
+
+<p>Two types of VCSs are currently in use industry-wide.</p>
+
+<ul>
+  <li>Centralized VCS</li>
+  <li>Distributed VCS</li>
+</ul>
+
+<p><a href="https://medium.com/faun/centralized-vs-distributed-version-control-systems-a135091299f0">This article</a> is doing a good job at explaining the similarities, differences, pros and cons of these two. To put the together an idea of the difference between the two for the sake of completeness,</p>
+
+<ul>
+  <li>
+    <p><strong>Centralized VCS</strong> - There is a single centralized copy of the project. Everyone who is working on it, will have a working copy of the project in their systems. Once a change is ready to be published, it will go into this central working copy, from which the others will get the updates into their working copy. Typical examples of CVCSs include <a href="https://subversion.apache.org/">Subversion</a> and <a href="https://www.perforce.com/">Perforce</a>.</p>
+  </li>
+  <li>
+    <p><strong>Distributed VCS</strong> - In theory, there is no single central copy. Everyone involved have their own copy of the repository, to which the changes done in the working copy are published into. In order to publish these updates, all of the local repositories are synchronized with a shared remote location (this is where the <a href="#bare_repo">bare repos</a> come in to play). Without such a central location, one who has added some changes to their local repository will have to broadcast infomation about the said update so as to the others to see. <a href="https://git-scm.com/">Git</a> and <a href="https://www.mercurial-scm.org/">Mercurial</a> could be enumerated as popular exampels of DVCSs.</p>
+  </li>
+</ul>
+
+<p>Advantages of Git, over other available VCSs, could be summarized as follows.</p>
+
+<ul>
+  <li>FOSS</li>
+  <li>Fast &amp; small</li>
+  <li>Implicit backup</li>
+  <li>Security</li>
+  <li>Powerful hardware is not required</li>
+  <li>Simpler branching</li>
+</ul>
+
+<h2 id="dvcs-terminology">DVCS Terminology</h2>
+
+<p>In order to understand how a DVCS works, we need to clarify and be familiar with the following terminology.</p>
+
+<ul>
+  <li>
+<strong>Local Repo</strong>: A copy of the remote repo. All individual changes are saved in the local repo. This is also known as the <strong><em>Working Tree/Working Directory</em></strong>.</li>
+  <li>
+<strong>Staging area</strong>: A temporary buffer that keeps track of the files presented for the commit. This allows committing each file separately if needed.</li>
+  <li>
+<strong>BLOB</strong>: Stands for Binary Large Object. A BLOB in Git represents each version of a file. Git DB saves the SHA1 hash of this, making it immune to overwrites.</li>
+  <li>
+<strong>Tree</strong>: An object that represents the directory structure.</li>
+  <li>
+<strong>Commit</strong>: The current state of the repo. Every commit is named by SHA1 and points at the previous commit allowing traversing back in the history, as in a reversed linked list.</li>
+  <li>
+<strong>Branch</strong>: A branch is a list of linked commits. Git has a default named “master”. Every branch is referenced by HEAD that points at the latest commit of the branch.</li>
+  <li>
+<strong>Tag</strong>: Ususally a commit may appear as not much meaningful given it is identified by the SHA1 hash. Tags are names/identifiers that can be assigned to such commits which may be defined as human readable, thereby meaningful. These IDs are immutable and each tag is assigned to/associated with <strong><em>exactly one</em></strong> commit.</li>
+  <li>
+<strong>Clone</strong>: Creates a snapshot/an instance of the repo. This could also be understood as a single frame of a video clip.</li>
+  <li>
+<strong>Pull</strong>: Copies the changes in the remote repo to the local.</li>
+  <li>
+<strong>Push</strong>: Copies the changes in the local to the remote.</li>
+  <li>
+<strong>HEAD</strong>: A pointer which always points at the latest commit of the branch.</li>
+  <li>
+<strong>Revision</strong>: Represents a particular version of the source code.</li>
+</ul>
+
+<h2 id="typical-life-cycle">Typical Life Cycle</h2>
+
+<p>When we are working on an existing repo, below mentioned is the typical life cycle that we would follow.</p>
+
+<ul>
+  <li>Clone the remote repo as a working copy</li>
+  <li>Modify the local copy</li>
+  <li>Review changes</li>
+  <li>Commit</li>
+  <li>Push changes to remote</li>
+</ul>
+
+<h2 id="creation-operations">Creation Operations</h2>
+
+<h3 id="bare-repository">
+<a name="bare_repo"></a>Bare Repository</h3>
+
+<p>By the nature, Git is a distributed VCS, which turn means that, there is no central singular copy of the Project, in theory. This leaves us with a problem on how to share the committed updates to all the other interested parties. This is where the concept of <strong>Bare Repository</strong> comes into play. A bare repository <strong><em>without a working tree</em></strong>. Conventionally, this is named as <code class="language-plaintext highlighter-rouge">&lt;reponame&gt;.git</code>.</p>
+
+<p>A git repository could be initialized using <a href="https://git-scm.com/docs/git-init"><code class="language-plaintext highlighter-rouge">git init</code></a> command. To make the repository being initialized a bare repo, the flag <code class="language-plaintext highlighter-rouge">--bare</code> could be used.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>projectname.git
+<span class="nv">$ </span>git <span class="nt">--bare</span> init projectname.git/
+Initialized empty Git repository <span class="k">in</span> /&lt;location&gt;/projectname.git/
+<span class="nv">$ </span><span class="nb">ls
+</span>branches        config       HEAD   index  logs     refs
+COMMIT_EDITMSG  description  hooks  info   objects
+</code></pre></div></div>
+
+<h3 id="local-repository">Local Repository</h3>
+
+<p>This is the local copy of the project, that contains everything related to versioning, along with the version history. Transforming a working directory into a local repo could be done as follows.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init <span class="c">#Initializes the current directory as a repository</span>
+Initialized empty Git repository <span class="k">in</span> /&lt;location&gt;/&lt;projectname&gt;.git/
+<span class="nv">$ </span>git status <span class="nt">-s</span> <span class="c">#Indicates the current status of the files contained in the local repository.</span>
+?? README.md
+</code></pre></div></div>
+
+<p>Here, the command <a href="https://git-scm.com/docs/git-status"><code class="language-plaintext highlighter-rouge">git status</code></a> displays the summary status of the current repository (unstaged files, changes which are not committed etc.). <code class="language-plaintext highlighter-rouge">??</code> indicates that the file is not being tracked.</p>
+
+<h3 id="staging---adding-files-to-track">Staging - Adding files to track</h3>
+
+<p>Adding files to the staging area is done with <a href="https://git-scm.com/docs/git-add"><code class="language-plaintext highlighter-rouge">git add</code></a> command. Following would add the selected files for tracking.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add &lt;filename1&gt; &lt;filename2&gt; ... &lt;filenameN&gt;
+</code></pre></div></div>
+
+<p>Once the command is issued, the file(s) specified as arguments for this command will be marked with a green color capital letter A.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>The above command adds all the files (the dot character acts as a wildcard that means <strong><em>all files</em></strong>) available in the repo for tracking. Usual practice is to use this method, where the command will add all files except the files/paths mentioned in the <code class="language-plaintext highlighter-rouge">.gitignore</code> file, in to the staging area. Following are some of the allowed expressions in <code class="language-plaintext highlighter-rouge">.gitignore</code>.</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">*</code> - All files in the repository are ignored.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">.idea</code> - A file/directory with the name <code class="language-plaintext highlighter-rouge">.idea</code> is ignored.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">!.gitignore</code> - DO NOT ignore the file <code class="language-plaintext highlighter-rouge">.gitignore</code>.</li>
+</ul>
+
+<p>Once the add command is executed, the Added files will be indicated with ‘A’ prefixed to indicate that the file is “Added” into staging area.</p>
+
+<h3 id="committing">Committing</h3>
+
+<p>Files staged, could be committed with <a href="https://git-scm.com/docs/git-commit"><code class="language-plaintext highlighter-rouge">git commit</code></a>. The commit message, followed by -m flag is compulsory. Make sure to put something meaningful as the commit message. In fact, the comment can be a multiline message where the first line will be interpreted as the title by most of the git hosts (<a href="">GitHub</a>, <a href="">GitLab</a> etc.)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Commit message"</span>
+<span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> df52a51] Commit message
+4 files changed, 5 insertions<span class="o">(</span>+<span class="o">)</span>
+create mode 100644 .gitignore
+create mode 100644 README.md
+create mode 100644 ig1.mml
+create mode 100644 ig2.mml
+</code></pre></div></div>
+
+<h3 id="binding-the-local-repo-with-remote-repos">Binding the Local Repo with Remote Repo(s)</h3>
+
+<p>The local repo could be bound to a remote repo using <a href="https://git-scm.com/docs/git-remote"><code class="language-plaintext highlighter-rouge">git remote</code></a> command, as follows.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote add origin git@github.com:username/reponame.git
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">origin</code> is actually a name, that serves as an identifier assigned to uniquely identify this remote location.</p>
+
+<p>Similarly, if we have a remote repo that is already bound, that could be changed as follows. Here, the remote with the name <code class="language-plaintext highlighter-rouge">origin</code> is given with a different URL.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote set-url origin git@gitgithub.com:username/reponame.git
+</code></pre></div></div>
+
+<p>Once this is done, the URLs could be verified as follows. Note that the URL mentioned here is what needs to be used in SSH access to the remote repository. <a href="https://dev.to/lostintangent/do-you-clone-git-repos-via-https-or-ssh-3gp2">Read about accessing remote with HTTPS and SSH</a>, here.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote –v
+origin    git@github.com:&lt;username&gt;/&lt;reponame&gt;.git <span class="o">(</span>fetch<span class="o">)</span>
+origin    git@github.com:&lt;username&gt;/&lt;reponame&gt;.git <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="pushing">Pushing</h3>
+
+<p>This is the operation where the changes committed to the local repository will be pushed to the remote repository. This is achieved with the command <a href="https://git-scm.com/docs/git-push"><code class="language-plaintext highlighter-rouge">git push</code></a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin master
+Counting objects: 5, <span class="k">done</span><span class="nb">.</span>
+Delta compression using up to 4 threads.
+Compressing objects: 100% <span class="o">(</span>2/2<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, 374 bytes | 0 bytes/s, <span class="k">done</span><span class="nb">.</span>
+Total 5 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To git@github.com:&lt;username&gt;/&lt;reponame&gt;.git
+<span class="k">*</span> <span class="o">[</span>new branch]      master -&gt; master
+</code></pre></div></div>
+
+<p>If you check the remote repo after this operation, the files except the files mentioned in the <code class="language-plaintext highlighter-rouge">.gitignore</code> should be available there.</p>
+
+<h2 id="clone-operation">Clone Operation</h2>
+
+<p>A local instance of a remote repo could be created with <strong><em>cloning</em></strong> as follows, using the command <a href="https://git-scm.com/docs/git-clone"><code class="language-plaintext highlighter-rouge">git clone</code></a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone git@github.com:&lt;username&gt;/&lt;reponame&gt;.git
+Cloning into <span class="s1">'repo_test_1'</span>...
+remote: Counting objects: 10, <span class="k">done</span><span class="nb">.</span>
+remote: Compressing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+remote: Total 10 <span class="o">(</span>delta 1<span class="o">)</span>, reused 10 <span class="o">(</span>delta 1<span class="o">)</span>, pack-reused 0
+Receiving objects: 100% <span class="o">(</span>10/10<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Resolving deltas: 100% <span class="o">(</span>1/1<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Checking connectivity... <span class="k">done</span><span class="nb">.</span>
+</code></pre></div></div>
+
+<p>This would make an exact local copy of the remote repo.</p>
+
+<h2 id="checkout-operations">Checkout Operations</h2>
+
+<p>Checking out primarily refers to switch between branches. This is achieved using <a href="https://git-scm.com/docs/git-checkout"><code class="language-plaintext highlighter-rouge">git checkout</code></a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout branch_name
+Switched to branch <span class="s1">'branch_name'</span>
+</code></pre></div></div>
+
+<p>Branches may be already existing or it may be to a new branch. A new branch can be checked out with <code class="language-plaintext highlighter-rouge">-b</code> for <code class="language-plaintext highlighter-rouge">git checkout</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> branch_name
+Switched to a new branch <span class="s1">'branch_name'</span>
+</code></pre></div></div>
+
+<p>Additionally, this operation could also be used in replacing/resetting files and the changes done as indicated under reset operations.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout file<span class="sb">`</span>.txt
+Updated 1 path from the index
+</code></pre></div></div>
+
+<p>The above operation will drop all the changes in the working tree for the file <code class="language-plaintext highlighter-rouge">file1.txt</code>, and revert it to the latest version available in the local repository.</p>
+
+<h3 id="performing-changes">Performing Changes</h3>
+
+<p>After cloning, you can change the working tree. Once you are done with the required changes, you can commit them to the local repository.</p>
+
+<p><strong><em>When should I commit?</em></strong> Every time you have done some substantial and meaningful changes, you should commit them to the repository.</p>
+
+<p>If new files are created, then those needs to be added using the <code class="language-plaintext highlighter-rouge">git add</code> command.</p>
+
+<h3 id="revision-history">Revision History</h3>
+
+<p>Git provides two options for reviewing the changes.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git log</code></li>
+  <li><code class="language-plaintext highlighter-rouge">git show</code></li>
+</ul>
+
+<p>The command <a href="https://git-scm.com/docs/git-log"><code class="language-plaintext highlighter-rouge">git log</code></a> indicates the revision history for the repository as follows.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log
+commit c1f363ad701b9ff98734ee0b01189e3f1edb648e
+Author: &lt;username&gt; &lt;user@email.com&gt;
+Date:   Mon Sep 26 15:56:10 2016 +0530
+			
+more changes
+
+commit e94af7e5672302dfd33dec828ad8bbd3c5557dc7
+Author: &lt;username&gt; &lt;user@email.com&gt;
+Date:   Mon Sep 26 15:20:09 2016 +0530
+
+some more of the files
+
+commit 0bfdd2f3620ca9242f80b37cf485e56251ea7e9f
+Author: &lt;username&gt; &lt;user@email.com&gt;
+Date:   Mon Sep 26 15:13:59 2016 +0530
+
+further new files
+</code></pre></div></div>
+
+<p><a href="https://git-scm.com/docs/git-show"><code class="language-plaintext highlighter-rouge">git show</code></a> command indicates the revisions and their changes. Output is varying on the input flags. Optionally, the commit’s SHA1 hash could be given as an argument to view the commit’s details.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git show
+commit c1f363ad701b9ff98734ee0b01189e3f1edb648e
+Author: &lt;username&gt; user@email.com
+Date:   Mon Sep 26 15:56:10 2016 +0530
+
+commit message
+
+diff <span class="nt">--git</span> a/src/.dmm b/src/.dmm
+new file mode 100644
+index 0000000..d6f09c3
+<span class="nt">---</span> /dev/null
++++ b/src/.dmm
+@@ <span class="nt">-0</span>,0 +1 @@
++some more garbage to come
+</code></pre></div></div>
+
+<p>Further, <a href="https://git-scm.com/docs/git-diff"><code class="language-plaintext highlighter-rouge">git diff</code></a> can be used to compare between commits and revisions. Following is the usage and an example output.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff HEAD~1 HEAD
+diff <span class="nt">--git</span> a/Test.c b/Test.c
+deleted file mode 100644
+index 3438120..0000000
+<span class="nt">---</span> a/Test.c
++++ /dev/null
+@@ <span class="nt">-1</span>,7 +0,0 @@
+-/<span class="k">*</span>created by 0004072
+- <span class="k">*</span>on <span class="nb">date</span>
+- <span class="k">*</span>/
+-#include &lt;stdio.h&gt;
+<span class="nt">-void</span> main<span class="o">(){</span>
+-       prinf<span class="o">(</span><span class="s2">"Good bye cruel worldl</span><span class="se">\n</span><span class="s2">"</span><span class="o">)</span><span class="p">;</span>
+-<span class="o">}</span>
+diff <span class="nt">--git</span> a/src/test2.tst b/src/test2.tst
+new file mode 100644
+index 0000000..359bb01
+<span class="nt">---</span> /dev/null
++++ b/src/test2.tst
+@@ <span class="nt">-0</span>,0 +1 @@
++some meaningless text appended to a file <span class="k">for </span>testing purposes
+</code></pre></div></div>
+
+<p>The result contains the comparison between the two commits. There are different options available to compare specific files selected from the two commits.</p>
+
+<h2 id="update-operation">Update Operation</h2>
+
+<p>Update operations are done by the following sequence of steps.</p>
+
+<ul>
+  <li>Checkout</li>
+  <li>Modify/add/remove files</li>
+  <li>Add the changes to the staging area</li>
+  <li>Commit</li>
+  <li>Push to the relevant branch</li>
+</ul>
+
+<p>Here, <strong><em>pushing may not be allowed if the repo is not in full synchronization with the remote repo</em></strong>. So, based on the situation, it might be required to pull the latest changes, which could be done using <a href="https://git-scm.com/docs/git-pull"><code class="language-plaintext highlighter-rouge">git pull</code></a> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull origin master
+remote: Counting objects: 7, <span class="k">done</span><span class="nb">.</span>
+remote: Compressing objects: 100% <span class="o">(</span>4/4<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+remote: Total 7 <span class="o">(</span>delta 2<span class="o">)</span>, reused 7 <span class="o">(</span>delta 2<span class="o">)</span>, pack-reused 0
+Unpacking objects: 100% <span class="o">(</span>7/7<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+From github.com:&lt;username&gt;/&lt;reponame&gt;
+528d725..7560a95  master     -&gt; origin/master
+Updating 528d725..7560a95
+Fast-forward
+hmacsha1.sh   | 6 ++++++
+src/test3.tst | 1 +
+2 files changed, 7 insertions<span class="o">(</span>+<span class="o">)</span>
+create mode 100644 hmacsha1.sh
+create mode 100644 src/test3.tst
+</code></pre></div></div>
+
+<h2 id="stash-operation">Stash Operation</h2>
+
+<p>Stashing is saving uncommitted changes added to the local repository. This allows managing such changes which would require later attention. In fact, stash works as a linked list that is kept track of in <code class="language-plaintext highlighter-rouge">$PROJECT_ROOT/.git/refs/stash</code>. Everytime the command <a href="https://git-scm.com/docs/git-stash"><code class="language-plaintext highlighter-rouge">git stash</code></a> is executed a <em>**kind of a temporary commit</em> is created in the said location, which can be referred to using <code class="language-plaintext highlighter-rouge">stash@{n}</code> where n being the zero-based index of the stash entry/commit. <a href="https://www.atlassian.com/git/tutorials/saving-changes/git-stash">This tutorial from Atlassian on Git</a> explains how stashing functions under the hood.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git stash
+Saved working directory and index state WIP on master: 7560a95 Merge branch <span class="s1">'master'</span> of github.com:&lt;username&gt;/&lt;reponame&gt;
+</code></pre></div></div>
+
+<p>After stashing, those stashes could later be listed out as follows using <code class="language-plaintext highlighter-rouge">git stash list</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git stash list
+stash@<span class="o">{</span>0<span class="o">}</span>: WIP on master: 7560a95 Merge branch <span class="s1">'master'</span> of github.com:&lt;username&gt;/&lt;reponame&gt;
+</code></pre></div></div>
+
+<p>These stashes could later be launched for continuation of work using <code class="language-plaintext highlighter-rouge">git stash pop</code> command. This will apply the most recent stash reference (referred by <code class="language-plaintext highlighter-rouge">stash@{0}</code>) in to the working tree and the stash entry will be marked as garbage for later removal. <strong><em>Popping</em></strong> stash entries is analoguous to popping a stack.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git stash pop
+On branch master
+Your branch is up-to-date with <span class="s1">'origin/master'</span><span class="nb">.</span>
+Changes to be committed:
+<span class="o">(</span>use <span class="s2">"git reset HEAD &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+			
+new file:   comp.txt
+new file:   src/test3.txt
+			
+Dropped refs/stash@<span class="o">{</span>0<span class="o">}</span> <span class="o">(</span>15a9d4f9088b151263f8f235330e67d6c9e771e7<span class="o">)</span>
+</code></pre></div></div>
+
+<p>There is a <code class="language-plaintext highlighter-rouge">git stash apply</code> as well, which without a stash reference will apply the most recent stash reference. <code class="language-plaintext highlighter-rouge">git stash apply stash@{n}</code> where <code class="language-plaintext highlighter-rouge">n</code> is a non-negative integer will apply the <code class="language-plaintext highlighter-rouge">n+1</code><sup>th</sup> stash entry.</p>
+
+<h2 id="move--rename-operations">Move &amp; Rename Operations</h2>
+
+<p>This is done using <a href="https://git-scm.com/docs/git-mv"><code class="language-plaintext highlighter-rouge">git mv</code></a> command, as given below. Needs to be followed by git add to add them in the stage area.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">mv </span>path/of/location/file.name path/of/dest/file.name
+<span class="nv">$ </span>git <span class="nb">mv </span>path/of/location/old.name path/of/location/new.name
+</code></pre></div></div>
+
+<p>The above are nothing more than git added to the typical linux move command.</p>
+
+<h2 id="delete-operation">Delete Operation</h2>
+
+<p>Delete is also achieved by a similar strategy as above, using <a href="https://git-scm.com/docs/git-rm"><code class="language-plaintext highlighter-rouge">git rm</code></a> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">rm </span>file.name
+</code></pre></div></div>
+
+<h2 id="reset-operations">Reset Operations</h2>
+
+<p>Resetting the incorrect/accidental changes is possible in git before committing the changes. Practically, these files could reside in two different locations from git’s standpoint,</p>
+
+<ul>
+  <li>in the local repo – Unintended deletions or modifications in the local repo could be restored by pulling out the required file from the local repo.</li>
+  <li>in the staging area – Files available in the staging area could be removed before the commit by checking them out from the HEAD. This involves an additional parameter added in the git checkout.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout HEAD file.name
+</code></pre></div></div>
+
+<p>Apart from that, there is an explicit <a href="https://git-scm.com/docs/git-reset"><code class="language-plaintext highlighter-rouge">git reset</code></a> command available, that deals with resetting using pointers for commits. This works in 3 different levels.</p>
+
+<ul>
+  <li>Soft: moves the <code class="language-plaintext highlighter-rouge">HEAD</code> pointer of the current branch to a specified commit without erasing the commits afterwards.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git reset <span class="nt">--soft</span> HEAD~
+</code></pre></div></div>
+
+<ul>
+  <li>Mixed: removes the changes from the staging area. Local modifications are not affected and no effect on the commit either. Git reset defaults to this.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git reset –mixed &lt;SOME COMMIT&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>Hard: Pointer is moved to the specified commit, staging area is cleared and the local changes are also reverted.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git reset –hard &lt;SOME COMMIT&gt;
+</code></pre></div></div>
+
+<h2 id="tagging">Tagging</h2>
+
+<p>Idea of tagging is assigning a human-readable and meaningful name to a particular commit. This is particularly useful in software versioning. Git supports two flavors of tags namely,</p>
+
+<ul>
+  <li>
+    <p><strong><em>Lightweight Tag</em></strong> - Acts as a branch that won’t change. Functions as a readable pointer to a specific commit.</p>
+  </li>
+  <li>
+    <p><strong><em>Annotated Tag</em></strong> - These are stored as full objects in the Git database, with their checksum and other information such as tagger name, email, date and a tagging message. These could be signed and verified with GNU Privacy Guard (GPG).</p>
+  </li>
+</ul>
+
+<p>In general, annotated tags are the preferred mode of tagging, as it enables storing some information along with the tag. If for some reason it is required to omit all these additional information for some temporary requirements, a lightweight tag also can be used.</p>
+
+<p>Creation of a tag could be done with <a href="https://git-scm.com/docs/git-tag"><code class="language-plaintext highlighter-rouge">git tag</code></a> command. The commit that should be tagged with, can be mentioned either with its commit hash, or else using the pointer <code class="language-plaintext highlighter-rouge">HEAD</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-a</span> <span class="s2">"tagname"</span> <span class="nt">-m</span> <span class="s2">"Message on tag"</span> HEAD
+</code></pre></div></div>
+
+<p>Once the tagging is done, it should be pushed to the remote repo as follows. <code class="language-plaintext highlighter-rouge">git push --tags</code> will push all the unpushed tags into the remote.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin tag tagname
+Counting objects: 1, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>1/1<span class="o">)</span>, 166 bytes | 0 bytes/s, <span class="k">done</span><span class="nb">.</span>
+Total 1 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To git@github.com:0004072/repo_test_1
+<span class="k">*</span> <span class="o">[</span>new tag]         tagname -&gt; tagname
+</code></pre></div></div>
+
+<p>Tags could be listed down using the <code class="language-plaintext highlighter-rouge">-l</code> flag.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-l</span>
+</code></pre></div></div>
+
+<p>Tags could be deleted from the local repo as follows, with <code class="language-plaintext highlighter-rouge">-d</code> flag and tag name.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-d</span> <span class="s1">'tagname'</span>
+Deleted tag <span class="s1">'tagname'</span> <span class="o">(</span>was ff39d14<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Once the tag is removed from the local repo, to make them effective in the remote repo, it requires a push operation to be executed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin :V1.0
+To https://github.com/user/repo.git
+- <span class="o">[</span>deleted]         V1.0
+</code></pre></div></div>
+
+<p>Also, the following can be used to delete tags in remote. Note that the local tag should still be removed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push <span class="nt">--delete</span> origin tagname
+To https://github.com/user/repo.git
+ - <span class="o">[</span>deleted]         tagname
+</code></pre></div></div>
+
+  </div>
+  <div style="text-align: center;">~END~</div>
+<div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://kanchana.senadheera.net/techbits/2017/09/13/software-version-controlling.html';
+      this.page.identifier = 'https://kanchana.senadheera.net/techbits/2017/09/13/software-version-controlling.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://000407.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+<a class="u-url" href="/techbits/2017/09/13/software-version-controlling.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col mt-center">
+        <div class="social-links">
+<a name="social_links"></a>
+<div id="social-media">
+    
+    
+        
+        
+            <a href="mailto:kanchana@senadheera.net" title="Email" class="social-icon"><i class="fa fac-square fa-envelope"></i></a>
+        
+    
+        
+        
+            <a href="https://www.linkedin.com/in/kanchana-senadheera" title="LinkedIn" class="social-icon"><i class="fa fac-square fa-linkedin"></i></a>
+        
+    
+        
+        
+            <a href="https://github.com/000407" title="GitHub" class="social-icon"><i class="fa fac-square fa-github"></i></a>
+        
+    
+        
+        
+            <a href="https://stackoverflow.com/users/3126973" title="" class="social-icon"><i class="fa fac-square fa-stack-overflow"></i></a>
+        
+    
+</div>
+</div>
+        <p>© 2017 Kanchana Senadheera @ KaZE<sub>2</sub>. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>#::3-Generics | ~my territory~</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="#::3-Generics">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="A deep dive into the concept of Generics, and a glance at under the hood of C# and Java, to slightly improve the understanding on how these two implements the concept of Generics.">
+<meta property="og:description" content="A deep dive into the concept of Generics, and a glance at under the hood of C# and Java, to slightly improve the understanding on how these two implements the concept of Generics.">
+<link rel="canonical" href="https://kanchana.senadheera.net/techbits/2020/03/27/hash-3-generics.html">
+<meta property="og:url" content="https://kanchana.senadheera.net/techbits/2020/03/27/hash-3-generics.html">
+<meta property="og:site_name" content="~my territory~">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-03-27T10:12:18+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="#::3-Generics">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-03-27T10:12:18+00:00","datePublished":"2020-03-27T10:12:18+00:00","description":"A deep dive into the concept of Generics, and a glance at under the hood of C# and Java, to slightly improve the understanding on how these two implements the concept of Generics.","headline":"#::3-Generics","mainEntityOfPage":{"@type":"WebPage","@id":"https://kanchana.senadheera.net/techbits/2020/03/27/hash-3-generics.html"},"url":"https://kanchana.senadheera.net/techbits/2020/03/27/hash-3-generics.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link type="application/atom+xml" rel="alternate" href="https://kanchana.senadheera.net/feed.xml" title="~my territory~">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+  <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+
+  <div class="wrapper">
+<h2><a class="site-title" rel="author" href="/">~my territory~</a></h2>
+<nav class="main-nav site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    
+      <li>
+        
+          <span class="main-item"><a href="/">Home</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/about">About</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/blog">Blog</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item">Tools</span>
+        
+        
+          
+          <ul>
+
+  <li>
+    
+      <span class="sub-item"><a href="/tools/singlishw">Singlish Writer</a></span>
+    
+    
+  </li>
+
+</ul>
+        
+      </li>
+    
+    </ul>
+  </div>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">#::3-Generics</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2020-03-27T10:12:18+00:00" itemprop="datePublished">
+        Mar 27, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Some time back, I wrote about stacks and how to implement them. There, I have promised at the end that I will improve our current implementation using generics. This, I write to keep that promise. The initial part of this, I am going to discuss some technical aspects related to generics in C# and Java. For those who are less interested in that part, you can <a href="#impl">jump into the implementation</a> straight away. Let’s get started. First of all, I am going to take a look at a simple method <code class="language-plaintext highlighter-rouge">void Swap()</code> that is used to swap two references.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">void</span> <span class="nf">Swap</span><span class="p">(</span><span class="n">Integer</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">Integer</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Integer</span> <span class="n">tmp</span> <span class="p">=</span> <span class="n">lhs</span><span class="p">;</span>
+    <span class="n">lhs</span> <span class="p">=</span> <span class="n">rhs</span><span class="p">;</span>
+    <span class="n">rhs</span> <span class="p">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>All about this method looks fine except that it can Swap only integer object references. That simply tells us that if we have other types of objects (for instance say <code class="language-plaintext highlighter-rouge">Float</code>), you will need other methods to be implemented with almost similar body, and blatantly violate one of the key principles of coding practices DRY (AKA Don’t Repeat Yourself) and end up having to do Shotgun Surgery. DUH! Can we really improve this to have only one implementation that is reusable across different types? Just look at the three implementations of <code class="language-plaintext highlighter-rouge">Swap()</code> method given below for <code class="language-plaintext highlighter-rouge">Integer</code>, <code class="language-plaintext highlighter-rouge">Person</code> and <code class="language-plaintext highlighter-rouge">Car</code>.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Utility</span> <span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Swap</span><span class="p">(</span><span class="n">Integer</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">Integer</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Integer</span> <span class="n">tmp</span> <span class="p">=</span> <span class="n">lhs</span><span class="p">;</span>
+        <span class="n">lhs</span> <span class="p">=</span> <span class="n">rhs</span><span class="p">;</span>
+        <span class="n">rhs</span> <span class="p">=</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">void</span> <span class="nf">Swap</span><span class="p">(</span><span class="n">Person</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">Person</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Person</span> <span class="n">tmp</span> <span class="p">=</span> <span class="n">lhs</span><span class="p">;</span>
+        <span class="n">lhs</span> <span class="p">=</span> <span class="n">rhs</span><span class="p">;</span>
+        <span class="n">rhs</span> <span class="p">=</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">void</span> <span class="nf">Swap</span><span class="p">(</span><span class="n">Car</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">Car</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Car</span> <span class="n">tmp</span> <span class="p">=</span> <span class="n">lhs</span><span class="p">;</span>
+        <span class="n">lhs</span> <span class="p">=</span> <span class="n">rhs</span><span class="p">;</span>
+        <span class="n">rhs</span> <span class="p">=</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The obvious difference in the three methods is the type of the parameters lhs and rhs being passed and the type of the variable tmp. That is where Generics come into play. Generics is a notation/syntactical component of most programming languages, that allows developers to specify the type parameters. In C#, we could easily rewrite the methods given above in to follows.</p>
+
+<h2 id="generic-methods">Generic Methods</h2>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Utility</span> <span class="p">{</span>
+    <span class="k">void</span> <span class="n">Swap</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">T</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">T</span> <span class="n">tmp</span> <span class="p">=</span> <span class="n">lhs</span><span class="p">;</span>
+        <span class="n">lhs</span> <span class="p">=</span> <span class="n">rhs</span><span class="p">;</span>
+        <span class="n">rhs</span> <span class="p">=</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">&lt;T&gt;</code> is the syntactical nuance that enables specifying type annotations. <code class="language-plaintext highlighter-rouge">T</code> acts just as a variable and allows a level of abstraction, which enables better reuse of code. In other words, if (god forbid) the logic of swapping happened to change over time, we will have to go and stitch only one bleeding wound except for multiple. That makes our code much much easier to maintain. When this method is invoked during runtime, different things happen under the hood, depending on the language under consideration. For the case of C#, the translated result into Intermediate Language (IL) would look something like follows. (thanks to https://sharplab.io for the output)</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">.</span><span class="k">class</span> <span class="nc">private</span> <span class="n">auto</span> <span class="n">ansi</span> <span class="err">'</span><span class="p">&lt;</span><span class="n">Module</span><span class="p">&gt;</span><span class="err">'</span>
+<span class="p">{</span>
+<span class="p">}</span> <span class="c1">// end of class &lt;Module&gt;</span>
+<span class="p">.</span><span class="k">class</span> <span class="nc">private</span> <span class="n">auto</span> <span class="n">ansi</span> <span class="n">beforefieldinit</span> <span class="n">Utility</span>
+    <span class="n">extends</span> <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Private</span><span class="p">.</span><span class="n">CoreLib</span><span class="p">]</span><span class="n">System</span><span class="p">.</span><span class="n">Object</span>
+<span class="p">{</span>
+    <span class="c1">// Methods</span>
+    <span class="p">.</span><span class="n">method</span> <span class="k">private</span> <span class="n">hidebysig</span> 
+        <span class="n">instance</span> <span class="k">void</span> <span class="n">Swap</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">(</span>
+            <span class="p">!!</span><span class="n">T</span> <span class="n">lhs</span><span class="p">,</span>
+            <span class="p">!!</span><span class="n">T</span> <span class="n">rhs</span>
+        <span class="p">)</span> <span class="n">cil</span> <span class="n">managed</span> 
+    <span class="p">{</span>
+        <span class="c1">// Method begins at RVA 0x2050</span>
+        <span class="c1">// Code size 10 (0xa)</span>
+        <span class="p">.</span><span class="n">maxstack</span> <span class="m">1</span>
+        <span class="p">.</span><span class="n">locals</span> <span class="nf">init</span> <span class="p">(</span>
+            <span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">!!</span><span class="n">T</span>
+        <span class="p">)</span>
+        <span class="n">IL_0000</span><span class="p">:</span> <span class="n">nop</span>
+        <span class="n">IL_0001</span><span class="p">:</span> <span class="n">ldarg</span><span class="p">.</span><span class="m">1</span>
+        <span class="n">IL_0002</span><span class="p">:</span> <span class="n">stloc</span><span class="p">.</span><span class="m">0</span>
+        <span class="n">IL_0003</span><span class="p">:</span> <span class="n">ldarg</span><span class="p">.</span><span class="m">2</span>
+        <span class="n">IL_0004</span><span class="p">:</span> <span class="n">starg</span><span class="p">.</span><span class="n">s</span> <span class="n">lhs</span>
+        <span class="n">IL_0006</span><span class="p">:</span> <span class="n">ldloc</span><span class="p">.</span><span class="m">0</span>
+        <span class="n">IL_0007</span><span class="p">:</span> <span class="n">starg</span><span class="p">.</span><span class="n">s</span> <span class="n">rhs</span>
+        <span class="n">IL_0009</span><span class="p">:</span> <span class="n">ret</span>
+    <span class="p">}</span> <span class="c1">// end of method Utility::Swap</span>
+    <span class="p">.</span><span class="n">method</span> <span class="k">public</span> <span class="n">hidebysig</span> <span class="n">specialname</span> <span class="n">rtspecialname</span> 
+        <span class="n">instance</span> <span class="k">void</span> <span class="p">.</span><span class="nf">ctor</span> <span class="p">()</span> <span class="n">cil</span> <span class="n">managed</span> 
+    <span class="p">{</span>
+        <span class="c1">// Method begins at RVA 0x2066</span>
+        <span class="c1">// Code size 8 (0x8)</span>
+        <span class="p">.</span><span class="n">maxstack</span> <span class="m">8</span>
+        <span class="n">IL_0000</span><span class="p">:</span> <span class="n">ldarg</span><span class="p">.</span><span class="m">0</span>
+        <span class="n">IL_0001</span><span class="p">:</span> <span class="n">call</span> <span class="n">instance</span> <span class="k">void</span> <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Private</span><span class="p">.</span><span class="n">CoreLib</span><span class="p">]</span><span class="n">System</span><span class="p">.</span><span class="n">Object</span><span class="p">::.</span><span class="nf">ctor</span><span class="p">()</span>
+        <span class="n">IL_0006</span><span class="p">:</span> <span class="n">nop</span>
+        <span class="n">IL_0007</span><span class="p">:</span> <span class="n">ret</span>
+    <span class="p">}</span> <span class="c1">// end of method Utility::.ctor</span>
+<span class="p">}</span> <span class="c1">// end of class Utility</span>
+</code></pre></div></div>
+
+<p>As it is clearly visible, we don’t see much difference in the IL code also, with regard to generics. So, as we can obviously conclude, the thing happens during the runtime. The .NET Common Language Runtime (CLR) will generate object code, with overrides for each invocation with different types, of our swap method, as if we wrote our C# code like in the first code snippet. In other words, in runtime, each different specialization of the method is treated as a different method of the same class. This same example written in Java would look quite close to identical. You already know that syntactical rules are very much similar in C# and Java. So, the almost identical looks should not be suprising.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Utility</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">swap</span><span class="o">(</span><span class="no">T</span> <span class="n">lhs</span><span class="o">,</span> <span class="no">T</span> <span class="n">rhs</span><span class="o">)</span> <span class="o">{</span>
+        <span class="no">T</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">;</span>
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">rhs</span><span class="o">;</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Unlike the .NET CLR, Java Runtime Environment (JRE) takes a different avenue in handling generics. It does something called type erasure. Even though the type parameters are specified in the code, all of them will be erased during the compile time. Generally, type erasure will replace the references to the type parameter <code class="language-plaintext highlighter-rouge">T</code> with Object for <code class="language-plaintext highlighter-rouge">T</code> is not bound. <code class="language-plaintext highlighter-rouge">T</code> will be replaced with the upper bound type. Further details and edge cases are discussed below.</p>
+
+<h2 id="generic-classes">Generic Classes</h2>
+
+<p>When you have a generic class instantiated, the runtime will generate a specialized version of the said class with the specific parameters. How it is done exactly, varies on whether the type parameters are value type or reference type. No matter what, the compiler will only generate a single generic type into the assembly. During the runtime, a separate set of static fields will be allocated for each type parameter of the generic class. How many different versions of the generic class will be generated depends on whether the type parameters are value type or reference type where,</p>
+
+<ul>
+  <li>for each value type parameter invocation, there will be a dedicated version of the generic class</li>
+  <li>all reference type parameter invocations will share the same version of the generic class (because the reference types have the same size)</li>
+</ul>
+
+<p>In other words, a class <code class="language-plaintext highlighter-rouge">Sample&lt;T&gt;</code>, initialized as follows would cause in having three different versions during the runtime.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Sample</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;();</span>
+<span class="nc">Sample</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;();</span>
+<span class="nc">Sample</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sample</span><span class="o">&lt;</span><span class="nc">Person</span><span class="o">&gt;();</span>
+</code></pre></div></div>
+
+<h2 id="type-constraints-in-c">Type Constraints in C#</h2>
+
+<p>Constraining is about limiting the possible values that each type parameter could take during the runtime. For an instance, a method <code class="language-plaintext highlighter-rouge">void Swap&lt;T&gt;()</code> can have any type for the parameter <code class="language-plaintext highlighter-rouge">T</code>. If we need to restrict this, we could do it like <code class="language-plaintext highlighter-rouge">void Swap&lt;T&gt;() where T : Person</code>. Now, <code class="language-plaintext highlighter-rouge">T</code> can’t be just anything. It should be anything that extends <code class="language-plaintext highlighter-rouge">Person</code>. Otherwise it will cause errors during compile time. In fact, these constraints could be categorized into four (04) as follows.</p>
+
+<ul>
+  <li>Reference Type Constraints – Restricts the type arguments to be only reference types. In the example below, the 3rd line will cause in The type <code class="language-plaintext highlighter-rouge">'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'Sample&lt;T&gt;'</code> during compile time.</li>
+</ul>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Sample</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span> <span class="err">{}</span>
+
+<span class="nc">Sample</span><span class="p">&lt;</span><span class="n">Integer</span><span class="p">&gt;</span> <span class="n">intSample</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">Integer</span><span class="p">&gt;();</span> <span class="c1">// Valid</span>
+<span class="n">Sample</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">intSample</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span> <span class="c1">// Invalid</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Unmanaged Type Constraints – Similar to previous one this time, type arguments only which are of non-nullable <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/unmanaged-types">unmanaged types</a> are allowed now.</li>
+</ul>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Sample</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span> <span class="err">{}</span>
+
+<span class="nc">Sample</span><span class="p">&lt;</span><span class="n">Integer</span><span class="p">&gt;</span> <span class="n">intSample</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">Integer</span><span class="p">&gt;();</span> <span class="c1">// Invalid</span>
+<span class="n">Sample</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">intSample</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span> <span class="c1">// Valid</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Constructor Type Constraints – This will check if the given type parameter <code class="language-plaintext highlighter-rouge">T</code> has a parameter-less default constructor, for each <code class="language-plaintext highlighter-rouge">T</code> is any non-static, non-abstract class without any explicitly declared constructors and for any non-abstract class with an explicit public parameter-less constructor. This should be the  last constraint defined for a generic type. Below, line number 7 will cause in <code class="language-plaintext highlighter-rouge">'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter </code>T<code class="language-plaintext highlighter-rouge"> in the generic type or method 'Program.CreateInstance&lt;T&gt;()'</code> during compile time.</li>
+</ul>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">T</span> <span class="n">CreateInstance</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">T</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">newInt</span> <span class="p">=</span>  <span class="n">CreateInstance</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span>      <span class="c1">//(5) Valid</span>
+<span class="kt">object</span> <span class="n">newObj</span> <span class="p">=</span> <span class="n">CreateInstance</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;();</span> <span class="c1">//(6) Valid</span>
+<span class="kt">string</span> <span class="n">newStr</span> <span class="p">=</span> <span class="n">CreateInstance</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;();</span> <span class="c1">//(7) Invalid: string DOES NOT have parameter-less public constructor</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Conversion Type Constraints – This is the most complex form of constraints. The conversion can be done based on identity, reference and boxing. To clarify this a bit, let’s consider the below example.</li>
+</ul>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">A</span><span class="p">&gt;</span> <span class="n">s1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">A</span><span class="p">&gt;();</span>          <span class="c1">// ---(1.1)</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">&gt;</span> <span class="n">s2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">&gt;();</span>          <span class="c1">// ---(1.2)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Sample</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">IComparable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Lines highlighted with comment 1.x in the above provides examples of  of boxing conversion. 1.1 above is valid because the class Sample expects a type parameter <code class="language-plaintext highlighter-rouge">T</code> that implements the interface <code class="language-plaintext highlighter-rouge">System.IComparable&lt;T&gt;</code> and the type parameter is int which is boxed into the struct <code class="language-plaintext highlighter-rouge">System.Int32</code>, that implements <code class="language-plaintext highlighter-rouge">IComparable&lt;Int32&gt;</code>.  This is because of the nature of the CLR on how it handles boxing. According to the doc on Boxing and Unboxing, <strong>Boxing is the process of converting a value type to the type object <u>or to any interface type implemented by this value type</u></strong>. The underlined latter part of the sentence clears it off.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">&gt;</span> <span class="n">s1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">&gt;();</span>          <span class="c1">// ---(2.1)</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">&gt;</span> <span class="n">s2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">&gt;();</span>          <span class="c1">// ---(2.2)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Sample</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">IX</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IX</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IX</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">A</span> <span class="p">:</span> <span class="n">IX</span><span class="p">&lt;</span><span class="n">A</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">B</span> <span class="p">:</span> <span class="n">A</span><span class="p">,</span> <span class="n">IX</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">C</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, class <code class="language-plaintext highlighter-rouge">Sample</code> expects a type parameter which is of type <code class="language-plaintext highlighter-rouge">IX</code>. This form of conversion is called reference type conversion. <code class="language-plaintext highlighter-rouge">B</code> implements the interface <code class="language-plaintext highlighter-rouge">IX</code> and hence 2.1 will be valid, while 2.2 will cause a compile time error because, <code class="language-plaintext highlighter-rouge">C</code> does not implement <code class="language-plaintext highlighter-rouge">IX</code>.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">A</span><span class="p">&gt;</span> <span class="n">s1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">A</span><span class="p">&gt;();</span>          <span class="c1">// ---(3.1)</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">&gt;</span> <span class="n">s2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">&gt;();</span>          <span class="c1">// ---(3.2)</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">&gt;</span> <span class="n">s3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">&gt;();</span>          <span class="c1">// ---(3.3)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Sample</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">A</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IX</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IX</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">A</span> <span class="p">:</span> <span class="n">IX</span><span class="p">&lt;</span><span class="n">A</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">B</span> <span class="p">:</span> <span class="n">A</span><span class="p">,</span> <span class="n">IX</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">C</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Lines highlighted with 3.x are examples for identity conversions. 3.1 and 3.2 are valid because the class <code class="language-plaintext highlighter-rouge">Sample</code> expects a type parameter which is of type <code class="language-plaintext highlighter-rouge">A</code>. 3.2 has <code class="language-plaintext highlighter-rouge">B</code> passed as a type arg, which extends <code class="language-plaintext highlighter-rouge">A</code>. 3.3 on the other hand is invalid because <code class="language-plaintext highlighter-rouge">C</code> does not belong to <code class="language-plaintext highlighter-rouge">A</code> in the inheritance hierarchy.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">&gt;</span> <span class="n">s1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">&gt;();</span>    <span class="c1">// ---(4.1)</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">,</span> <span class="n">IX</span><span class="p">&gt;</span> <span class="n">s2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">B</span><span class="p">,</span> <span class="n">IX</span><span class="p">&gt;();</span>  <span class="c1">// ---(4.2)</span>
+        <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">&gt;</span> <span class="n">s3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Sample</span><span class="p">&lt;</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">&gt;();</span>    <span class="c1">// ---(4.3)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Sample</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">U</span> <span class="p">{}</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IX</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">interface</span> <span class="nc">IX</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">A</span> <span class="p">:</span> <span class="n">IX</span><span class="p">&lt;</span><span class="n">A</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">B</span> <span class="p">:</span> <span class="n">A</span><span class="p">,</span> <span class="n">IX</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">C</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Lines highlighted with comments 4.x are a special case of reference conversion. As you can see the class Sample now has two type args <code class="language-plaintext highlighter-rouge">T</code> and <code class="language-plaintext highlighter-rouge">U</code> where, <code class="language-plaintext highlighter-rouge">T</code> should extend <code class="language-plaintext highlighter-rouge">U</code>. In other words, whatever the type parameter passed for <code class="language-plaintext highlighter-rouge">T</code> should either be a subclass of, or implement <code class="language-plaintext highlighter-rouge">U</code>. In that sense, both 4.1 and 4.2 will be valid and 4.3 will cause compile time error because <code class="language-plaintext highlighter-rouge">C</code> neither extends nor implements <code class="language-plaintext highlighter-rouge">A</code> in their inheritance hierarchy.</p>
+
+<h2 id="bound-type-parameters-in-java">Bound Type Parameters in Java</h2>
+
+<p>Similar to constraints in C#, Java has Bound Type parameters. Consider a simple class hierarchy in Java as <code class="language-plaintext highlighter-rouge">Object</code> :&gt; <code class="language-plaintext highlighter-rouge">Alpha</code> :&gt; <code class="language-plaintext highlighter-rouge">Bravo</code> :&gt; <code class="language-plaintext highlighter-rouge">Charlie</code>. Now when we define type args for a method <code class="language-plaintext highlighter-rouge">&lt;T&gt; void do(T t)</code>, we can alter the signature of the method as <code class="language-plaintext highlighter-rouge">&lt;T extends Alpha&gt;</code> which will restrict the assignable types to the parameter to only of type Alpha or anything that inherits from Alpha. This will result the compiler to perform type erasure and replace all occurrences that refer to type arg <code class="language-plaintext highlighter-rouge">T</code>, with <code class="language-plaintext highlighter-rouge">Alpha</code>. In fact <code class="language-plaintext highlighter-rouge">&lt;T extends A&gt;</code> is identical to<code class="language-plaintext highlighter-rouge"> &lt;T&gt;</code>. But this is quite handy, when we use this with interfaces, as it will enable an upper bound which is not restricted to a particular sub tree in the object hierarchy. Upon type erasure, <code class="language-plaintext highlighter-rouge">&lt;T extends IAlpha&gt; void do(T t)</code> will result in <code class="language-plaintext highlighter-rouge">void do(IAlpha t)</code>, where <code class="language-plaintext highlighter-rouge">IAlpha</code> is an interface.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Source</span>
+<span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">IAlpha</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+
+<span class="c1">// Results in follows</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="nc">IAlpha</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>As previously mentioned, Java compiler performs type erasure by replacing the generic methods with a signature where the bounded type parameters will be replaced with upper bound. “Okay, so what about lower bound?” is a nice counter question, which I believe will be answered with something like “that’s a useful feature which is not useful enough to be implemented in Java core”. That’s why when you try public <code class="language-plaintext highlighter-rouge">&lt;T super String&gt; void swap(T lhs, T rhs)</code>, it will end up in a compile time error. Java also allows specifying multiple bounds, under the same restrictions for class declaration. There can be any number of bounds with at most one class as a bound.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">String</span> <span class="o">&amp;</span> <span class="nc">Serializable</span> <span class="o">&amp;</span> <span class="nc">Iterable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span> <span class="c1">// Valid</span>
+<span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">String</span> <span class="o">&amp;</span> <span class="nc">Integer</span> <span class="o">&amp;</span> <span class="nc">Iterable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span> <span class="c1">// Invalid: Muliple class bounds</span>
+</code></pre></div></div>
+
+<p>When there are multiple bounds as such, Java compiler will internally refactor the source with synthetic methods (so called because generated automatically based on the existing methods) to have overrides of the method for each bound. These methods are called bridge methods.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Source</span>
+<span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">String</span> <span class="o">&amp;</span> <span class="nc">Serializable</span> <span class="o">&amp;</span> <span class="nc">Iterable</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+
+<span class="c1">// Results in follows</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="nc">String</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="nc">Serializable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">do</span><span class="o">(</span><span class="nc">Iterable</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="type-inference-in-generics--c">Type Inference in Generics – C#</h2>
+
+<p>In layman terms, this is how the runtime determines the actual type for a given type parameter, in invocations where the actual types for the parameters are not explicitly mentioned/specified. This is specifically essential in generic methods. In C#, the only source for inferring types is the arguments list of a method. Neither the left hand side of an assignment, nor the type constraints will provide sources to infer the types. The rules are actually quite complicated and even the spec has got them wrong in multiple places (at least according to Jon Skeet as mentioned by himself in <a href="https://stackoverflow.com/a/479983">this answer to a question in Stack Overflow</a>).</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Implementation</span>
+<span class="n">T</span> <span class="n">Work</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">t</span><span class="p">){</span>
+    <span class="c1">// Body</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// Invocation</span>
+<span class="kt">int</span> <span class="n">a</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span>
+<span class="nf">Work</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="n">Person</span> <span class="n">p</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Person</span><span class="p">();</span>
+<span class="nf">Work</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Here, the runtime can easily and obviously determine the type of of the parameter a. For the case where we pass an int as a parameter to method Work, the runtime can determine the method will return an int. So, There will be strict type enforcement even if different invocations of method Work are there. This gives us a form of a polymorphic behaviour.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">LinkedList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">CreateList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;();</span>
+<span class="p">}</span>
+
+<span class="n">LinkedList</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">intList</span> <span class="p">=</span> <span class="nf">CreateList</span><span class="p">();</span>      <span class="c1">// ---(1)</span>
+<span class="n">LinkedList</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">intList</span> <span class="p">=</span> <span class="n">CreateList</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span> <span class="c1">// ---(2)</span>
+</code></pre></div></div>
+
+<p>However, the line, highlighted with the comment 1 above, will cause a compile tile error. This is a case where the C# runtime won’t be able to infer the type. If the method call is added with explicit type arguments (line with comment 2) the problem will be resolved.</p>
+
+<h2 id="type-inference-in-generics--java">Type Inference in Generics – Java</h2>
+
+<p>Java also capable of determining the types based on method arguments. Also, there is diamond operator <code class="language-plaintext highlighter-rouge">&lt;&gt;</code> available from Java 7 onward. This allows JRE to determine the type by inference. So, Java is perfectly capable of the following.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Declaration</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nc">Alpha</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">make</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">Alpha</span><span class="o">&lt;&gt;();</span> <span class="c1">// Inference</span>
+<span class="o">}</span>
+
+<span class="c1">// Invocation</span>
+<span class="nc">Alpha</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">make</span><span class="o">();</span>
+<span class="nc">But</span> <span class="n">the</span> <span class="n">following</span><span class="o">,</span> <span class="n">where</span> <span class="n">it</span> <span class="n">attempts</span> <span class="n">to</span> <span class="n">deserialize</span> <span class="n">a</span> <span class="no">JSON</span> <span class="n">string</span> <span class="n">into</span> <span class="n">a</span> <span class="n">given</span> <span class="n">type</span> <span class="n">using</span> <span class="nc">ObjectMapper</span> <span class="n">in</span> <span class="nc">Jackson</span> <span class="nc">Databind</span><span class="o">.</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;</span> <span class="n">cars1</span> <span class="o">=</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">,</span> <span class="k">new</span> <span class="nc">TypeReference</span><span class="o">&lt;&gt;(){});</span> <span class="c1">// Will fail during the runtime</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;</span> <span class="n">cars1</span> <span class="o">=</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">jsonArray</span><span class="o">,</span> <span class="k">new</span> <span class="nc">TypeReference</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;&gt;(){});</span> <span class="c1">// Works</span>
+</code></pre></div></div>
+
+<p>Even though you might think, “since the end result should be a <code class="language-plaintext highlighter-rouge">List&lt;Car&gt;</code> type argument for <code class="language-plaintext highlighter-rouge">TypeReference&lt;&gt;</code> should be obvious”, it seems like there is no inference channel that the compiler can understand so. Hence, the first method above will fail during the runtime. So the bottom line is, there should be some inference channels that the compiler/runtime is aware of, in order to successfully infer the types for generics.</p>
+
+<h2 id="modified-stack">
+<a name="impl"></a>Modified Stack</h2>
+
+<p>Previously, our stack supported only int data and now we are trying to make it work with different types. The first thing is to rewrite the IStack interface with generics.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">interface</span> <span class="nc">IStack</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">void</span> <span class="nf">Push</span><span class="p">(</span><span class="n">T</span> <span class="k">value</span><span class="p">);</span>
+    <span class="n">T</span> <span class="nf">Pop</span><span class="p">();</span>
+    <span class="n">T</span> <span class="nf">Peek</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="nf">IsFull</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="nf">IsEmpty</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The difference from the previous version is quite simple. All the stack operations are now refactored to work with the type <code class="language-plaintext highlighter-rouge">T</code>, that will be varied in the runtime. Given the interface that provides the contract for stack operations has changed, we need to change its implementation as well. The refactored version will take its shape as follows.</p>
+
+<div class="language-c# highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Stack</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">:</span> <span class="n">IStack</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="n">T</span><span class="p">[]</span> <span class="n">array</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="nf">Stack</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">array</span> <span class="p">=</span> <span class="k">new</span> <span class="n">T</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
+        <span class="n">top</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span> 
+    
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Push</span><span class="p">(</span><span class="n">T</span> <span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">IsFull</span><span class="p">())</span> <span class="p">{</span> <span class="c1">//Check if the stack is full</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">SystemException</span><span class="p">(</span><span class="s">"Stack is already full!"</span><span class="p">);</span> <span class="c1">// Will not try to add new items</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">[++</span><span class="n">top</span><span class="p">]</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="n">T</span> <span class="nf">Pop</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// Check if the stack is empty</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">SystemException</span><span class="p">(</span><span class="s">"Stack is empty!"</span><span class="p">);</span> <span class="c1">// Will not try to remove the top most item from the stack</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">[</span><span class="n">top</span><span class="p">--];</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="n">T</span> <span class="nf">Peek</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">IsEmpty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// Check if the stack is empty</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">SystemException</span><span class="p">(</span><span class="s">"Stack is empty!"</span><span class="p">);</span> <span class="c1">// Will not try to get the top most item from the stack</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">[</span><span class="n">top</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">IsFull</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">array</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="m">1</span><span class="p">)</span> <span class="p">==</span> <span class="k">this</span><span class="p">.</span><span class="n">top</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="kt">bool</span> <span class="nf">IsEmpty</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">top</span> <span class="p">==</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As you can see, it is quite straightforward in these sort of cases. All you need to do is</p>
+
+<ul>
+  <li>Introduce a type parameter <code class="language-plaintext highlighter-rouge">T</code>
+</li>
+  <li>Change all method signatures to work on <code class="language-plaintext highlighter-rouge">T</code>.</li>
+</ul>
+
+<p>That’s pretty much it. I hope this has shed some light in the grey areas you had on generics. Happy cording!</p>
+
+  </div>
+  <div style="text-align: center;">~END~</div>
+<div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://kanchana.senadheera.net/techbits/2020/03/27/hash-3-generics.html';
+      this.page.identifier = 'https://kanchana.senadheera.net/techbits/2020/03/27/hash-3-generics.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://000407.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+<a class="u-url" href="/techbits/2020/03/27/hash-3-generics.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col mt-center">
+        <div class="social-links">
+<a name="social_links"></a>
+<div id="social-media">
+    
+    
+        
+        
+            <a href="mailto:kanchana@senadheera.net" title="Email" class="social-icon"><i class="fa fac-square fa-envelope"></i></a>
+        
+    
+        
+        
+            <a href="https://www.linkedin.com/in/kanchana-senadheera" title="LinkedIn" class="social-icon"><i class="fa fac-square fa-linkedin"></i></a>
+        
+    
+        
+        
+            <a href="https://github.com/000407" title="GitHub" class="social-icon"><i class="fa fac-square fa-github"></i></a>
+        
+    
+        
+        
+            <a href="https://stackoverflow.com/users/3126973" title="" class="social-icon"><i class="fa fac-square fa-stack-overflow"></i></a>
+        
+    
+</div>
+</div>
+        <p>© 2017 Kanchana Senadheera @ KaZE<sub>2</sub>. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+</body>
+
+</html>

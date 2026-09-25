@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Server-Sent Events in Action | ~my territory~</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Server-Sent Events in Action">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="In client-server architecture, the modes of interaction between the client and the server are primarily two-fold. They are namely Push and Pull. Generally, the server is understood to be passive, where the interaction is initiated from the side of the client, making the client the active party. But this is not the case, when the server wants to notify the client when there is a specific event occurred on the side of the server. These events are sent, or pushed to the client as they occur. This article is about Server-Side Events and how to use them.">
+<meta property="og:description" content="In client-server architecture, the modes of interaction between the client and the server are primarily two-fold. They are namely Push and Pull. Generally, the server is understood to be passive, where the interaction is initiated from the side of the client, making the client the active party. But this is not the case, when the server wants to notify the client when there is a specific event occurred on the side of the server. These events are sent, or pushed to the client as they occur. This article is about Server-Side Events and how to use them.">
+<link rel="canonical" href="https://kanchana.senadheera.net/techbits/2021/02/11/spring-boot-server-sent-events.html">
+<meta property="og:url" content="https://kanchana.senadheera.net/techbits/2021/02/11/spring-boot-server-sent-events.html">
+<meta property="og:site_name" content="~my territory~">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-02-11T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Server-Sent Events in Action">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-02-11T00:00:00+00:00","datePublished":"2021-02-11T00:00:00+00:00","description":"In client-server architecture, the modes of interaction between the client and the server are primarily two-fold. They are namely Push and Pull. Generally, the server is understood to be passive, where the interaction is initiated from the side of the client, making the client the active party. But this is not the case, when the server wants to notify the client when there is a specific event occurred on the side of the server. These events are sent, or pushed to the client as they occur. This article is about Server-Side Events and how to use them.","headline":"Server-Sent Events in Action","mainEntityOfPage":{"@type":"WebPage","@id":"https://kanchana.senadheera.net/techbits/2021/02/11/spring-boot-server-sent-events.html"},"url":"https://kanchana.senadheera.net/techbits/2021/02/11/spring-boot-server-sent-events.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link type="application/atom+xml" rel="alternate" href="https://kanchana.senadheera.net/feed.xml" title="~my territory~">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+  <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<header class="site-header">
+
+  <div class="wrapper">
+<h2><a class="site-title" rel="author" href="/">~my territory~</a></h2>
+<nav class="main-nav site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+  <div class="nav-bar">
+    <ul class="nav-menu">
+    
+      <li>
+        
+          <span class="main-item"><a href="/">Home</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/about">About</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item"><a href="/blog">Blog</a></span>
+        
+        
+      </li>
+    
+      <li>
+        
+          <span class="main-item">Tools</span>
+        
+        
+          
+          <ul>
+
+  <li>
+    
+      <span class="sub-item"><a href="/tools/singlishw">Singlish Writer</a></span>
+    
+    
+  </li>
+
+</ul>
+        
+      </li>
+    
+    </ul>
+  </div>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Server-Sent Events in Action</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-02-11T00:00:00+00:00" itemprop="datePublished">
+        Feb 11, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>In client-server architecture, the modes of interaction between the client and the server are primarily two-fold. They are namely Push and Pull. Generally, the server is understood to be passive, where the interaction is initiated from the side of the client, making the client the active party. Whenever the client wants, the client will poke the server saying <em>hey, are you up?</em> and the server will keep an ear on the line listening to such <em>hey!</em> messages. This is known as <strong><em>pull-messaging</em></strong>. But this is not the case, when the server wants to notify the client when there is a specific <strong><em>event</em></strong> occurred on the side of the server. These events are <strong><em>sent</em></strong>, or <strong><em>pushed</em></strong> to the client as they occur. This is the reason why we employ <strong><em>Server-Sent Events</em></strong> in the first place.</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Server-sent_events">Wikipedia’s page</a>,</p>
+
+<blockquote>
+  <p>Server-Sent Events is a standard describing how servers can initiate data transmission towards clients once an initial client connection has been established. They are commonly used to send message updates or continuous data streams to a browser client and designed to enhance native, cross-browser streaming through a JavaScript API called EventSource, through which a client requests a particular URL in order to receive an event stream.</p>
+</blockquote>
+
+<p><img src="/assets/img/posts/spring_sse/standard_client_server.png#center" alt="Standard Client-Server Interaction"></p>
+
+<p>The above diagram depicts the difference between the two. In fact in server-sent events, the initial connection is again requested by the client. This could be achieved for instance using <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource</a> in JavaScript. Server-sent events differ from <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">Web Sockets</a> as Server-Sent Events are <strong><em>uni-directional</em></strong> while Web Sockets are <strong><em>bi-directional</em></strong>. That means Server-Sent Events, as the name implies are on the direction of <code class="language-plaintext highlighter-rouge">Server -&gt; Client</code> but not the other way around.</p>
+
+<h2 id="server-sent-events-with-spring">Server-Sent Events with Spring</h2>
+
+<p>The famous <a href="https://spring.io/projects/spring-framework">Spring Framework</a> provides support for reactive-stack web applications to run on non-blocking servers such as Netty and Undertow, with <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html">Spring Webflux</a>. This is a popular library among developers for its streaming capability and so forth. We will be using Webflux to create a streaming API. Let’s get started.</p>
+
+<p>This demo mainly comprises of two services which are integrated with streams over HTTP.</p>
+
+<ol>
+  <li>
+<code class="language-plaintext highlighter-rouge">EventEmitter</code> - This is the origin of events. This will also have a standard HTTP endpoing which is not streaming data.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">EventConsumerProxy</code> - This is the service that is acting as a proxy. This consumes both the streaming and non-streaming endpoints from the <code class="language-plaintext highlighter-rouge">EventEmitter</code> and provides two streaming endpoints, one for each.</li>
+</ol>
+
+<p>In the <code class="language-plaintext highlighter-rouge">EventEmitter</code>, there is a controller <a href="https://github.com/000407/sse_demo/blob/master/src/sse_emitter/java/sse_emitter/controller/EventEmitterController.java"><code class="language-plaintext highlighter-rouge">EventEmitterController</code></a>, that has a method <code class="language-plaintext highlighter-rouge">Flux&lt;ServerSentEvent&lt;String&gt;&gt; streamEvents()</code> which appears as follows. Let’s break down what the statements of this method means.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/stream"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Flux</span><span class="o">&lt;</span><span class="nc">ServerSentEvent</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="nf">streamEvents</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Received request to stream events"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">Flux</span><span class="o">.</span><span class="na">interval</span><span class="o">(</span><span class="nc">Duration</span><span class="o">.</span><span class="na">ofSeconds</span><span class="o">(</span><span class="mi">2</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">sequence</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="nc">ThreadLocalRandom</span><span class="o">.</span><span class="na">current</span><span class="o">().</span><span class="na">nextLong</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">1000</span><span class="o">));</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                    <span class="o">}</span>
+                    <span class="k">return</span> <span class="nc">ServerSentEvent</span><span class="o">.&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">builder</span><span class="o">()</span>
+                            <span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">sequence</span><span class="o">))</span>
+                            <span class="o">.</span><span class="na">event</span><span class="o">(</span><span class="s">"periodic-event"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">data</span><span class="o">(</span><span class="s">"SSE - "</span> <span class="o">+</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">toString</span><span class="o">())</span>
+                            <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+                <span class="o">});</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">@GetMapping(...)</code> - typical Spring controller endpoint URL mapping</li>
+  <li>Return type <code class="language-plaintext highlighter-rouge">Flux&lt;ServerSentEvent&lt;String&gt;&gt;</code> - This return is important, as it specifies the response of this endpoint would be a reactive stream of data with the content type <code class="language-plaintext highlighter-rouge">text/event-stream</code>
+</li>
+  <li>Construction of the <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/codec/ServerSentEvent.html"><code class="language-plaintext highlighter-rouge">ServerSentEvent</code></a> - The SSE object is created using the builder specified in the said class.</li>
+</ul>
+
+<p>In addition, there is a <code class="language-plaintext highlighter-rouge">Thread.sleep(...)</code> that adds a random delay to this event generation. This is to mimic the random behaviour of event generation. When this endpoint is accessed with <code class="language-plaintext highlighter-rouge">http://localhost:8099/stream</code> in a web browser, the result would be as follows.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span>:0
+event:periodic-event
+data:SSE - 2021-02-11T22:29:57.493093900
+
+<span class="nb">id</span>:1
+event:periodic-event
+data:SSE - 2021-02-11T22:29:59.896589400
+
+<span class="nb">id</span>:2
+event:periodic-event
+data:SSE - 2021-02-11T22:30:02.135695500
+
+<span class="nb">id</span>:3
+event:periodic-event
+data:SSE - 2021-02-11T22:30:03.512121300
+
+<span class="nb">id</span>:4
+event:periodic-event
+data:SSE - 2021-02-11T22:30:05.739262100
+
+<span class="nb">id</span>:5
+event:periodic-event
+data:SSE - 2021-02-11T22:30:07.930640900
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">EventConsumerProxy</code> is intended to act as an intermediary, which creates a stream by consuming the stream from the <code class="language-plaintext highlighter-rouge">EventEmitter</code>. To access the <code class="language-plaintext highlighter-rouge">EventEmitter</code> over HTTP, <code class="language-plaintext highlighter-rouge">EventConsumerProxy</code> has a service <a href="https://github.com/000407/sse_demo/blob/master/src/main/java/com/kaze2/sse_demo/service/EventService.java">`EventService</a>, which is written as follows.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EventService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">WebClient</span> <span class="n">client</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">EventService</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="nc">WebClient</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="s">"http://localhost:8099"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Flux</span><span class="o">&lt;</span><span class="nc">ServerSentEvent</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="nf">consumeStream</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;</span><span class="nc">ServerSentEvent</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">type</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;&gt;()</span> <span class="o">{};</span>
+
+        <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="na">get</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">uri</span><span class="o">(</span><span class="s">"/stream"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_EVENT_STREAM</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">retrieve</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">bodyToFlux</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Flux</span><span class="o">&lt;</span><span class="nc">SomeDTO</span><span class="o">&gt;</span> <span class="nf">createStream</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;</span><span class="nc">SomeDTO</span><span class="o">&gt;</span> <span class="n">type</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;&gt;()</span> <span class="o">{};</span>
+
+        <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="na">get</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">uri</span><span class="o">(</span><span class="s">"/item"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">retrieve</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">bodyToFlux</span><span class="o">(</span><span class="n">type</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">delaySubscription</span><span class="o">(</span><span class="nc">Duration</span><span class="o">.</span><span class="na">ofSeconds</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">repeat</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This class</p>
+<ul>
+  <li>employs <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.html"><code class="language-plaintext highlighter-rouge">WebClient</code></a> which is a <strong><em>Non-blocking, reactive client to perform HTTP requests, exposing a fluent, reactive API over underlying HTTP client libraries such as Reactor Netty</em></strong>.</li>
+  <li>has <code class="language-plaintext highlighter-rouge">Flux&lt;ServerSentEvent&lt;String&gt;&gt; consumeStream()</code>, that the <code class="language-plaintext highlighter-rouge">webClient</code> instance accesses the <code class="language-plaintext highlighter-rouge">EventEmitter</code> and creates the stream of events.
+    <ul>
+      <li>
+<code class="language-plaintext highlighter-rouge">.accept(MediaType.TEXT_EVENT_STREAM)</code> - Sets the expected content type. Notice the accept type is set to <code class="language-plaintext highlighter-rouge">text/event-stream</code>.</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">.bodyToFlux(type)</code> - Creates a <a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html"><code class="language-plaintext highlighter-rouge">Flux</code></a> of type <code class="language-plaintext highlighter-rouge">type</code>, which is a <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/ParameterizedTypeReference.html"><code class="language-plaintext highlighter-rouge">ParameterizedTypeReference</code></a> of type <code class="language-plaintext highlighter-rouge">ServerSentEvent</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>This service is consumed by <a href="https://github.com/000407/sse_demo/blob/master/src/main/java/com/kaze2/sse_demo/controller/EventController.java"><code class="language-plaintext highlighter-rouge">EventController</code></a>. Notice the use of the <code class="language-plaintext highlighter-rouge">map(Function&lt;? super T,? extends V&gt; mapper)</code> method to map the stream items into a new stream of <code class="language-plaintext highlighter-rouge">ServerSentEvent</code>s which are based on the origin <code class="language-plaintext highlighter-rouge">EventEmitter</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/stream"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Flux</span><span class="o">&lt;</span><span class="nc">ServerSentEvent</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="nf">streamEvents</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Received request to stream events"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">eventService</span><span class="o">.</span><span class="na">consumeStream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"DATA: {}"</span><span class="o">,</span> <span class="n">s</span><span class="o">.</span><span class="na">data</span><span class="o">());</span>
+                    <span class="k">return</span> <span class="nc">ServerSentEvent</span><span class="o">.&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">builder</span><span class="o">()</span>
+                            <span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="s">"PROXY::"</span> <span class="o">+</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">id</span><span class="o">()).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"UNKNOWN_ID"</span><span class="o">))</span>
+                            <span class="o">.</span><span class="na">event</span><span class="o">(</span><span class="s">"PROXY::"</span> <span class="o">+</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">event</span><span class="o">()).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"UNKNOWN_EVENT"</span><span class="o">))</span>
+                            <span class="o">.</span><span class="na">data</span><span class="o">(</span><span class="s">"PROXY::"</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="na">data</span><span class="o">())</span>
+                            <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+                <span class="o">});</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>When this endpoint is accessed with <code class="language-plaintext highlighter-rouge">http://localhost:8088/stream</code> in a web browser, the result would be as follows.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span>:PROXY::0
+event:PROXY::periodic-event
+data:PROXY::SSE - 2021-02-11T22:30:56.395588800
+
+<span class="nb">id</span>:PROXY::1
+event:PROXY::periodic-event
+data:PROXY::SSE - 2021-02-11T22:30:58.741941900
+
+<span class="nb">id</span>:PROXY::2
+event:PROXY::periodic-event
+data:PROXY::SSE - 2021-02-11T22:31:00.987860
+
+<span class="nb">id</span>:PROXY::3
+event:PROXY::periodic-event
+data:PROXY::SSE - 2021-02-11T22:31:02.383951
+
+<span class="nb">id</span>:PROXY::4
+event:PROXY::periodic-event
+data:PROXY::SSE - 2021-02-11T22:31:04.744465
+
+<span class="nb">id</span>:PROXY::5
+event:PROXY::periodic-event
+data:PROXY::SSE - 2021-02-11T22:31:06.507792900
+</code></pre></div></div>
+
+<p>When the result streams are compared, it is evident that the <code class="language-plaintext highlighter-rouge">EventConsumerProxy</code> is actually routing the streamed response from <code class="language-plaintext highlighter-rouge">EventEmitter</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="nc">Flux</span><span class="o">&lt;</span><span class="nc">SomeDTO</span><span class="o">&gt;</span> <span class="nf">createStream</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;</span><span class="nc">SomeDTO</span><span class="o">&gt;</span> <span class="n">type</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;&gt;()</span> <span class="o">{};</span>
+
+        <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="na">get</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">uri</span><span class="o">(</span><span class="s">"/item"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">retrieve</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">bodyToFlux</span><span class="o">(</span><span class="n">type</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">delaySubscription</span><span class="o">(</span><span class="nc">Duration</span><span class="o">.</span><span class="na">ofSeconds</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">repeat</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>In the above snippet of <code class="language-plaintext highlighter-rouge">EventService</code>, the method <code class="language-plaintext highlighter-rouge">Flux&lt;SomeDTO&gt; createStream()</code> repeatedly consumes a typical REST endpoint that provides <code class="language-plaintext highlighter-rouge">application/json</code> in evey 1 second, creating a stream. This is particularly useful as a method of pinging a source for updates. Notice</p>
+
+<ul>
+  <li>the use of <code class="language-plaintext highlighter-rouge">.delaySubscription(Duration.ofSeconds(1))</code> delaying access to the endpoint by 1 second</li>
+  <li>the use of <code class="language-plaintext highlighter-rouge">repeat()</code> which plays the same HTTP request repeatedly, that which creates a stream of updates.</li>
+</ul>
+
+<h3 id="a-final-note">a final note…</h3>
+
+<p>Server-Sent Events has its own merits and demerits. For merits</p>
+
+<ul>
+  <li>it uses HTTP, so supporting this is trivial</li>
+  <li>it can be poly-filled (using something like JS) to “backport” to browsers with no support</li>
+  <li>has reconnect and event ID built-in</li>
+  <li>it is particularly useful in the cases where there are one-way server originated communication requirements (e.g. live updates to stock prices)</li>
+</ul>
+
+<p>However, these could be achieved only within the following constraints/limitations</p>
+
+<ul>
+  <li>SSE is limited to UTF-8; no support binary data</li>
+  <li>SSE is having an imposed limitation on maximum number of concurrent connections. This can be particularly hindering when opening multiple tabs as the limit is per browser and set to a very low number (<a href="https://stackoverflow.com/a/16853226/3126973">about 6</a>, 100 by default with HTTP/2 and HTTP/3)</li>
+</ul>
+
+<p>That’s it for this one lads. Feel free to drop a comment below. Happy coding!<img class="emoji" title=":sunglasses:" alt=":sunglasses:" raw="😎" src="https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png" style="vertical-align: middle; display: inline; max-width: 1em; visibility: hidden;" onload="this.style.visibility='visible'" onerror="this.replaceWith(this.getAttribute('raw'))"></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+  <li><a href="https://www.ably.io/blog/websockets-vs-sse">WebSockets vs Server-Sent Events</a></li>
+  <li><a href="https://www.baeldung.com/spring-server-sent-events">Server Sent Event is Spring</a></li>
+  <li><a href="https://stackoverflow.com/a/16853226/3126973">SSE(EventSource): why no more than 6 connections?</a></li>
+</ul>
+
+  </div>
+  <div style="text-align: center;">~END~</div>
+<div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://kanchana.senadheera.net/techbits/2021/02/11/spring-boot-server-sent-events.html';
+      this.page.identifier = 'https://kanchana.senadheera.net/techbits/2021/02/11/spring-boot-server-sent-events.html';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://000407.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+<a class="u-url" href="/techbits/2021/02/11/spring-boot-server-sent-events.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col mt-center">
+        <div class="social-links">
+<a name="social_links"></a>
+<div id="social-media">
+    
+    
+        
+        
+            <a href="mailto:kanchana@senadheera.net" title="Email" class="social-icon"><i class="fa fac-square fa-envelope"></i></a>
+        
+    
+        
+        
+            <a href="https://www.linkedin.com/in/kanchana-senadheera" title="LinkedIn" class="social-icon"><i class="fa fac-square fa-linkedin"></i></a>
+        
+    
+        
+        
+            <a href="https://github.com/000407" title="GitHub" class="social-icon"><i class="fa fac-square fa-github"></i></a>
+        
+    
+        
+        
+            <a href="https://stackoverflow.com/users/3126973" title="" class="social-icon"><i class="fa fac-square fa-stack-overflow"></i></a>
+        
+    
+</div>
+</div>
+        <p>© 2017 Kanchana Senadheera @ KaZE<sub>2</sub>. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+
+  
+    <script type="text/javascript" src="/assets/js/mermaid.min.js"></script>
+  
+</body>
+
+</html>

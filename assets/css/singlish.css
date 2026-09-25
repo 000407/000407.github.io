@@ -1,0 +1,85 @@
+ul {
+  margin-left: 0;
+  margin-bottom: 0; }
+
+#typearea {
+  resize: vertical; }
+
+table.scheme {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  font-size: 75%; }
+
+table.scheme {
+  border: 1px solid #bbb; }
+  table.scheme th, table.scheme td {
+    border: 1px solid #bbb;
+    padding: 0.5em; }
+
+table.scheme tr:nth-child(even) {
+  background-color: #f2f2f2; }
+
+table.scheme tr:hover {
+  background-color: #ddd; }
+
+table.scheme th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50; }
+
+table.scheme {
+  display: block;
+  position: relative;
+  top: 100%;
+  left: 0;
+  color: #000; }
+
+ul.hidden {
+  display: none;
+  width: 0;
+  height: 0;
+  transition: width 1s, height 1s; }
+
+#content {
+  width: intrinsic;
+  /* Safari/WebKit uses a non-standard name */
+  width: -moz-max-content;
+  /* Firefox/Gecko */
+  width: -webkit-max-content;
+  /* Chrome */
+  width: max-content;
+  padding: 0 1em;
+  list-style-type: none; }
+
+#content > li {
+  position: relative;
+  display: inline-block; }
+
+#content > li:not(:first-child) {
+  margin-left: 1em; }
+
+#content > li:hover > table.scheme {
+  display: block; }
+
+#content > li:hover > table.scheme:hover {
+  display: block; }
+
+/*Draggable*/
+#translit-scheme {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  color: #000; }
+
+#translit-scheme-title {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #5590b4;
+  color: #fff; }
+
+#toggle-scheme {
+  float: right;
+  margin-left: 1em; }
